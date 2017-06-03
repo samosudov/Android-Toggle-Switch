@@ -1,4 +1,4 @@
-package belka.us.androidtoggleswitch.widgets.util;
+package belka.us.androidtoggleswitch.widgets.old;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ public class ToggleSwitchButton{
     private View separator;
 
     public ToggleSwitchButton(Context context) {
-        this(LayoutInflater.from(context).inflate(R.layout.item_widget_toggle_switch, null));
+        this(LayoutInflater.from(context).inflate(R.layout.toggle_switch_button, null));
     }
 
     public ToggleSwitchButton(View view) {

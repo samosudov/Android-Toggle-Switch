@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ToggleSwitchOptions">
-        <attr name="toggleWidth"        format="dimension"/>
 
-        <attr name="textToggleCenter"   format="string" localization="suggested" />
-        <attr name="textToggleLeft"     format="string" localization="suggested" />
-        <attr name="textToggleRight"    format="string" localization="suggested" />
+        <!-- Android Attributes -->
 
-        <attr name="activeBgColor"      format="color"/>
-        <attr name="activeTextColor"    format="color"/>
-        <attr name="inactiveBgColor"    format="color"/>
-        <attr name="inactiveTextColor"  format="color"/>
-        <attr name="separatorColor"     format="color"/>
-
-        <attr name="cornerRadius"       format="dimension"/>
-
+        <attr name="android:entries"/>
         <attr name="android:textSize"/>
+
+        <!-- Custom Attributes-->
+
+        <attr name="activeBackgroundColor"      format="color"/>
+        <attr name="activeBorderColor"          format="color"/>
+        <attr name="activeTextColor"            format="color"/>
+
+        <attr name="borderWidth"                format="dimension"/>
+        <attr name="cornerRadius"               format="dimension"/>
+
+        <attr name="inactiveBackgroundColor"    format="color"/>
+        <attr name="inactiveBorderColor"        format="color"/>
+        <attr name="inactiveTextColor"          format="color"/>
+
+        <attr name="separatorColor"             format="color"/>
+
+        <attr name="textToggleCenter"           format="string" localization="suggested" />
+        <attr name="textToggleLeft"             format="string" localization="suggested" />
+        <attr name="textToggleRight"            format="string" localization="suggested" />
+
+        <attr name="toggleWidth"                format="dimension"/>
+
     </declare-styleable>
 </resources>

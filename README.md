@@ -36,7 +36,7 @@ dependencies {
 #### 2 Items 
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:textToggleLeft="OR"
@@ -48,7 +48,7 @@ dependencies {
 #### 3 Items
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:textToggleCenter="XOR"
@@ -64,7 +64,7 @@ This can be accomplished only **programmatically**.
 
 XML
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
@@ -88,7 +88,7 @@ NOTE: Providing a custom array of labels, the attributes textToggle[Left/Center/
 #### Multiple checked items support
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
+<belka.us.androidtoggleswitch.widgets.old.MultipleToggleSwitch
         android:id="@+id/multiple_toggle_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -179,7 +179,7 @@ It is possible to customize the buttons applying the following options:
 #### Example
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"

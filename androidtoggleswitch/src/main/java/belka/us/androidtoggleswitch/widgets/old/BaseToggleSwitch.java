@@ -1,4 +1,4 @@
-package belka.us.androidtoggleswitch.widgets;
+package belka.us.androidtoggleswitch.widgets.old;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import belka.us.androidtoggleswitch.R;
-import belka.us.androidtoggleswitch.widgets.util.ToggleSwitchButton;
 
 /**
  * Created by lorenzorigato on 4/1/16.

@@ -27,7 +27,7 @@
             android:padding="@dimen/space.small"
             android:text="@string/two_items_switch_text" />
 
-        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+        <belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -51,7 +51,7 @@
             android:padding="@dimen/space.small"
             android:text="@string/three_items_switch_text" />
 
-        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+        <belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -76,7 +76,7 @@
             android:padding="@dimen/space.small"
             android:text="@string/n_items_switch_text" />
 
-        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+        <belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
             android:id="@+id/n_items_toggle_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             android:padding="@dimen/space.small"
             android:text="@string/customized_items_switch_text" />
 
-        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+        <belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
             android:id="@+id/customized_items_toggle_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
             android:padding="@dimen/space.small"
             android:text="@string/multi_items_switch_text" />
 
-        <belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
+        <belka.us.androidtoggleswitch.widgets.old.MultipleToggleSwitch
             android:id="@+id/multiple_toggle_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

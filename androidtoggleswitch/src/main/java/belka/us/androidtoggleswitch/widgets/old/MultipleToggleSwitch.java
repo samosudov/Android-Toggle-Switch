@@ -1,10 +1,12 @@
-package belka.us.androidtoggleswitch.widgets;
+package belka.us.androidtoggleswitch.widgets.old;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
 import java.util.Set;
 import java.util.TreeSet;
+
+import belka.us.androidtoggleswitch.widgets.old.BaseToggleSwitch;
 
 /**
  * Created by lorenzorigato on 3/31/16.

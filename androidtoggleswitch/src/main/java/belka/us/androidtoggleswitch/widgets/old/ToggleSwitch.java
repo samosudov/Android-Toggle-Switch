@@ -1,9 +1,7 @@
-package belka.us.androidtoggleswitch.widgets;
+package belka.us.androidtoggleswitch.widgets.old;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
-import belka.us.androidtoggleswitch.widgets.util.ToggleSwitchButton;
 
 /**
  * Created by lorenzorigato on 2/22/16.
