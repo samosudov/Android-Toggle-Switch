@@ -12,10 +12,9 @@
     tools:context=".MainActivity">
 
 
-    <belka.us.androidtoggleswitch.widgets.ToggleSwitchButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </belka.us.androidtoggleswitch.widgets.ToggleSwitchButton>
+    <belka.us.androidtoggleswitch.widgets.BaseToggleSwitch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/planets"/>
 
 </LinearLayout>

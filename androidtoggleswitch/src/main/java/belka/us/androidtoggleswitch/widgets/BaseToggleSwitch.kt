@@ -2,10 +2,12 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import belka.us.androidtoggleswitch.R
-import belka.us.androidtoggleswitch.R.attr.separatorColor
+
+
 
 
 /**
@@ -15,12 +17,16 @@ import belka.us.androidtoggleswitch.R.attr.separatorColor
 
 class BaseToggleSwitch : LinearLayout {
 
+    /*
+       Default Values
+     */
+
     private val ACTIVE_BACKGROUND_COLOR     = R.color.blue
     private val ACTIVE_BORDER_COLOR         = R.color.blue
     private val ACTIVE_TEXT_COLOR           = android.R.color.white
 
+    private val BORDER_RADIUS_DP            = 4
     private val BORDER_WIDTH                = 2
-    private val CORNER_RADIUS_DP            = 4
 
     private val INACTIVE_BACKGROUND_COLOR   = R.color.gray_light
     private val INACTIVE_BORDER_COLOR       = R.color.gray_light
@@ -31,18 +37,27 @@ class BaseToggleSwitch : LinearLayout {
     private val TOGGLE_WIDTH                = 64f
 
 
+    /*
+       Instance Variables
+     */
+
     var activeBackgroundColor : Int
     var activeBorderColor : Int
     var activeTextColor : Int
 
+    var borderRadius: Float
     var borderWidth : Float
-    var cornerRadius : Float
 
     var inactiveBackgroundColor : Int
     var inactiveBorderColor : Int
     var inactiveTextColor : Int
+
+    var separatorColor : Int
+
     var textSize : Int
     var toggleWidth: Float
+
+    var buttons = ArrayList<ToggleSwitchButton>()
 
 
     constructor(context : Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -64,7 +79,7 @@ class BaseToggleSwitch : LinearLayout {
                         ContextCompat.getColor(context, ACTIVE_BACKGROUND_COLOR))
 
                 activeBorderColor = attributes.getColor(
-                        R.styleable.ToggleSwitchOptions_activeBgColor,
+                        R.styleable.ToggleSwitchOptions_activeBorderColor,
                         ContextCompat.getColor(context, ACTIVE_BORDER_COLOR))
 
                 activeTextColor = attributes.getColor(
@@ -99,9 +114,33 @@ class BaseToggleSwitch : LinearLayout {
                         R.styleable.ToggleSwitchOptions_toggleWidth,
                         Util.dp2px(getContext(), TOGGLE_WIDTH))
 
-                cornerRadius = attributes.getDimensionPixelSize(
+                borderRadius = attributes.getDimensionPixelSize(
                         R.styleable.ToggleSwitchOptions_cornerRadius,
-                        Util.dp2px(context, CORNER_RADIUS_DP.toFloat()).toInt()).toFloat()
+                        Util.dp2px(context, BORDER_RADIUS_DP.toFloat()).toInt()).toFloat()
+
+
+                val entries         = attributes.getTextArray(R.styleable.ToggleSwitchOptions_android_entries)
+                if (entries == null || entries.isEmpty()) {
+
+                    val entriesList = ArrayList<String>()
+
+                    val textToggleLeft  = attributes.getString(R.styleable.ToggleSwitchOptions_textToggleLeft)
+                    val textToggleRight = attributes.getString(R.styleable.ToggleSwitchOptions_textToggleRight)
+
+                    if (!TextUtils.isEmpty(textToggleLeft) && !TextUtils.isEmpty(textToggleRight)) {
+                        entriesList.add(textToggleLeft)
+                        val textToggleCenter  = attributes.getString(R.styleable.ToggleSwitchOptions_textToggleCenter)
+                        if (!TextUtils.isEmpty(textToggleCenter)) {
+                            entriesList.add(textToggleCenter)
+                        }
+                        entriesList.add(textToggleRight)
+                        setEntries(entriesList)
+                    }
+                }
+                else {
+                    setEntries(entries)
+                }
+
             }
             finally {
                 attributes.recycle()
@@ -111,6 +150,51 @@ class BaseToggleSwitch : LinearLayout {
             throw RuntimeException("AttributeSet is null!")
         }
 
+    }
+
+
+    /*
+       Public instance methods
+     */
+
+    fun setEntries(entries : Array<CharSequence>) {
+        val entriesList = ArrayList<String>()
+        for (entry in entries) {
+            entriesList.add(entry.toString())
+        }
+        setEntries(entriesList)
+    }
+
+    fun setEntries(entries : ArrayList<String>) {
+        removeAllViews()
+        buttons.clear()
+
+        for ((index, entry) in entries.withIndex()) {
+
+            var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
+                    activeBackgroundColor, activeBorderColor,
+                    activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
+                    inactiveBorderColor, inactiveTextColor)
+            buttons.add(button)
+            addView(button)
+        }
+    }
+
+
+    /*
+       Private instance methods
+     */
+
+    private fun getPosition(index : Int, entries : ArrayList<String>) : ToggleSwitchButton.Position {
+        if (index == 0) {
+            return ToggleSwitchButton.Position.LEFT
+        }
+        else if (index == entries.size - 1) {
+            return ToggleSwitchButton.Position.RIGHT
+        }
+        else {
+            return ToggleSwitchButton.Position.CENTER
+        }
     }
 
 }

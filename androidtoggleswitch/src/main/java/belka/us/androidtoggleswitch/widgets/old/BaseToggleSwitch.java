@@ -77,9 +77,9 @@ public abstract class BaseToggleSwitch extends LinearLayout implements View.OnCl
                 String leftToggleText = attributes.getString(R.styleable.ToggleSwitchOptions_textToggleLeft);
                 String rightToggleText = attributes.getString(R.styleable.ToggleSwitchOptions_textToggleRight);
 
-                this.activeBgColor = attributes.getColor(R.styleable.ToggleSwitchOptions_activeBgColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.ACTIVE_BG_COLOR));
+                this.activeBgColor = attributes.getColor(R.styleable.ToggleSwitchOptions_activeBackgroundColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.ACTIVE_BG_COLOR));
                 this.activeTextColor = attributes.getColor(R.styleable.ToggleSwitchOptions_activeTextColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.ACTIVE_TEXT_COLOR));
-                this.inactiveBgColor = attributes.getColor(R.styleable.ToggleSwitchOptions_inactiveBgColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.INACTIVE_BG_COLOR));
+                this.inactiveBgColor = attributes.getColor(R.styleable.ToggleSwitchOptions_inactiveBackgroundColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.INACTIVE_BG_COLOR));
                 this.inactiveTextColor = attributes.getColor(R.styleable.ToggleSwitchOptions_inactiveTextColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.INACTIVE_TEXT_COLOR));
                 this.separatorColor = attributes.getColor(R.styleable.ToggleSwitchOptions_separatorColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.SEPARATOR_COLOR));
                 this.textSize = attributes.getDimensionPixelSize(R.styleable.ToggleSwitchOptions_android_textSize, (int) dp2px(context, BaseToggleSwitch.Default.TEXT_SIZE));

@@ -5,4 +5,10 @@
     <string name="n_items_switch_text">N Items</string>
     <string name="customized_items_switch_text">Custom</string>
     <string name="multi_items_switch_text">Multi</string>
+
+    <string-array name="planets">
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Venus</item>
+    </string-array>
 </resources>

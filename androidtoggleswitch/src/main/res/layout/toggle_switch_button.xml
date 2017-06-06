@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:paddingBottom="@dimen/space.small"
-        android:paddingLeft="@dimen/space.medium"
-        android:paddingRight="@dimen/space.medium"
-        android:paddingTop="@dimen/space.small">
 
-        <TextView
-            android:id="@+id/text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Prova"/>
+    <LinearLayout
+        android:id="@+id/clickable_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true">
 
-        <View
-            android:id="@+id/separator"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/space.very_small"
-            android:layout_marginTop="@dimen/space.very_small"
-            android:visibility="invisible" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
-</layout>
+            <TextView
+                android:id="@+id/text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="@dimen/space.small"
+                android:paddingBottom="@dimen/space.small"
+                android:textSize="16sp"
+                tools:text="Prova"/>
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="3dp"
+                android:layout_height="20dp"
+                android:background="@color/blue"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+        <!--android:layout_marginBottom="@dimen/space.very_small"-->
+        <!--android:layout_marginTop="@dimen/space.very_small"-->
+        <!--android:visibility="invisible"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--tools:visibility="visible"-->
+        <!--/>-->
+
+</merge>

@@ -1,45 +1,126 @@
 package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.util.AttributeSet
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
-import android.widget.RelativeLayout
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import belka.us.androidtoggleswitch.R
-import belka.us.androidtoggleswitch.databinding.ToggleSwitchButtonBinding
+
+
 
 /**
  * Created by lorenzorigato on 01/06/2017.
  */
 
-class ToggleSwitchButton : RelativeLayout {
+class ToggleSwitchButton : LinearLayout {
 
-    var activeBgColor : Int
+    enum class Position {
+        LEFT, CENTER, RIGHT
+    }
+
+    var activeBackgroundColor : Int
     var activeBorderColor : Int
     var activeTextColor : Int
 
+    var borderRadius : Float
     var borderWidth : Float
 
-    var inactiveBgColor : Int
+    var inactiveBackgroundColor : Int
     var inactiveBorderColor : Int
     var inactiveTextColor : Int
 
-    var binding : ToggleSwitchButtonBinding
+    var isChecked : Boolean
 
-    constructor(context : Context, attrs: AttributeSet?) : super(context, attrs) {
+//    var binding : ToggleSwitchButtonBinding
+
+//    constructor(context : Context, attrs: AttributeSet?) : super(context, attrs) {
+//        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        binding = ToggleSwitchButtonBinding.inflate(inflater)
+//
+//        activeBgColor       = ContextCompat.getColor(context, R.color.blue)
+//        activeBorderColor   = ContextCompat.getColor(context, R.color.blue)
+//        activeTextColor     = ContextCompat.getColor(context, android.R.color.white)
+//
+//        borderWidth         = Util.dp2px(context, 2f)
+//
+//        inactiveBgColor     = ContextCompat.getColor(context, R.color.gray_light)
+//        inactiveBorderColor = ContextCompat.getColor(context, R.color.gray_light)
+//        inactiveTextColor   = ContextCompat.getColor(context, R.color.gray)
+//
+//    }
+
+//
+    var position : Position
+    var textView : TextView
+    var separator : View
+
+    constructor(context: Context, entry : String, position: Position, activeBackgroundColor : Int,
+                activeBorderColor : Int, activeTextColor : Int, borderRadius : Float,
+                borderWidth : Float, inactiveBackgroundColor : Int,
+                inactiveBorderColor : Int, inactiveTextColor : Int) : super(context) {
+
+        this.isChecked                  = false
+        this.position                   = position
+
+        this.activeBackgroundColor      = activeBackgroundColor
+        this.activeBorderColor          = activeBorderColor
+        this.activeTextColor            = activeTextColor
+
+        this.borderRadius               = borderRadius
+        this.borderWidth                = borderWidth
+
+        this.inactiveBackgroundColor    = inactiveBackgroundColor
+        this.inactiveBorderColor        = inactiveBorderColor
+        this.inactiveTextColor          = inactiveTextColor
+
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ToggleSwitchButtonBinding.inflate(inflater)
+        var view = inflater.inflate(R.layout.toggle_switch_button, this, true)
 
-        activeBgColor       = ContextCompat.getColor(context, R.color.blue)
-        activeBorderColor   = ContextCompat.getColor(context, R.color.blue)
-        activeTextColor     = ContextCompat.getColor(context, android.R.color.white)
+        this.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+        this.orientation = HORIZONTAL
 
-        borderWidth         = Util.dp2px(context, 2f)
+        this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
+                inactiveBorderColor, borderRadius, borderWidth)
 
-        inactiveBgColor     = ContextCompat.getColor(context, R.color.gray_light)
-        inactiveBorderColor = ContextCompat.getColor(context, R.color.gray_light)
-        inactiveTextColor   = ContextCompat.getColor(context, R.color.gray)
 
+        textView = view.findViewById(R.id.text_view) as TextView
+        separator = view.findViewById(R.id.separator)
+
+        textView.text = entry
+
+        textView.setTextColor(inactiveTextColor)
+
+        val clickableWrapper = findViewById(R.id.clickable_wrapper)
+        clickableWrapper.setOnClickListener {
+            isChecked = !isChecked
+            if (isChecked) {
+                this.background = getBackgroundDrawable(position, activeBackgroundColor,
+                        activeBorderColor, borderRadius, borderWidth)
+            }
+            else {
+                this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
+                        inactiveBorderColor, borderRadius, borderWidth)
+            }
+        }
     }
 
+
+    private fun getBackgroundDrawable(position: Position, backgroundColor : Int, borderColor : Int,
+                              borderRadius: Float, borderWidth : Float) : GradientDrawable {
+        var gradientDrawable = GradientDrawable()
+        gradientDrawable.setColor(backgroundColor)
+
+        when(position) {
+            Position.LEFT -> gradientDrawable.cornerRadii = floatArrayOf(borderRadius, borderRadius, 0f,0f,0f,0f, borderRadius, borderRadius)
+            Position.RIGHT -> gradientDrawable.cornerRadii = floatArrayOf(0f,0f,borderRadius, borderRadius, borderRadius, borderRadius, 0f,0f)
+        }
+
+        if (borderWidth > 0) {
+            gradientDrawable.setStroke(borderWidth.toInt(), borderColor)
+        }
+
+        return gradientDrawable
+    }
 }
