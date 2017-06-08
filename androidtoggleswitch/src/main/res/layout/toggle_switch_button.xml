@@ -27,9 +27,10 @@
 
             <View
                 android:id="@+id/separator"
-                android:layout_width="3dp"
+                android:layout_width="2dp"
                 android:layout_height="20dp"
                 android:background="@color/blue"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true" />
 

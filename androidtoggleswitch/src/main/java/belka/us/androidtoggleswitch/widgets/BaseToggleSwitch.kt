@@ -8,14 +8,12 @@ import android.widget.LinearLayout
 import belka.us.androidtoggleswitch.R
 
 
-
-
 /**
  * Created by lorenzorigato on 02/06/2017.
  */
 
 
-class BaseToggleSwitch : LinearLayout {
+abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     /*
        Default Values
@@ -88,7 +86,7 @@ class BaseToggleSwitch : LinearLayout {
 
                 borderWidth = attributes.getDimensionPixelSize(
                         R.styleable.ToggleSwitchOptions_borderWidth,
-                        Util.dp2px(context, BORDER_WIDTH.toFloat()).toInt()).toFloat()
+                        dp2px(context, BORDER_WIDTH.toFloat()).toInt()).toFloat()
 
                 inactiveBackgroundColor = attributes.getColor(
                         R.styleable.ToggleSwitchOptions_inactiveBackgroundColor,
@@ -108,15 +106,15 @@ class BaseToggleSwitch : LinearLayout {
 
                 textSize = attributes.getDimensionPixelSize(
                         R.styleable.ToggleSwitchOptions_android_textSize,
-                        Util.dp2px(context, TEXT_SIZE).toInt())
+                        dp2px(context, TEXT_SIZE).toInt())
 
                 toggleWidth = attributes.getDimension(
                         R.styleable.ToggleSwitchOptions_toggleWidth,
-                        Util.dp2px(getContext(), TOGGLE_WIDTH))
+                        dp2px(getContext(), TOGGLE_WIDTH))
 
                 borderRadius = attributes.getDimensionPixelSize(
                         R.styleable.ToggleSwitchOptions_cornerRadius,
-                        Util.dp2px(context, BORDER_RADIUS_DP.toFloat()).toInt()).toFloat()
+                        dp2px(context, BORDER_RADIUS_DP.toFloat()).toInt()).toFloat()
 
 
                 val entries         = attributes.getTextArray(R.styleable.ToggleSwitchOptions_android_entries)
@@ -153,6 +151,14 @@ class BaseToggleSwitch : LinearLayout {
     }
 
 
+    fun manageSeparatorVisiblity() {
+        for ((button, index) in buttons.withIndex()) {
+            if (index < buttons.size - 1) {
+                button.setSeparatorVisibility(false)
+            }
+        }
+    }
+
     /*
        Public instance methods
      */
@@ -172,9 +178,9 @@ class BaseToggleSwitch : LinearLayout {
         for ((index, entry) in entries.withIndex()) {
 
             var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
-                    activeBackgroundColor, activeBorderColor,
+                    this, activeBackgroundColor, activeBorderColor,
                     activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
-                    inactiveBorderColor, inactiveTextColor)
+                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor)
             buttons.add(button)
             addView(button)
         }
