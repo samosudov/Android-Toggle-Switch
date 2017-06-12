@@ -152,8 +152,11 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
 
     fun manageSeparatorVisiblity() {
-        for ((button, index) in buttons.withIndex()) {
+        for ((index, button) in buttons.withIndex()) {
             if (index < buttons.size - 1) {
+                button.setSeparatorVisibility(button.isChecked == buttons[index + 1].isChecked)
+            }
+            else {
                 button.setSeparatorVisibility(false)
             }
         }

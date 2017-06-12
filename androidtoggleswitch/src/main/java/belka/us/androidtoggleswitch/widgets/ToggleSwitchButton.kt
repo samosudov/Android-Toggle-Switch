@@ -122,12 +122,14 @@ class ToggleSwitchButton : LinearLayout {
         this.background = getBackgroundDrawable(position, activeBackgroundColor,
                 activeBorderColor, borderRadius, borderWidth)
         this.textView.setTextColor(activeTextColor)
+        this.isChecked = true
     }
 
     fun uncheck() {
         this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
                 inactiveBorderColor, borderRadius, borderWidth)
         this.textView.setTextColor(inactiveTextColor)
+        this.isChecked = false
     }
 
     public fun setSeparatorVisibility(isSeparatorVisible : Boolean) {

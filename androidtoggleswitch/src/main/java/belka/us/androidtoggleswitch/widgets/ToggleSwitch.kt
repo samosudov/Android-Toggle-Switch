@@ -19,5 +19,29 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
         toggleSwitchButton.check()
 
         currentToggleSwitch = toggleSwitchButton
+
+        manageSeparatorVisiblity()
+    }
+
+    fun getCheckedPosition() : Int {
+        val checkedPositions = ArrayList<Int>()
+
+        if (currentToggleSwitch == null) {
+            return -1
+        }
+        else {
+            return buttons.indexOf(currentToggleSwitch!!)
+        }
+    }
+
+    fun setCheckedPosition(checkedPositions: Int) {
+        for ((index, toggleSwitchButton) in buttons.withIndex()) {
+            if (checkedPositions == index) {
+                toggleSwitchButton.check()
+            }
+            else {
+                toggleSwitchButton.uncheck()
+            }
+        }
     }
 }
