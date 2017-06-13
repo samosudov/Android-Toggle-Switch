@@ -9,7 +9,12 @@ import android.util.AttributeSet
 
 class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(context, attrs) {
 
+    public interface OnChangeListener {
+        fun onToggleSwitchChanged(position: Int)
+    }
+
     var currentToggleSwitch : ToggleSwitchButton? = null
+    var onChangeListener : OnChangeListener? = null
 
     override fun onToggleSwitchClicked(toggleSwitchButton: ToggleSwitchButton) {
         currentToggleSwitch?.uncheck()
@@ -21,17 +26,12 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
         currentToggleSwitch = toggleSwitchButton
 
         manageSeparatorVisiblity()
+
+        onChangeListener?.onToggleSwitchChanged(buttons.indexOf(toggleSwitchButton))
     }
 
     fun getCheckedPosition() : Int {
-        val checkedPositions = ArrayList<Int>()
-
-        if (currentToggleSwitch == null) {
-            return -1
-        }
-        else {
-            return buttons.indexOf(currentToggleSwitch!!)
-        }
+        return if (currentToggleSwitch == null) -1 else buttons.indexOf(currentToggleSwitch!!)
     }
 
     fun setCheckedPosition(checkedPositions: Int) {

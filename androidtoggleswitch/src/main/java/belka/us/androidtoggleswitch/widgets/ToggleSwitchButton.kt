@@ -9,7 +9,6 @@ import android.widget.TextView
 import belka.us.androidtoggleswitch.R
 
 
-
 /**
  * Created by lorenzorigato on 01/06/2017.
  */
@@ -24,27 +23,27 @@ class ToggleSwitchButton : LinearLayout {
         LEFT, CENTER, RIGHT
     }
 
-    var activeBackgroundColor : Int
-    var activeBorderColor : Int
-    var activeTextColor : Int
+    var activeBackgroundColor: Int
+    var activeBorderColor: Int
+    var activeTextColor: Int
 
-    var borderRadius : Float
-    var borderWidth : Float
+    var borderRadius: Float
+    var borderWidth: Float
 
-    var inactiveBackgroundColor : Int
-    var inactiveBorderColor : Int
-    var inactiveTextColor : Int
+    var inactiveBackgroundColor: Int
+    var inactiveBorderColor: Int
+    var inactiveTextColor: Int
 
-    var separatorColor : Int
-    var textSize : Int
+    var separatorColor: Int
+    var textSize: Int
 
-    var isChecked : Boolean
+    var isChecked: Boolean
 
-    var position : Position
-    var textView : TextView
-    var separator : View
+    var position: Position
+    var textView: TextView
+    var separator: View
 
-    var listener : Listener
+    var listener: Listener
 
     constructor(context: Context, entry: String, position: Position, listener: Listener,
                 activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
@@ -75,7 +74,6 @@ class ToggleSwitchButton : LinearLayout {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         var view = inflater.inflate(R.layout.toggle_switch_button, this, true)
 
-
         // Bind Views
 
         textView = view.findViewById(R.id.text_view) as TextView
@@ -84,7 +82,7 @@ class ToggleSwitchButton : LinearLayout {
 
         // Setup View
 
-        this.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+        this.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f)
         this.orientation = HORIZONTAL
         this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
                 inactiveBorderColor, borderRadius, borderWidth)
@@ -96,10 +94,6 @@ class ToggleSwitchButton : LinearLayout {
 
         textView.text = entry
         textView.setTextColor(inactiveTextColor)
-
-        val increment : Int = dp2px(getContext(), 8f).toInt()
-        separator.layoutParams.height = textSize + increment
-        separator.requestLayout()
 
         clickableWrapper.setOnClickListener {
             isChecked = !isChecked

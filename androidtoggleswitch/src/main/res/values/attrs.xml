@@ -6,6 +6,8 @@
 
         <attr name="android:entries"/>
         <attr name="android:textSize"/>
+        <attr name="android:layout_height"/>
+        <attr name="android:layout_width"/>
 
         <!-- Custom Attributes-->
 
@@ -26,6 +28,7 @@
         <attr name="textToggleLeft"             format="string" localization="suggested" />
         <attr name="textToggleRight"            format="string" localization="suggested" />
 
+        <attr name="toggleHeight"               format="dimension"/>
         <attr name="toggleWidth"                format="dimension"/>
 
     </declare-styleable>

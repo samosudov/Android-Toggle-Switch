@@ -32,6 +32,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     private val SEPARATOR_COLOR             = R.color.gray_very_light
 
     private val TEXT_SIZE                   = 12f
+    private val TOGGLE_HEIGHT               = 38f
     private val TOGGLE_WIDTH                = 64f
 
 
@@ -53,7 +54,11 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     var separatorColor : Int
 
     var textSize : Int
+    var toggleHeight: Float
     var toggleWidth: Float
+
+    var layoutHeight: Int
+    var layoutWidth: Int
 
     var buttons = ArrayList<ToggleSwitchButton>()
 
@@ -108,6 +113,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                         R.styleable.ToggleSwitchOptions_android_textSize,
                         dp2px(context, TEXT_SIZE).toInt())
 
+                toggleHeight = attributes.getDimension(
+                        R.styleable.ToggleSwitchOptions_toggleHeight,
+                        dp2px(getContext(), TOGGLE_HEIGHT))
+
                 toggleWidth = attributes.getDimension(
                         R.styleable.ToggleSwitchOptions_toggleWidth,
                         dp2px(getContext(), TOGGLE_WIDTH))
@@ -116,6 +125,13 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                         R.styleable.ToggleSwitchOptions_cornerRadius,
                         dp2px(context, BORDER_RADIUS_DP.toFloat()).toInt()).toFloat()
 
+                layoutHeight = attributes.getLayoutDimension(
+                        R.styleable.ToggleSwitchOptions_android_layout_height,
+                        LinearLayout.LayoutParams.WRAP_CONTENT)
+
+                layoutWidth = attributes.getLayoutDimension(
+                        R.styleable.ToggleSwitchOptions_android_layout_width,
+                        LinearLayout.LayoutParams.WRAP_CONTENT)
 
                 val entries         = attributes.getTextArray(R.styleable.ToggleSwitchOptions_android_entries)
                 if (entries == null || entries.isEmpty()) {
@@ -147,7 +163,13 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         else {
             throw RuntimeException("AttributeSet is null!")
         }
+    }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (!isCustomHeightSet()) {
+            layoutParams.height = dp2px(context, TOGGLE_HEIGHT).toInt()
+        }
     }
 
 
@@ -193,6 +215,17 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     /*
        Private instance methods
      */
+
+    private fun isFullWidth() : Boolean {
+        return layoutWidth == LinearLayout.LayoutParams.MATCH_PARENT
+    }
+
+    private fun isCustomHeightSet() : Boolean {
+        return layoutHeight > 0
+                && layoutWidth != LinearLayout.LayoutParams.MATCH_PARENT
+                && layoutWidth != LinearLayout.LayoutParams.WRAP_CONTENT
+    }
+
 
     private fun getPosition(index : Int, entries : ArrayList<String>) : ToggleSwitchButton.Position {
         if (index == 0) {

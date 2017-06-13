@@ -12,7 +12,7 @@ class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleS
 
 
     public interface OnChangeListener {
-        fun onCheckChanged(position: Int, checked: Boolean)
+        fun onMultipleToggleSwitchChanged(position: Int, checked: Boolean)
     }
 
     var onChangeListener: OnChangeListener? = null
@@ -51,8 +51,8 @@ class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleS
 
         val position = buttons.indexOf(toggleSwitchButton)
 
-        onChangeListener?.onCheckChanged(position, toggleSwitchButton.isChecked)
-
         manageSeparatorVisiblity()
+
+        onChangeListener?.onMultipleToggleSwitchChanged(position, toggleSwitchButton.isChecked)
     }
 }
