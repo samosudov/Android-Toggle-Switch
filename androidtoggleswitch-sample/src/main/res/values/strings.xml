@@ -8,6 +8,7 @@
 
     <string-array name="planets">
         <item>Earth</item>
+        <item>Jupiter</item>
         <item>Mars</item>
         <item>Venus</item>
     </string-array>

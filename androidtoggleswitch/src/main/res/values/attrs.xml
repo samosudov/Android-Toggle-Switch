@@ -23,6 +23,7 @@
         <attr name="inactiveTextColor"          format="color"/>
 
         <attr name="separatorColor"             format="color"/>
+        <attr name="separatorVisible"           format="boolean"/>
 
         <attr name="textToggleCenter"           format="string" localization="suggested" />
         <attr name="textToggleLeft"             format="string" localization="suggested" />

@@ -13,30 +13,44 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
         fun onToggleSwitchChanged(position: Int)
     }
 
-    var currentToggleSwitch : ToggleSwitchButton? = null
+    var checkedPosition: Int? = null
     var onChangeListener : OnChangeListener? = null
 
+
+    override fun onRedrawn() {
+        if (checkedPosition != null) {
+            val currentToggleSwitch = buttons[checkedPosition!!]
+            currentToggleSwitch?.check()
+            currentToggleSwitch?.isClickable = false
+        }
+        manageSeparatorVisiblity()
+    }
+
     override fun onToggleSwitchClicked(toggleSwitchButton: ToggleSwitchButton) {
-        currentToggleSwitch?.uncheck()
-        currentToggleSwitch?.isClickable = true
+
+        if (checkedPosition != null) {
+            val currentToggleSwitch = buttons[checkedPosition!!]
+            currentToggleSwitch?.uncheck()
+            currentToggleSwitch?.isClickable = true
+        }
+
+        checkedPosition = buttons.indexOf(toggleSwitchButton)
 
         toggleSwitchButton.isClickable = false
-        toggleSwitchButton.check()
-
-        currentToggleSwitch = toggleSwitchButton
 
         manageSeparatorVisiblity()
 
-        onChangeListener?.onToggleSwitchChanged(buttons.indexOf(toggleSwitchButton))
+        onChangeListener?.onToggleSwitchChanged(checkedPosition!!)
     }
 
     fun getCheckedPosition() : Int {
-        return if (currentToggleSwitch == null) -1 else buttons.indexOf(currentToggleSwitch!!)
+        return checkedPosition ?: -1
     }
 
-    fun setCheckedPosition(checkedPositions: Int) {
+    fun setCheckedPosition(checkedPosition: Int) {
+        this.checkedPosition = checkedPosition
         for ((index, toggleSwitchButton) in buttons.withIndex()) {
-            if (checkedPositions == index) {
+            if (checkedPosition == index) {
                 toggleSwitchButton.check()
             }
             else {

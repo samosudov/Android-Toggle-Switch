@@ -35,7 +35,10 @@ class ToggleSwitchButton : LinearLayout {
     var inactiveTextColor: Int
 
     var separatorColor: Int
+
     var textSize: Int
+
+    var toggleWidth: Int
 
     var isChecked: Boolean
 
@@ -48,7 +51,8 @@ class ToggleSwitchButton : LinearLayout {
     constructor(context: Context, entry: String, position: Position, listener: Listener,
                 activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
                 borderRadius: Float, borderWidth: Float, inactiveBackgroundColor: Int,
-                inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Int, separatorColor: Int) : super(context) {
+                inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Int,
+                separatorColor: Int, toggleWidth: Int) : super(context) {
 
         this.isChecked                  = false
         this.position                   = position
@@ -67,6 +71,7 @@ class ToggleSwitchButton : LinearLayout {
 
         this.separatorColor             = separatorColor
         this.textSize                   = textSize
+        this.toggleWidth                = toggleWidth
 
 
         // Inflate Layout
@@ -82,7 +87,11 @@ class ToggleSwitchButton : LinearLayout {
 
         // Setup View
 
-        this.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f)
+        if (toggleWidth > 0)
+            this.layoutParams = LinearLayout.LayoutParams(toggleWidth, LinearLayout.LayoutParams.MATCH_PARENT)
+        else
+            this.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f)
+
         this.orientation = HORIZONTAL
         this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
                 inactiveBorderColor, borderRadius, borderWidth)
@@ -124,6 +133,10 @@ class ToggleSwitchButton : LinearLayout {
                 inactiveBorderColor, borderRadius, borderWidth)
         this.textView.setTextColor(inactiveTextColor)
         this.isChecked = false
+    }
+
+    fun getText() : String {
+        return textView.text.toString()
     }
 
     public fun setSeparatorVisibility(isSeparatorVisible : Boolean) {

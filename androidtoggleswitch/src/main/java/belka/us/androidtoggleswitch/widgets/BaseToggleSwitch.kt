@@ -29,31 +29,34 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     private val INACTIVE_BACKGROUND_COLOR   = R.color.gray_light
     private val INACTIVE_BORDER_COLOR       = R.color.gray_light
     private val INACTIVE_TEXT_COLOR         = R.color.gray
+
     private val SEPARATOR_COLOR             = R.color.gray_very_light
+    private val SEPARATOR_VISIBLE           = true
 
     private val TEXT_SIZE                   = 12f
     private val TOGGLE_HEIGHT               = 38f
-    private val TOGGLE_WIDTH                = 64f
+    private val TOGGLE_WIDTH                = 72f
 
 
     /*
        Instance Variables
      */
 
-    var activeBackgroundColor : Int
-    var activeBorderColor : Int
-    var activeTextColor : Int
+    var activeBackgroundColor: Int
+    var activeBorderColor: Int
+    var activeTextColor: Int
 
     var borderRadius: Float
-    var borderWidth : Float
+    var borderWidth: Float
 
-    var inactiveBackgroundColor : Int
-    var inactiveBorderColor : Int
-    var inactiveTextColor : Int
+    var inactiveBackgroundColor: Int
+    var inactiveBorderColor: Int
+    var inactiveTextColor: Int
 
-    var separatorColor : Int
+    var separatorColor: Int
+    var separatorVisible: Boolean
 
-    var textSize : Int
+    var textSize: Int
     var toggleHeight: Float
     var toggleWidth: Float
 
@@ -109,6 +112,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                         R.styleable.ToggleSwitchOptions_separatorColor,
                         ContextCompat.getColor(context, SEPARATOR_COLOR))
 
+                separatorVisible = attributes.getBoolean(
+                        R.styleable.ToggleSwitchOptions_separatorVisible,
+                        SEPARATOR_VISIBLE)
+
                 textSize = attributes.getDimensionPixelSize(
                         R.styleable.ToggleSwitchOptions_android_textSize,
                         dp2px(context, TEXT_SIZE).toInt())
@@ -163,19 +170,27 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         else {
             throw RuntimeException("AttributeSet is null!")
         }
+
+        manageSeparatorVisiblity()
     }
+
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         if (!isCustomHeightSet()) {
             layoutParams.height = dp2px(context, TOGGLE_HEIGHT).toInt()
         }
+        if (!isFullWidth()) {
+            for (button in buttons) {
+                button.layoutParams.width = toggleWidth.toInt()
+            }
+        }
     }
 
 
     fun manageSeparatorVisiblity() {
         for ((index, button) in buttons.withIndex()) {
-            if (index < buttons.size - 1) {
+            if (separatorVisible && index < buttons.size - 1) {
                 button.setSeparatorVisibility(button.isChecked == buttons[index + 1].isChecked)
             }
             else {
@@ -183,6 +198,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
             }
         }
     }
+
 
     /*
        Public instance methods
@@ -196,21 +212,34 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         setEntries(entriesList)
     }
 
-    fun setEntries(entries : ArrayList<String>) {
+    fun setEntries(entries : List<String>) {
         removeAllViews()
         buttons.clear()
 
         for ((index, entry) in entries.withIndex()) {
 
+            val toggleWidth = if (isFullWidth()) 0 else this.toggleWidth.toInt()
             var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
                     this, activeBackgroundColor, activeBorderColor,
                     activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
-                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor)
+                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor, toggleWidth)
+
             buttons.add(button)
             addView(button)
         }
     }
 
+    public fun reDraw() {
+        setEntries(buttons.map { it.getText() })
+        onRedrawn()
+    }
+
+
+    /*
+       Protected instance methods
+     */
+
+    protected abstract fun onRedrawn()
 
     /*
        Private instance methods
@@ -227,7 +256,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     }
 
 
-    private fun getPosition(index : Int, entries : ArrayList<String>) : ToggleSwitchButton.Position {
+    private fun getPosition(index : Int, entries : List<String>) : ToggleSwitchButton.Position {
         if (index == 0) {
             return ToggleSwitchButton.Position.LEFT
         }

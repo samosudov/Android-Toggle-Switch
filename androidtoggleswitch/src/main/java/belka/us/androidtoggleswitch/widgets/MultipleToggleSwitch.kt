@@ -10,27 +10,20 @@ import android.util.AttributeSet
 
 class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(context, attrs) {
 
-
     public interface OnChangeListener {
         fun onMultipleToggleSwitchChanged(position: Int, checked: Boolean)
     }
 
     var onChangeListener: OnChangeListener? = null
-
+    private var checkedPositions: ArrayList<Int> = ArrayList()
 
     fun getCheckedPositions() : List<Int> {
-        val checkedPositions = ArrayList<Int>()
-
-        for ((index, toggleSwitchButton) in buttons.withIndex()) {
-            if (toggleSwitchButton.isChecked) {
-                checkedPositions.add(index)
-            }
-        }
-
         return checkedPositions
     }
 
     fun setCheckedPositions(checkedPositions: List<Int>) {
+        this.checkedPositions.clear()
+        this.checkedPositions.addAll(checkedPositions)
         for ((index, toggleSwitchButton) in buttons.withIndex()) {
             if (checkedPositions.contains(index)) {
                 toggleSwitchButton.check()
@@ -42,17 +35,19 @@ class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleS
     }
 
     override fun onToggleSwitchClicked(toggleSwitchButton: ToggleSwitchButton) {
+        manageSeparatorVisiblity()
+        val position = buttons.indexOf(toggleSwitchButton)
         if (toggleSwitchButton.isChecked) {
-            toggleSwitchButton.uncheck()
+            checkedPositions.add(position)
         }
         else {
-            toggleSwitchButton.check()
+            checkedPositions.remove(position)
         }
-
-        val position = buttons.indexOf(toggleSwitchButton)
-
-        manageSeparatorVisiblity()
-
         onChangeListener?.onMultipleToggleSwitchChanged(position, toggleSwitchButton.isChecked)
+    }
+
+    override fun onRedrawn() {
+        setCheckedPositions(checkedPositions)
+        manageSeparatorVisiblity()
     }
 }
