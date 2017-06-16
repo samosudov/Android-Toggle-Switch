@@ -1,35 +1,117 @@
 package com.example.androidtoggleswitch_sample;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-
-import belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private String[] mMenuTitles;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_activity_main);
 
-        final MultipleToggleSwitch toggleSwitch = (MultipleToggleSwitch) findViewById(R.id.toggleSwitch);
+        mMenuTitles = getResources().getStringArray(R.array.menu_titles);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        final Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.string.open_drawer,  /* "open drawer" description */
+                R.string.close_drawer  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mMenuTitles));
+
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                toggleSwitch.setSeparatorVisible(true);
-                toggleSwitch.reDraw();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                setTitle(mMenuTitles[position]);
+                showFragment(getFragmentByPosition(position));
+                mDrawerLayout.closeDrawers();
             }
         });
-//        ToggleSwitch toggleSwitch = (ToggleSwitch) findViewById(R.id.n_items_toggle_switch);
-//        ArrayList<String> labels = new ArrayList<>();
-//        labels.add("A");
-//        labels.add("B");
-//        labels.add("C");
-//        labels.add("D");
-//        toggleSwitch.setLabels(labels);
+
+        setTitle(mMenuTitles[1]);
+        showFragment(getFragmentByPosition(1));
     }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private Fragment getFragmentByPosition(int position) {
+        switch (position) {
+            case 0:     return new SampleFragment();
+            case 1:     return new CustomToggleButtonsFragment();
+            default:    throw new RuntimeException("Unsupported position");
+        }
+    }
+
+    private void showFragment(Fragment fragment) {
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+    }
+
 }

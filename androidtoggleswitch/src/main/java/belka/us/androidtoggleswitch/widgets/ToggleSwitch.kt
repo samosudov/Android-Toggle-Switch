@@ -28,19 +28,19 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
 
     override fun onToggleSwitchClicked(toggleSwitchButton: ToggleSwitchButton) {
 
-        if (checkedPosition != null) {
-            val currentToggleSwitch = buttons[checkedPosition!!]
-            currentToggleSwitch?.uncheck()
-            currentToggleSwitch?.isClickable = true
+        if (!toggleSwitchButton.isChecked) {
+            if (checkedPosition != null) {
+                buttons[checkedPosition!!]?.uncheck()
+            }
+
+            checkedPosition = buttons.indexOf(toggleSwitchButton)
+
+            toggleSwitchButton.check()
+
+            manageSeparatorVisiblity()
+
+            onChangeListener?.onToggleSwitchChanged(checkedPosition!!)
         }
-
-        checkedPosition = buttons.indexOf(toggleSwitchButton)
-
-        toggleSwitchButton.isClickable = false
-
-        manageSeparatorVisiblity()
-
-        onChangeListener?.onToggleSwitchChanged(checkedPosition!!)
     }
 
     fun getCheckedPosition() : Int {

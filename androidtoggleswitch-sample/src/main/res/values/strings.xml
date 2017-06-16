@@ -1,10 +1,23 @@
 <resources>
+
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+
     <string name="app_name">Toggle Switch Sample</string>
     <string name="two_items_switch_text">2 Items</string>
     <string name="three_items_switch_text">3 Items</string>
     <string name="n_items_switch_text">N Items</string>
-    <string name="customized_items_switch_text">Custom</string>
-    <string name="multi_items_switch_text">Multi</string>
+    <string name="multi_select_items_switch_text">Multi Select</string>
+
+    <string name="match_parent_width">Match parent width</string>
+    <string name="custom_colors">Custom colors</string>
+    <string name="custom_sizes">Custom sizes</string>
+    <string name="custom_borders">Custom borders</string>
+    <string name="no_separator">No separator</string>
+
+    <string name="apple">Apple</string>
+    <string name="lemon">Lemon</string>
+    <string name="orange">Orange</string>
 
     <string-array name="planets">
         <item>Earth</item>
@@ -12,4 +25,15 @@
         <item>Mars</item>
         <item>Venus</item>
     </string-array>
+
+    <string-array name="operators">
+        <item>AND</item>
+        <item>OR</item>
+        <item>NOT</item>
+    </string-array>
+
+    <array name="menu_titles">
+        <item>Samples</item>
+        <item>Custom Toggle Buttons</item>
+    </array>
 </resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Label"
+            android:text="@string/two_items_switch_text"/>
+
+        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+            android:id="@+id/twoItemsToggleSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textToggleLeft="@string/apple"
+            app:textToggleRight="@string/lemon"/>
+
+        <TextView
+            style="@style/Label"
+            android:text="@string/three_items_switch_text"/>
+
+        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+            android:id="@+id/threeItemsToggleSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textToggleLeft="@string/apple"
+            app:textToggleCenter="@string/orange"
+            app:textToggleRight="@string/lemon" />
+
+        <TextView
+            style="@style/Label"
+            android:text="@string/n_items_switch_text"/>
+
+        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+            android:id="@+id/nItemsToggleSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/planets" />
+
+        <TextView
+            style="@style/Label"
+            android:text="@string/multi_select_items_switch_text"/>
+
+        <belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
+            android:id="@+id/multipleToggleSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/planets" />
+
+    </LinearLayout>
+
+</ScrollView>

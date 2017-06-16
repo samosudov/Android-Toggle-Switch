@@ -105,13 +105,13 @@ class ToggleSwitchButton : LinearLayout {
         textView.setTextColor(inactiveTextColor)
 
         clickableWrapper.setOnClickListener {
-            isChecked = !isChecked
-            if (isChecked) {
-                check()
-            }
-            else {
-                uncheck()
-            }
+//            isChecked = !isChecked
+//            if (isChecked) {
+//                check()
+//            }
+//            else {
+//                uncheck()
+//            }
             listener.onToggleSwitchClicked(this)
         }
     }
@@ -147,21 +147,37 @@ class ToggleSwitchButton : LinearLayout {
 
     private fun getBackgroundDrawable(position: Position, backgroundColor : Int, borderColor : Int,
                               borderRadius: Float, borderWidth : Float) : GradientDrawable {
+        val isRightToLeft = resources.getBoolean(R.bool.is_right_to_left)
+
         var gradientDrawable = GradientDrawable()
         gradientDrawable.setColor(backgroundColor)
 
-        when(position) {
-            Position.LEFT -> gradientDrawable.cornerRadii = floatArrayOf(
-                    borderRadius, borderRadius, 0f,0f,0f,0f, borderRadius, borderRadius)
-
-            Position.RIGHT -> gradientDrawable.cornerRadii = floatArrayOf(
-                    0f,0f,borderRadius, borderRadius, borderRadius, borderRadius, 0f,0f)
-        }
+        gradientDrawable.cornerRadii = getCornerRadii(position, isRightToLeft, borderRadius)
 
         if (borderWidth > 0) {
             gradientDrawable.setStroke(borderWidth.toInt(), borderColor)
         }
 
         return gradientDrawable
+    }
+
+    private fun getCornerRadii(position: Position, isRightToLeft: Boolean, borderRadius: Float): FloatArray {
+        when(position) {
+            Position.LEFT ->
+                return if (isRightToLeft) getRightCornerRadii(borderRadius) else getLeftCornerRadii(borderRadius)
+
+            Position.RIGHT ->
+                return if (isRightToLeft) getLeftCornerRadii(borderRadius) else getRightCornerRadii(borderRadius)
+
+            else -> return floatArrayOf(0f,0f,0f, 0f, 0f, 0f, 0f,0f)
+        }
+    }
+
+    private fun getRightCornerRadii(borderRadius: Float): FloatArray {
+        return floatArrayOf(0f,0f,borderRadius, borderRadius, borderRadius, borderRadius, 0f,0f)
+    }
+
+    private fun getLeftCornerRadii(borderRadius: Float): FloatArray {
+        return floatArrayOf(borderRadius, borderRadius, 0f,0f,0f,0f, borderRadius, borderRadius)
     }
 }

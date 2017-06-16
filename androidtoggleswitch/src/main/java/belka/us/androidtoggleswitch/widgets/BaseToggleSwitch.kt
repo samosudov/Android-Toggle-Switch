@@ -204,6 +204,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
        Public instance methods
      */
 
+    fun getLabels() : List<String> {
+        return buttons.map { it.getText() }
+    }
+
     fun setEntries(entries : Array<CharSequence>) {
         val entriesList = ArrayList<String>()
         for (entry in entries) {
