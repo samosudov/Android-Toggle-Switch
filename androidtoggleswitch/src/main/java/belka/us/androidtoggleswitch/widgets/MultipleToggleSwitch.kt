@@ -2,11 +2,7 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.util.AttributeSet
-
-/**
- * Created by lorenzorigato on 12/06/2017.
- */
-
+import java.util.*
 
 class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(context, attrs) {
 
@@ -34,18 +30,18 @@ class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleS
         }
     }
 
-    override fun onToggleSwitchClicked(toggleSwitchButton: ToggleSwitchButton) {
-        val position = buttons.indexOf(toggleSwitchButton)
-        if (toggleSwitchButton.isChecked) {
-            toggleSwitchButton.uncheck()
+    override fun onToggleSwitchClicked(button: ToggleSwitchButton) {
+        val position = buttons.indexOf(button)
+        if (button.isChecked) {
+            button.uncheck()
             checkedPositions.remove(position)
         }
         else {
-            toggleSwitchButton.check()
+            button.check()
             checkedPositions.add(position)
         }
         manageSeparatorVisiblity()
-        onChangeListener?.onMultipleToggleSwitchChanged(position, toggleSwitchButton.isChecked)
+        onChangeListener?.onMultipleToggleSwitchChanged(position, button.isChecked)
     }
 
     override fun onRedrawn() {

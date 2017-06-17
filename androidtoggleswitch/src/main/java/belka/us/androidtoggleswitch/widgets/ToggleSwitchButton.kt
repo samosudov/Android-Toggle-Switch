@@ -2,16 +2,13 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import belka.us.androidtoggleswitch.R
 
-
-/**
- * Created by lorenzorigato on 01/06/2017.
- */
 
 class ToggleSwitchButton : LinearLayout {
 
@@ -36,9 +33,10 @@ class ToggleSwitchButton : LinearLayout {
 
     var separatorColor: Int
 
-    var textSize: Int
+    var textSize: Float
 
     var toggleWidth: Int
+    var toggleHeight: Int
 
     var isChecked: Boolean
 
@@ -51,8 +49,8 @@ class ToggleSwitchButton : LinearLayout {
     constructor(context: Context, entry: String, position: Position, listener: Listener,
                 activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
                 borderRadius: Float, borderWidth: Float, inactiveBackgroundColor: Int,
-                inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Int,
-                separatorColor: Int, toggleWidth: Int) : super(context) {
+                inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Float,
+                separatorColor: Int) : super(context) {
 
         this.isChecked                  = false
         this.position                   = position
@@ -71,7 +69,9 @@ class ToggleSwitchButton : LinearLayout {
 
         this.separatorColor             = separatorColor
         this.textSize                   = textSize
-        this.toggleWidth                = toggleWidth
+
+        this.toggleWidth                = 0
+        this.toggleHeight               = LinearLayout.LayoutParams.MATCH_PARENT
 
 
         // Inflate Layout
@@ -87,31 +87,19 @@ class ToggleSwitchButton : LinearLayout {
 
         // Setup View
 
-        if (toggleWidth > 0)
-            this.layoutParams = LinearLayout.LayoutParams(toggleWidth, LinearLayout.LayoutParams.MATCH_PARENT)
-        else
-            this.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f)
+        this.layoutParams = LinearLayout.LayoutParams(toggleWidth, toggleHeight, 1.0f)
 
         this.orientation = HORIZONTAL
         this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
                 inactiveBorderColor, borderRadius, borderWidth)
 
         separator.setBackgroundColor(separatorColor)
-        if (isRight()) {
-            separator.visibility = View.GONE
-        }
 
         textView.text = entry
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         textView.setTextColor(inactiveTextColor)
 
         clickableWrapper.setOnClickListener {
-//            isChecked = !isChecked
-//            if (isChecked) {
-//                check()
-//            }
-//            else {
-//                uncheck()
-//            }
             listener.onToggleSwitchClicked(this)
         }
     }

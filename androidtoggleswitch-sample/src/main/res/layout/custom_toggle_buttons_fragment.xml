@@ -31,10 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/planets"
-            app:activeBackgroundColor="@color/green"
+            app:activeBackgroundColor="@color/orange"
             app:activeTextColor="@android:color/white"
             app:inactiveBackgroundColor="@color/colorPrimaryDark"
-            app:inactiveTextColor="@color/gray_border"/>
+            app:inactiveTextColor="@color/green"
+            app:separatorColor="@color/green"/>
 
         <TextView
             style="@style/Label"
@@ -44,10 +45,11 @@
             android:id="@+id/customSizesToggleSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/operators"
-            android:textSize="22sp"
-            app:toggleHeight="62dp"
-            app:toggleWidth="82dp"/>
+            app:textToggleLeft="@string/apple"
+            app:textToggleRight="@string/lemon"
+            android:textSize="26sp"
+            app:toggleHeight="82dp"
+            app:toggleWidth="122dp"/>
 
         <TextView
             style="@style/Label"
