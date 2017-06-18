@@ -8,7 +8,8 @@ import android.widget.LinearLayout
 import belka.us.androidtoggleswitch.R
 import java.util.*
 
-abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
+abstract class BaseToggleSwitch(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs),
+        ToggleSwitchButton.Listener {
 
     /*
        Default Values
@@ -65,14 +66,108 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     var buttons = ArrayList<ToggleSwitchButton>()
 
 
-    constructor(context : Context, attrs: AttributeSet?) : super(context, attrs) {
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
 
+        for (button in buttons) {
+            if (!isFullWidth()) {
+                button.layoutParams.width = toggleWidth.toInt()
+            }
+
+            if (!isFullHeight()) {
+                button.layoutParams.height = toggleHeight.toInt()
+            }
+        }
+    }
+
+
+    fun manageSeparatorVisiblity() {
+        for ((index, button) in buttons.withIndex()) {
+            if (separatorVisible && index < buttons.size - 1 && !hasBorder()) {
+                button.setSeparatorVisibility(button.isChecked == buttons[index + 1].isChecked)
+            }
+            else {
+                button.setSeparatorVisibility(false)
+            }
+        }
+    }
+
+
+    /*
+       Public instance methods
+     */
+
+    fun getLabels() : List<String> {
+        return buttons.map { it.getText() }
+    }
+
+    fun setEntries(entries : Array<CharSequence>) {
+        val entriesList = ArrayList<String>()
+        for (entry in entries) {
+            entriesList.add(entry.toString())
+        }
+        setEntries(entriesList)
+    }
+
+    fun setEntries(entries : List<String>) {
+        removeAllViews()
+        buttons.clear()
+
+        for ((index, entry) in entries.withIndex()) {
+            var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
+                    this, activeBackgroundColor, activeBorderColor,
+                    activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
+                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor)
+            buttons.add(button)
+            addView(button)
+        }
+    }
+
+    public fun reDraw() {
+        setEntries(buttons.map { it.getText() })
+        onRedrawn()
+    }
+
+
+    /*
+       Protected instance methods
+     */
+
+    protected abstract fun onRedrawn()
+
+    /*
+       Private instance methods
+     */
+
+    private fun isFullHeight() : Boolean {
+        return layoutHeight == LinearLayout.LayoutParams.MATCH_PARENT
+    }
+
+    private fun isFullWidth() : Boolean {
+        return layoutWidth == LinearLayout.LayoutParams.MATCH_PARENT
+    }
+
+    private fun getPosition(index : Int, entries : List<String>) : ToggleSwitchButton.Position {
+        if (index == 0) {
+            return ToggleSwitchButton.Position.LEFT
+        }
+        else if (index == entries.size - 1) {
+            return ToggleSwitchButton.Position.RIGHT
+        }
+        else {
+            return ToggleSwitchButton.Position.CENTER
+        }
+    }
+
+    private fun hasBorder() : Boolean {
+        return borderWidth > 0f
+    }
+
+    init {
         layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT)
-
         orientation = HORIZONTAL
-
         if (attrs != null) {
 
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ToggleSwitchOptions, 0, 0)
@@ -169,102 +264,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         else {
             throw RuntimeException("AttributeSet is null!")
         }
-
         manageSeparatorVisiblity()
-    }
-
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-
-        for (button in buttons) {
-            if (!isFullWidth()) {
-                button.layoutParams.width = toggleWidth.toInt()
-            }
-
-            if (!isFullHeight()) {
-                button.layoutParams.height = toggleHeight.toInt()
-            }
-        }
-    }
-
-
-    fun manageSeparatorVisiblity() {
-        for ((index, button) in buttons.withIndex()) {
-            if (separatorVisible && index < buttons.size - 1) {
-                button.setSeparatorVisibility(button.isChecked == buttons[index + 1].isChecked)
-            }
-            else {
-                button.setSeparatorVisibility(false)
-            }
-        }
-    }
-
-
-    /*
-       Public instance methods
-     */
-
-    fun getLabels() : List<String> {
-        return buttons.map { it.getText() }
-    }
-
-    fun setEntries(entries : Array<CharSequence>) {
-        val entriesList = ArrayList<String>()
-        for (entry in entries) {
-            entriesList.add(entry.toString())
-        }
-        setEntries(entriesList)
-    }
-
-    fun setEntries(entries : List<String>) {
-        removeAllViews()
-        buttons.clear()
-
-        for ((index, entry) in entries.withIndex()) {
-            var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
-                    this, activeBackgroundColor, activeBorderColor,
-                    activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
-                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor)
-            buttons.add(button)
-            addView(button)
-        }
-    }
-
-    public fun reDraw() {
-        setEntries(buttons.map { it.getText() })
-        onRedrawn()
-    }
-
-
-    /*
-       Protected instance methods
-     */
-
-    protected abstract fun onRedrawn()
-
-    /*
-       Private instance methods
-     */
-
-    private fun isFullHeight() : Boolean {
-        return layoutHeight == LinearLayout.LayoutParams.MATCH_PARENT
-    }
-
-    private fun isFullWidth() : Boolean {
-        return layoutWidth == LinearLayout.LayoutParams.MATCH_PARENT
-    }
-
-    private fun getPosition(index : Int, entries : List<String>) : ToggleSwitchButton.Position {
-        if (index == 0) {
-            return ToggleSwitchButton.Position.LEFT
-        }
-        else if (index == entries.size - 1) {
-            return ToggleSwitchButton.Position.RIGHT
-        }
-        else {
-            return ToggleSwitchButton.Position.CENTER
-        }
     }
 
 }

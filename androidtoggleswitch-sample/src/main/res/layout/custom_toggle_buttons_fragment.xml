@@ -59,7 +59,10 @@
             android:id="@+id/multipleToggleSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/planets" />
+            android:entries="@array/planets"
+            app:borderWidth="4dp"
+            app:activeBorderColor="@color/teal"
+            app:inactiveBorderColor="@color/gray_border"/>
 
         <TextView
             style="@style/Label"
