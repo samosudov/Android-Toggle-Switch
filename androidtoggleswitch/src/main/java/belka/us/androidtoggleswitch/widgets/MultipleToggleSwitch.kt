@@ -40,6 +40,9 @@ class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleS
             button.check()
             checkedPositions.add(position)
         }
+
+        Collections.sort(checkedPositions)
+
         manageSeparatorVisiblity()
         onChangeListener?.onMultipleToggleSwitchChanged(position, button.isChecked)
     }

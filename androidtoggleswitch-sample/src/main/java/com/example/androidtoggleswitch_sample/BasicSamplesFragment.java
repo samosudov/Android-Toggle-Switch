@@ -15,18 +15,17 @@ import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
  * Created by lorenzorigato on 16/06/2017.
  */
 
-public class SampleFragment extends Fragment {
+public class BasicSamplesFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.sample_fragment, container, false);
+        View view = inflater.inflate(R.layout.basic_samples_fragment, container, false);
 
         final ToggleSwitch twoItemsToggleSwitch = (ToggleSwitch) view.findViewById(R.id.twoItemsToggleSwitch);
         final ToggleSwitch threeItemsToggleSwitch = (ToggleSwitch) view.findViewById(R.id.threeItemsToggleSwitch);
         final ToggleSwitch nItemsToggleSwitch = (ToggleSwitch) view.findViewById(R.id.nItemsToggleSwitch);
         final MultipleToggleSwitch multipleToggleSwitch = (MultipleToggleSwitch) view.findViewById(R.id.multipleToggleSwitch);
-
 
         twoItemsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override

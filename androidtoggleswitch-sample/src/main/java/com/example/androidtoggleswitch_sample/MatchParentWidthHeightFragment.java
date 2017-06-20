@@ -8,15 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by lorenzorigato on 16/06/2017.
+ * Created by lorenzorigato on 20/06/2017.
  */
 
-public class CustomToggleButtonsFragment extends Fragment {
+public class MatchParentWidthHeightFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.custom_toggle_buttons_fragment, container, false);
-
+        View view = inflater.inflate(R.layout.match_parent_width_height_fragment, container, false);
         return view;
     }
 }

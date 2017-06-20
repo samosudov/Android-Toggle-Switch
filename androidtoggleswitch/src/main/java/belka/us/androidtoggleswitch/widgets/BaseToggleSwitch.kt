@@ -41,6 +41,7 @@ abstract class BaseToggleSwitch(context: Context, attrs: AttributeSet?) : Linear
        Instance Variables
      */
 
+
     var activeBackgroundColor: Int
     var activeBorderColor: Int
     var activeTextColor: Int
@@ -101,6 +102,18 @@ abstract class BaseToggleSwitch(context: Context, attrs: AttributeSet?) : Linear
         return buttons.map { it.getText() }
     }
 
+    fun setEntries(stringArrayId: Int) {
+        setEntries(resources.getStringArray(stringArrayId))
+    }
+
+    fun setEntries(entries: Array<String>) {
+        val entriesList = ArrayList<String>()
+        for (entry in entries) {
+            entriesList.add(entry)
+        }
+        setEntries(entriesList)
+    }
+
     fun setEntries(entries : Array<CharSequence>) {
         val entriesList = ArrayList<String>()
         for (entry in entries) {
@@ -121,6 +134,7 @@ abstract class BaseToggleSwitch(context: Context, attrs: AttributeSet?) : Linear
             buttons.add(button)
             addView(button)
         }
+        manageSeparatorVisiblity()
     }
 
     public fun reDraw() {
@@ -264,7 +278,6 @@ abstract class BaseToggleSwitch(context: Context, attrs: AttributeSet?) : Linear
         else {
             throw RuntimeException("AttributeSet is null!")
         }
-        manageSeparatorVisiblity()
     }
 
 }

@@ -33,7 +33,8 @@
     </string-array>
 
     <array name="menu_titles">
-        <item>Samples</item>
-        <item>Custom Toggle Buttons</item>
+        <item>Basic Samples</item>
+        <item>Custom Samples</item>
+        <item>Match Parent Width and Height Sample</item>
     </array>
 </resources>

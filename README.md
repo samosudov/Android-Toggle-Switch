@@ -31,24 +31,23 @@ dependencies {
 </dependency>
 ```
 
-## Usage
+## Basic Usage
 
-#### 2 Items 
+![Basic Samples](docs/basic_samples.gif)
+
+#### 2 Items
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:textToggleLeft="OR"
         custom:textToggleRight="AND"/>
 ```
-
-![Sample of libray with 2 items](docs/2_items.gif)
-
 #### 3 Items
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:textToggleCenter="XOR"
@@ -56,21 +55,22 @@ dependencies {
         custom:textToggleRight="AND"/>
 ```
 
-![Sample of libray with 3 items](docs/3_items.gif)
-
 #### N - Items support
 
-This can be accomplished only **programmatically**.
+This can be accomplished in two ways:
+* `xml`: In this way you have to define the `android:entries` attributes
+as a `string-array`.
+* `programmatically`: you have to set the entries as `List<String>`, `CharSequence[]`, etc.
 
 XML
 ```xml
-<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:entries="@array/planets"/>
 ```
 
-JAVA code
+Programmatically
 ```java
 ToggleSwitch toggleSwitch = (ToggleSwitch) findViewById(R.id.multiple_switches);
 ArrayList<String> labels = new ArrayList<>();
@@ -81,105 +81,94 @@ labels.add("NOT");
 labels.add("OFF");
 toggleSwitch.setLabels(labels);
 ```
-![Sample of libray with 3 items](docs/n_items.gif)
 
-NOTE: Providing a custom array of labels, the attributes textToggle[Left/Center/Right] will be ignored.
+NOTE: Providing the entries using the `android:entries` attribute,
+the attributes textToggle[Left/Center/Right] will be ignored.
 
 #### Multiple checked items support
 
+Simply use `MultipleToggleSwitch` instead of `ToggleSwitch`.
+
 ```xml
-<belka.us.androidtoggleswitch.widgets.old.MultipleToggleSwitch
+<belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
         android:id="@+id/multiple_toggle_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:textToggleCenter="Center"
         custom:textToggleLeft="Left"
-        custom:textToggleRight="Right"
-        android:layout_gravity="center"
-        custom:toggleWidth="82dp"/>                
+        custom:textToggleRight="Right"/>                
 ```
-
-NOTE: Please not that it's a **different** widget `MultipleToggleSwitch` instead of the previous `ToggleSwitch`.
 
 ## Getters and Setters
 
 
 #### Toggle Switch
 
-* `int getCheckedTogglePosition()` Returns the current checked position
+* `int getCheckedPosition()` Returns the current checked position, -1 if none is checked.
 
 ```java
-int position = toggleSwitch.getCheckedTogglePosition();
+int position = toggleSwitch.getCheckedPosition();
 ```
 
-* `void setCheckedTogglePosition(int position)` Checks the position passed as argument
+* `void setCheckedPosition(int position)` Checks the position passed as argument.
 
 ```java
 int position = 3;
-toggleSwitch.setCheckedTogglePosition(position);
+multipleToggleSwitch.setCheckedPosition(position);
 ```
 
 #### Multiple Toggle Switch
 
-* `void setCheckedTogglePosition(int position)` Checks the position passed as argument
+* `List<Integer> getCheckedPositions()` Returns the list of the current checked positions
 
 ```java
-int position = 3;
-multipleToggleSwitch.setCheckedTogglePosition(position);
+List<Integer> checkedPositions = multipleToggleSwitch.getCheckedPositions();
 ```
 
-* `void setUncheckedTogglePosition(int position)` Unchecks the position passed as argument
+* `void setCheckedPositions(List<Integer> checkedPositions)` Checks the position passed as argument
 
 ```java
-int position = 0;
-multipleToggleSwitch.setUncheckedTogglePosition(position);
+List<Integer> checkedPositions = new ArrayList();
+checkedPositions.add(3);
+checkedPositions.add(5);
+multipleToggleSwitch.setCheckedTogglePositions(checkedPositions);
 ```
-
-* `Set<Integer> getCheckedTogglePositions()` Returns the set of the current checked positions
-
-```java
-Set<Integer> checkedPositions = multipleToggleSwitch.getCheckedTogglePositions();
-```
-
-
-
 
 ## Listeners
 
 ```java
 toggleSwitch.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
-
-            @Override
-            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
-				// Write your code ... 
-            }
-        });
+      @Override
+      public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+	// Write your code ...
+      }
+  });
 ```
 
-
-
 ## Customization
+
+![Basic Samples](docs/custom_samples.gif)
 
 #### Attributes
 
 It is possible to customize the buttons applying the following options:
 
 
-| Option Name      				| Format                 | Description                              |
-| ---------------- 				| ---------------------- | -----------------------------            |
-| android:textSize 				| `dimension`  	         | Text size of each button                 |
-| custom:activeBgColor         | `color`               |  Background color of the checked button    |
-| custom:activeTextColor       | `color`               | Text color of the checked button |
-| custom:inactiveBgColor 		| `color`		         | Background color of the inactive buttons  |
-| custom:inactiveTextColor     | `color`               | Text color of the inactive buttons       |
-| custom:separatorColor        | `color`               | Color of the vertical separator between inactive buttons  |
-| custom:toggleWidth    		| `dimension`           | Width of each button  |
-| custom:borderRadius			| `dimension`	         | Corner Radius in dp |
+| Option Name      				    | Format         | Description                  |
+| ---------------- 				    | -------------- | -----------------------------            |
+| android:textSize 				    | `dimension`  	 | Text size of each button                 |
+| custom:activeBgColor        | `color`        | Background color of the checked button    |
+| custom:activeTextColor      | `color`        | Text color of the checked button |
+| custom:inactiveBgColor 	    | `color`		     | Background color of the inactive buttons  |
+| custom:inactiveTextColor    | `color`        | Text color of the inactive buttons       |
+| custom:separatorColor       | `color`        | Color of the vertical separator between inactive buttons  |
+| custom:toggleWidth    		  | `dimension`    | Width of each button  |
+| custom:borderRadius			    | `dimension`	   | Corner Radius in dp |
 
 #### Example
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.old.ToggleSwitch
+<belka.us.androidtoggleswitch.widgets.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"

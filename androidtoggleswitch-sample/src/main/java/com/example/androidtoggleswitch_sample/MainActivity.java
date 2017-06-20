@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setTitle(mMenuTitles[1]);
-        showFragment(getFragmentByPosition(1));
+        setTitle(mMenuTitles[0]);
+        showFragment(getFragmentByPosition(0));
     }
 
     @Override
@@ -100,8 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getFragmentByPosition(int position) {
         switch (position) {
-            case 0:     return new SampleFragment();
-            case 1:     return new CustomToggleButtonsFragment();
+            case 0:     return new BasicSamplesFragment();
+            case 1:     return new CustomSamplesFragment();
+            case 2:     return new MatchParentWidthHeightFragment();
             default:    throw new RuntimeException("Unsupported position");
         }
     }
@@ -113,5 +114,4 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.content_frame, fragment)
                 .commit();
     }
-
 }
