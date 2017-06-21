@@ -84,7 +84,7 @@ public abstract class BaseToggleSwitch extends LinearLayout implements View.OnCl
                 this.separatorColor = attributes.getColor(R.styleable.ToggleSwitchOptions_separatorColor, ContextCompat.getColor(context, BaseToggleSwitch.Default.SEPARATOR_COLOR));
                 this.textSize = attributes.getDimensionPixelSize(R.styleable.ToggleSwitchOptions_android_textSize, (int) dp2px(context, BaseToggleSwitch.Default.TEXT_SIZE));
                 this.toggleWidth = attributes.getDimension(R.styleable.ToggleSwitchOptions_toggleWidth, dp2px(getContext(), BaseToggleSwitch.Default.TOGGLE_WIDTH));
-                this.cornerRadius = attributes.getDimensionPixelSize(R.styleable.ToggleSwitchOptions_cornerRadius, (int) dp2px(context, BaseToggleSwitch.Default.CORNER_RADIUS_DP));
+                this.cornerRadius = attributes.getDimensionPixelSize(R.styleable.ToggleSwitchOptions_borderRadius, (int) dp2px(context, BaseToggleSwitch.Default.CORNER_RADIUS_DP));
 
                 if (leftToggleText != null && !leftToggleText.isEmpty() &&
                         rightToggleText != null && !rightToggleText.isEmpty()) {

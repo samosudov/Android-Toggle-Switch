@@ -16,7 +16,7 @@
         <attr name="activeTextColor"            format="color"/>
 
         <attr name="borderWidth"                format="dimension"/>
-        <attr name="cornerRadius"               format="dimension"/>
+        <attr name="borderRadius"               format="dimension"/>
 
         <attr name="inactiveBackgroundColor"    format="color"/>
         <attr name="inactiveBorderColor"        format="color"/>
