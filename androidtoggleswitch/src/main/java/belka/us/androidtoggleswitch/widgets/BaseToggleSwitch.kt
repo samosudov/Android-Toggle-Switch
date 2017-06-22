@@ -122,7 +122,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                         ContextCompat.getColor(context, ACTIVE_TEXT_COLOR))
 
                 borderRadius = attributes.getDimensionPixelSize(
-                        R.styleable.BaseToggleSwitch_cornerRadius,
+                        R.styleable.BaseToggleSwitch_borderRadius,
                         dp2px(context, BORDER_RADIUS_DP.toFloat()).toInt()).toFloat()
 
                 borderWidth = attributes.getDimensionPixelSize(
