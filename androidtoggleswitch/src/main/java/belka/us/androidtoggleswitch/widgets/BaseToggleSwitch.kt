@@ -106,6 +106,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     constructor(context: Context, attrs: AttributeSet?) : super (context, attrs) {
         prepareLayout()
+
         if (attrs != null) {
 
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.BaseToggleSwitch, 0, 0)

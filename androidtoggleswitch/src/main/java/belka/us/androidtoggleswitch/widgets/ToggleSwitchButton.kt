@@ -2,7 +2,6 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.support.v4.view.ViewCompat
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -111,8 +110,6 @@ class ToggleSwitchButton : LinearLayout {
         clickableWrapper.setOnClickListener {
             listener.onToggleSwitchClicked(this)
         }
-
-        ViewCompat.setElevation(this, 40f)
     }
 
     fun check() {
