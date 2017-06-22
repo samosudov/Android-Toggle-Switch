@@ -2,6 +2,7 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.support.v4.view.ViewCompat
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class ToggleSwitchButton : LinearLayout {
 
     var textSize: Float
 
+    var toggleMargin: Int
     var toggleWidth: Int
     var toggleHeight: Int
 
@@ -50,7 +52,7 @@ class ToggleSwitchButton : LinearLayout {
                 activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
                 borderRadius: Float, borderWidth: Float, inactiveBackgroundColor: Int,
                 inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Float,
-                separatorColor: Int) : super(context) {
+                separatorColor: Int, toggleMargin: Int) : super(context) {
 
         this.isChecked                  = false
         this.position                   = position
@@ -70,6 +72,7 @@ class ToggleSwitchButton : LinearLayout {
         this.separatorColor             = separatorColor
         this.textSize                   = textSize
 
+        this.toggleMargin             = toggleMargin
         this.toggleWidth                = 0
         this.toggleHeight               = LinearLayout.LayoutParams.MATCH_PARENT
 
@@ -87,11 +90,17 @@ class ToggleSwitchButton : LinearLayout {
 
         // Setup View
 
-        this.layoutParams = LinearLayout.LayoutParams(toggleWidth, toggleHeight, 1.0f)
+        val layoutParams = LinearLayout.LayoutParams(toggleWidth, toggleHeight, 1.0f)
+
+        if (toggleMargin > 0 && !isFirst()) {
+            layoutParams.setMargins(toggleMargin, 0, 0, 0)
+        }
+
+        this.layoutParams = layoutParams
 
         this.orientation = HORIZONTAL
         this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
-                inactiveBorderColor, borderRadius, borderWidth)
+                inactiveBorderColor, borderRadius, borderWidth, toggleMargin)
 
         separator.setBackgroundColor(separatorColor)
 
@@ -102,23 +111,20 @@ class ToggleSwitchButton : LinearLayout {
         clickableWrapper.setOnClickListener {
             listener.onToggleSwitchClicked(this)
         }
-    }
 
-
-    fun isRight() : Boolean {
-        return position == Position.RIGHT
+        ViewCompat.setElevation(this, 40f)
     }
 
     fun check() {
         this.background = getBackgroundDrawable(position, activeBackgroundColor,
-                activeBorderColor, borderRadius, borderWidth)
+                activeBorderColor, borderRadius, borderWidth, toggleMargin)
         this.textView.setTextColor(activeTextColor)
         this.isChecked = true
     }
 
     fun uncheck() {
         this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
-                inactiveBorderColor, borderRadius, borderWidth)
+                inactiveBorderColor, borderRadius, borderWidth, toggleMargin)
         this.textView.setTextColor(inactiveTextColor)
         this.isChecked = false
     }
@@ -134,13 +140,15 @@ class ToggleSwitchButton : LinearLayout {
     // Private instance methods
 
     private fun getBackgroundDrawable(position: Position, backgroundColor : Int, borderColor : Int,
-                              borderRadius: Float, borderWidth : Float) : GradientDrawable {
+                              borderRadius: Float, borderWidth : Float,
+                                      toggleMargin: Int) : GradientDrawable {
+
         val isRightToLeft = resources.getBoolean(R.bool.is_right_to_left)
 
         var gradientDrawable = GradientDrawable()
         gradientDrawable.setColor(backgroundColor)
 
-        gradientDrawable.cornerRadii = getCornerRadii(position, isRightToLeft, borderRadius)
+        gradientDrawable.cornerRadii = getCornerRadii(position, isRightToLeft, borderRadius, toggleMargin)
 
         if (borderWidth > 0) {
             gradientDrawable.setStroke(borderWidth.toInt(), borderColor)
@@ -149,15 +157,20 @@ class ToggleSwitchButton : LinearLayout {
         return gradientDrawable
     }
 
-    private fun getCornerRadii(position: Position, isRightToLeft: Boolean, borderRadius: Float): FloatArray {
-        when(position) {
-            Position.LEFT ->
-                return if (isRightToLeft) getRightCornerRadii(borderRadius) else getLeftCornerRadii(borderRadius)
+    private fun getCornerRadii(position: Position, isRightToLeft: Boolean, borderRadius: Float, toggleMargin: Int): FloatArray {
+        if (toggleMargin > 0) {
+            return floatArrayOf(borderRadius,borderRadius,borderRadius, borderRadius, borderRadius, borderRadius, borderRadius,borderRadius)
+        }
+        else {
+            when(position) {
+                Position.LEFT ->
+                    return if (isRightToLeft) getRightCornerRadii(borderRadius) else getLeftCornerRadii(borderRadius)
 
-            Position.RIGHT ->
-                return if (isRightToLeft) getLeftCornerRadii(borderRadius) else getRightCornerRadii(borderRadius)
+                Position.RIGHT ->
+                    return if (isRightToLeft) getLeftCornerRadii(borderRadius) else getRightCornerRadii(borderRadius)
 
-            else -> return floatArrayOf(0f,0f,0f, 0f, 0f, 0f, 0f,0f)
+                else -> return floatArrayOf(0f,0f,0f, 0f, 0f, 0f, 0f,0f)
+            }
         }
     }
 
@@ -167,5 +180,16 @@ class ToggleSwitchButton : LinearLayout {
 
     private fun getLeftCornerRadii(borderRadius: Float): FloatArray {
         return floatArrayOf(borderRadius, borderRadius, 0f,0f,0f,0f, borderRadius, borderRadius)
+    }
+
+    private fun isFirst() : Boolean {
+        val isRightToLeft = resources.getBoolean(R.bool.is_right_to_left)
+
+        if (isRightToLeft) {
+            return position == Position.RIGHT
+        }
+        else {
+            return position == Position.LEFT
+        }
     }
 }

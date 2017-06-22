@@ -33,6 +33,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val SEPARATOR_VISIBLE           = true
 
         @JvmStatic private val TEXT_SIZE                   = 16f
+
+        @JvmStatic private val TOGGLE_DISTANCE             = 0f
         @JvmStatic private val TOGGLE_HEIGHT               = 38f
         @JvmStatic private val TOGGLE_WIDTH                = 72f
     }
@@ -61,6 +63,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     var textSize: Float
 
+    var toggleMargin: Float
     var toggleHeight: Float
     var toggleWidth: Float
 
@@ -75,7 +78,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
      */
 
     constructor(context: Context) : super(context) {
-        init()
+        prepareLayout()
 
         activeBackgroundColor       = ContextCompat.getColor(context, ACTIVE_BACKGROUND_COLOR)
         activeBorderColor           = ContextCompat.getColor(context, ACTIVE_BORDER_COLOR)
@@ -93,6 +96,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
         textSize                    = dp2px(context, TEXT_SIZE)
 
+        toggleMargin              = dp2px(getContext(), TOGGLE_DISTANCE)
         toggleHeight                = dp2px(getContext(), TOGGLE_HEIGHT)
         toggleWidth                 = dp2px(getContext(), TOGGLE_WIDTH)
 
@@ -101,8 +105,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super (context, attrs) {
-        init()
-
+        prepareLayout()
         if (attrs != null) {
 
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.BaseToggleSwitch, 0, 0)
@@ -152,6 +155,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                 textSize = attributes.getDimensionPixelSize(
                         R.styleable.BaseToggleSwitch_android_textSize,
                         dp2px(context, TEXT_SIZE).toInt()).toFloat()
+
+                toggleMargin = attributes.getDimension(
+                        R.styleable.BaseToggleSwitch_toggleMargin,
+                        dp2px(getContext(), TOGGLE_DISTANCE))
 
                 toggleHeight = attributes.getDimension(
                         R.styleable.BaseToggleSwitch_toggleHeight,
@@ -257,7 +264,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
             var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
                     this, activeBackgroundColor, activeBorderColor,
                     activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
-                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor)
+                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor,
+                    toggleMargin.toInt())
             buttons.add(button)
             addView(button)
         }
@@ -279,7 +287,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     protected fun manageSeparatorVisiblity() {
         for ((index, button) in buttons.withIndex()) {
-            if (separatorVisible && index < buttons.size - 1 && !hasBorder()) {
+            if (separatorVisible && index < buttons.size - 1 && !hasBorder() && !areToggleSeparated()) {
                 button.setSeparatorVisibility(button.isChecked == buttons[index + 1].isChecked)
             }
             else {
@@ -291,6 +299,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     /*
        Private instance methods
      */
+
+    private fun areToggleSeparated() : Boolean {
+        return toggleMargin > 0
+    }
 
     private fun getPosition(index : Int, entries : List<String>) : ToggleSwitchButton.Position {
         if (index == 0) {
@@ -308,19 +320,19 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         return borderWidth > 0f
     }
 
-    private fun init() {
-        layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.MATCH_PARENT)
-        orientation = HORIZONTAL
-    }
-
     private fun isFullHeight() : Boolean {
         return layoutHeight == LinearLayout.LayoutParams.MATCH_PARENT
     }
 
     private fun isFullWidth() : Boolean {
         return layoutWidth == LinearLayout.LayoutParams.MATCH_PARENT
+    }
+
+    private fun prepareLayout() {
+        layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT)
+        orientation = HORIZONTAL
     }
 
 }
