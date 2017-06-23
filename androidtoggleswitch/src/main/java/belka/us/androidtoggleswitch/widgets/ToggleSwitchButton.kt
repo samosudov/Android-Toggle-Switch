@@ -47,6 +47,23 @@ class ToggleSwitchButton : LinearLayout {
 
     var listener: Listener
 
+
+    constructor(context: Context, layoutId: Int, activeDecorator: BaseToggleSwitch.ViewDecorator,
+                inactiveDecorator: BaseToggleSwitch.ViewDecorator, position: Position, listener: Listener,
+                activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
+                borderRadius: Float, borderWidth: Float, inactiveBackgroundColor: Int,
+                inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Float,
+                separatorColor: Int, toggleMargin: Int) : super(context) {
+
+        tttt(activeBackgroundColor, activeBorderColor, activeTextColor)
+    }
+
+    private fun tttt(activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int) {
+        this.activeBackgroundColor      = activeBackgroundColor
+        this.activeBorderColor          = activeBorderColor
+        this.activeTextColor            = activeTextColor
+    }
+
     constructor(context: Context, entry: String, position: Position, listener: Listener,
                 activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
                 borderRadius: Float, borderWidth: Float, inactiveBackgroundColor: Int,
@@ -57,9 +74,11 @@ class ToggleSwitchButton : LinearLayout {
         this.position                   = position
         this.listener                   = listener
 
-        this.activeBackgroundColor      = activeBackgroundColor
-        this.activeBorderColor          = activeBorderColor
-        this.activeTextColor            = activeTextColor
+        tttt(activeBackgroundColor, activeBorderColor, activeTextColor)
+
+//        this.activeBackgroundColor      = activeBackgroundColor
+//        this.activeBorderColor          = activeBorderColor
+//        this.activeTextColor            = activeTextColor
 
         this.borderRadius               = borderRadius
         this.borderWidth                = borderWidth
@@ -71,7 +90,7 @@ class ToggleSwitchButton : LinearLayout {
         this.separatorColor             = separatorColor
         this.textSize                   = textSize
 
-        this.toggleMargin             = toggleMargin
+        this.toggleMargin               = toggleMargin
         this.toggleWidth                = 0
         this.toggleHeight               = LinearLayout.LayoutParams.MATCH_PARENT
 

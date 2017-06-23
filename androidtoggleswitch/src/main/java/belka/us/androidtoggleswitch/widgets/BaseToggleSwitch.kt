@@ -4,11 +4,22 @@ import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.view.View
 import android.widget.LinearLayout
 import belka.us.androidtoggleswitch.R
 import java.util.*
 
 abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
+
+    /*
+       Interfaces
+     */
+
+    public interface ViewDecorator {
+        fun setView(view: View, position: Int)
+    }
+
+
 
     /*
        Default Values
@@ -270,6 +281,23 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
             buttons.add(button)
             addView(button)
         }
+        manageSeparatorVisiblity()
+    }
+
+    fun setCustomView(layoutId: Int, numEntries: Int, activeDecorator: ViewDecorator, inactiveDecorator: ViewDecorator) {
+        removeAllViews()
+        buttons.clear()
+
+        for (i in 0..numEntries) {
+            var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
+                    this, activeBackgroundColor, activeBorderColor,
+                    activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
+                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor,
+                    toggleMargin.toInt())
+            buttons.add(button)
+            addView(button)
+        }
+
         manageSeparatorVisiblity()
     }
 
