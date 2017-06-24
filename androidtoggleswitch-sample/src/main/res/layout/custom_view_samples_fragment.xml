@@ -14,7 +14,8 @@
             android:id="@+id/imageTextToggleSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:toggleHeight="104dp" />
+            app:toggleHeight="104dp"
+            app:toggleMargin="16dp"/>
 
     </LinearLayout>
 </layout>

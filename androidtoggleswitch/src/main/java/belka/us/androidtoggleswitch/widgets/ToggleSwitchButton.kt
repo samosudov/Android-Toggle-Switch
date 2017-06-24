@@ -11,8 +11,8 @@ import belka.us.androidtoggleswitch.R
 
 
 class ToggleSwitchButton (context: Context, var position: Int, var positionType: PositionType,
-                          listener: Listener, layoutId: Int,
-                          var activeDecorator: ViewDecorator, var inactiveDecorator: ViewDecorator,
+                          listener: Listener, layoutId: Int, var prepareDecorator: ViewDecorator,
+                          var activeDecorator: ViewDecorator?, var inactiveDecorator: ViewDecorator?,
                           var activeBackgroundColor: Int, var activeBorderColor: Int,
                           var borderRadius: Float, var borderWidth: Float,
                           var inactiveBackgroundColor: Int, var inactiveBorderColor: Int,
@@ -72,23 +72,25 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
 
         separator.setBackgroundColor(separatorColor)
 
-        inactiveDecorator.decorate(buttonView, position)
-
         clickableWrapper.setOnClickListener {
             listener.onToggleSwitchClicked(this)
         }
+
+        // Decorate
+        prepareDecorator.decorate(buttonView, position)
+        inactiveDecorator?.decorate(buttonView, position)
     }
 
     fun check() {
         this.background = getBackgroundDrawable(activeBackgroundColor, activeBorderColor)
         this.isChecked = true
-        activeDecorator.decorate(buttonView, position)
+        activeDecorator?.decorate(buttonView, position)
     }
 
     fun uncheck() {
         this.background = getBackgroundDrawable(inactiveBackgroundColor, inactiveBorderColor)
         this.isChecked = false
-        inactiveDecorator.decorate(buttonView, position)
+        inactiveDecorator?.decorate(buttonView, position)
     }
 
     fun setSeparatorVisibility(isSeparatorVisible : Boolean) {

@@ -29,14 +29,22 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
 
         binding.imageTextToggleSwitch.setView(R.layout.image_text_toggle_button, 2,
                 new ToggleSwitchButton.ViewDecorator() {
+                    @Override
+                    public void decorate(@NotNull View view, int position) {
+                        TextView textView   = (TextView) view.findViewById(R.id.text_view);
+                        textView.setText(getLabelText(position));
+
+                        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                        imageView.setImageDrawable(getDrawable(position));
+                    }
+                },
+        new ToggleSwitchButton.ViewDecorator() {
             @Override
             public void decorate(@NotNull View view, int position) {
                 TextView textView   = (TextView) view.findViewById(R.id.text_view);
-                textView.setText(getLabelText(position));
                 textView.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
 
                 ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
-                imageView.setImageDrawable(getDrawable(position));
                 imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
             }
         }, new ToggleSwitchButton.ViewDecorator() {
@@ -44,11 +52,9 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
             public void decorate(@NotNull View view, int position) {
 
                 TextView textView   = (TextView) view.findViewById(R.id.text_view);
-                textView.setText(getLabelText(position));
                 textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
 
                 ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
-                imageView.setImageDrawable(getDrawable(position));
                 imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
             }
         });
