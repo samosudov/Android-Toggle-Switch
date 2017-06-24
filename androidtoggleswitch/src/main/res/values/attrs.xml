@@ -4,6 +4,7 @@
 
         <!-- Android Attributes -->
 
+        <attr name="android:enabled"/>
         <attr name="android:entries"/>
         <attr name="android:textSize"/>
         <attr name="android:layout_height"/>

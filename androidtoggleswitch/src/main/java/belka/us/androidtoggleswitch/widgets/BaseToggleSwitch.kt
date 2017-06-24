@@ -26,6 +26,12 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val BORDER_RADIUS_DP            = 4
         @JvmStatic private val BORDER_WIDTH                = 0
 
+        @JvmStatic private val EMPTY_DECORATOR             = object: ToggleSwitchButton.ViewDecorator {
+            override fun decorate(view: View, position: Int) {}
+        }
+
+        @JvmStatic private val ENABLED                     = true
+
         @JvmStatic private val INACTIVE_BACKGROUND_COLOR   = R.color.gray_light
         @JvmStatic private val INACTIVE_BORDER_COLOR       = R.color.gray_light
         @JvmStatic private val INACTIVE_TEXT_COLOR         = R.color.gray
@@ -44,10 +50,6 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val TOGGLE_DISTANCE             = 0f
         @JvmStatic private val TOGGLE_HEIGHT               = 38f
         @JvmStatic private val TOGGLE_WIDTH                = 72f
-
-        @JvmStatic private val EMPTY_DECORATOR             = object: ToggleSwitchButton.ViewDecorator {
-            override fun decorate(view: View, position: Int) {}
-        }
     }
 
 
@@ -81,6 +83,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     var layoutHeight =              LAYOUT_HEIGHT
     var layoutWidth =               LAYOUT_WIDTH
 
+//    private var enabled =           ENABLED
+
     var layoutId =                  LAYOUT_ID
     var numEntries =                NUM_ENTRIES
     var activeDecorator =           EMPTY_DECORATOR
@@ -88,6 +92,14 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     var buttons = ArrayList<ToggleSwitchButton>()
 
+
+//    override fun setEnabled(enabled: Boolean) {
+//
+//    }
+
+//    override fun setEnabled(enabled: Boolean) {
+////        super.setEnabled(enabled)
+//    }
 
     /*
        Constructors
@@ -120,6 +132,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     constructor(context: Context, attrs: AttributeSet?) : super (context, attrs) {
 
+//        var enabled = true
+
         if (attrs != null) {
             setUpView()
 
@@ -146,6 +160,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                 borderWidth = attributes.getDimensionPixelSize(
                         R.styleable.BaseToggleSwitch_borderWidth,
                         dp2px(context, BORDER_WIDTH.toFloat()).toInt()).toFloat()
+
+                isEnabled = attributes.getBoolean(
+                        R.styleable.BaseToggleSwitch_android_enabled,
+                        ENABLED)
 
                 inactiveBackgroundColor = attributes.getColor(
                         R.styleable.BaseToggleSwitch_inactiveBackgroundColor,
@@ -239,6 +257,17 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
             if (!isFullHeight()) {
                 button.layoutParams.height = toggleHeight.toInt()
             }
+        }
+    }
+
+    final override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+
+        if (enabled) {
+            alpha = 1f
+        }
+        else {
+            alpha = .6f
         }
     }
 

@@ -28,23 +28,26 @@ class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleS
                 toggleSwitchButton.uncheck()
             }
         }
+        manageSeparatorVisiblity()
     }
 
     override fun onToggleSwitchClicked(button: ToggleSwitchButton) {
-        val position = buttons.indexOf(button)
-        if (button.isChecked) {
-            button.uncheck()
-            checkedPositions.remove(position)
-        }
-        else {
-            button.check()
-            checkedPositions.add(position)
-        }
+        if (isEnabled) {
+            val position = buttons.indexOf(button)
+            if (button.isChecked) {
+                button.uncheck()
+                checkedPositions.remove(position)
+            }
+            else {
+                button.check()
+                checkedPositions.add(position)
+            }
 
-        Collections.sort(checkedPositions)
+            Collections.sort(checkedPositions)
 
-        manageSeparatorVisiblity()
-        onChangeListener?.onMultipleToggleSwitchChanged(position, button.isChecked)
+            manageSeparatorVisiblity()
+            onChangeListener?.onMultipleToggleSwitchChanged(position, button.isChecked)
+        }
     }
 
     override fun onRedrawn() {

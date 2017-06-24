@@ -24,7 +24,7 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
 
     override fun onToggleSwitchClicked(button: ToggleSwitchButton) {
 
-        if (!button.isChecked) {
+        if (!button.isChecked && isEnabled) {
             if (checkedPosition != null) {
                 buttons[checkedPosition!!]?.uncheck()
             }
@@ -53,5 +53,6 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
                 toggleSwitchButton.uncheck()
             }
         }
+        manageSeparatorVisiblity()
     }
 }

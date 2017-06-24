@@ -59,6 +59,17 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/planets" />
 
+            <TextView
+                style="@style/Label"
+                android:text="@string/disabled"/>
+
+            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                android:id="@+id/disabledToggleSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/planets"
+                android:enabled="false"/>
+
         </LinearLayout>
 
     </ScrollView>
