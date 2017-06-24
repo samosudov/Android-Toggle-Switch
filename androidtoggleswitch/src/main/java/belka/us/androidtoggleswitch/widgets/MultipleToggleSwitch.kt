@@ -6,7 +6,7 @@ import java.util.*
 
 class MultipleToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(context, attrs) {
 
-    public interface OnChangeListener {
+    interface OnChangeListener {
         fun onMultipleToggleSwitchChanged(position: Int, checked: Boolean)
     }
 

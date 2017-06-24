@@ -2,6 +2,7 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -48,6 +49,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val TEXT_SIZE                   = 16f
 
         @JvmStatic private val TOGGLE_DISTANCE             = 0f
+        @JvmStatic private val TOGGLE_ELEVATION            = 0f
         @JvmStatic private val TOGGLE_HEIGHT               = 38f
         @JvmStatic private val TOGGLE_WIDTH                = 72f
     }
@@ -76,6 +78,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     var textSize:                   Float
 
+    var toggleElevation =           TOGGLE_ELEVATION
     var toggleMargin:               Float
     var toggleHeight:               Float
     var toggleWidth:                Float
@@ -179,6 +182,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                         R.styleable.BaseToggleSwitch_android_textSize,
                         dp2px(context, TEXT_SIZE).toInt()).toFloat()
 
+                toggleElevation = attributes.getDimensionPixelSize(
+                        R.styleable.BaseToggleSwitch_elevation,
+                        dp2px(context, TOGGLE_ELEVATION).toInt()).toFloat()
+
                 toggleMargin = attributes.getDimension(
                         R.styleable.BaseToggleSwitch_toggleMargin,
                         dp2px(getContext(), TOGGLE_DISTANCE))
@@ -220,7 +227,6 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                 else {
                     setEntries(entries)
                 }
-
             }
             finally {
                 attributes.recycle()
@@ -258,6 +264,21 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         }
         else {
             alpha = .6f
+        }
+    }
+
+    final override fun setElevation(elevation: Float) {
+        super.setElevation(elevation)
+        if (elevation > 0) {
+            clipToPadding = false
+            setPadding(elevation.toInt(), elevation.toInt(), elevation.toInt(), elevation.toInt())
+        }
+        else {
+            clipToPadding = true
+            setPadding(0, 0, 0, 0)
+        }
+        for (button in buttons) {
+            ViewCompat.setElevation(button, elevation)
         }
     }
 
@@ -342,6 +363,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
             buttons.add(button)
             addView(button)
         }
+
+        elevation = toggleElevation
 
         manageSeparatorVisiblity()
     }

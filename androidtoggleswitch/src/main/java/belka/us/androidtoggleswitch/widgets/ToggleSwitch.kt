@@ -5,7 +5,7 @@ import android.util.AttributeSet
 
 class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(context, attrs) {
 
-    public interface OnChangeListener {
+    interface OnChangeListener {
         fun onToggleSwitchChanged(position: Int)
     }
 
@@ -16,8 +16,8 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
     override fun onRedrawn() {
         if (checkedPosition != null) {
             val currentToggleSwitch = buttons[checkedPosition!!]
-            currentToggleSwitch?.check()
-            currentToggleSwitch?.isClickable = false
+            currentToggleSwitch.check()
+            currentToggleSwitch.isClickable = false
         }
         manageSeparatorVisiblity()
     }
@@ -26,7 +26,7 @@ class ToggleSwitch(context: Context, attrs: AttributeSet?) : BaseToggleSwitch(co
 
         if (!button.isChecked && isEnabled) {
             if (checkedPosition != null) {
-                buttons[checkedPosition!!]?.uncheck()
+                buttons[checkedPosition!!].uncheck()
             }
 
             checkedPosition = buttons.indexOf(button)

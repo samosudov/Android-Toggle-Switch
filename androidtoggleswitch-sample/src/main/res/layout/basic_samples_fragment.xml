@@ -25,7 +25,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:textToggleLeft="@string/apple"
-                app:textToggleRight="@string/lemon"/>
+                app:textToggleRight="@string/lemon"
+                app:elevation="8dp"/>
 
             <TextView
                 style="@style/Label"

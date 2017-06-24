@@ -2,6 +2,7 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.support.v4.view.ViewCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,6 +81,8 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
         prepareDecorator.decorate(buttonView, position)
         inactiveDecorator?.decorate(buttonView, position)
     }
+
+    // Public instance methods
 
     fun check() {
         this.background = getBackgroundDrawable(activeBackgroundColor, activeBorderColor)

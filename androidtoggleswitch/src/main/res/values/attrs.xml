@@ -19,6 +19,8 @@
         <attr name="borderWidth"                format="dimension"/>
         <attr name="borderRadius"               format="dimension"/>
 
+        <attr name="elevation"                  format="dimension"/>
+
         <attr name="inactiveBackgroundColor"    format="color"/>
         <attr name="inactiveBorderColor"        format="color"/>
         <attr name="inactiveTextColor"          format="color"/>

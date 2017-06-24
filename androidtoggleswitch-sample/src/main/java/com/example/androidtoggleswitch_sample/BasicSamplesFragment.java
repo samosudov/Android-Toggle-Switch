@@ -38,6 +38,8 @@ public class BasicSamplesFragment extends BaseSamplesFragment {
             }
         });
 
+        binding.threeItemsToggleSwitch.setElevation(30);
+
         binding.nItemsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override
             public void onToggleSwitchChanged(int position) {
