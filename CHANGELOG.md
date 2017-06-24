@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Method `getCheckedTogglePosition` renamed to `getCheckedPosition`.
 - Method `setCheckedTogglePosition` renamed to `setCheckedPosition`.
 - Listener `OnToggleSwitchChangeListener` renamed to `OnChangeListener`.
-- Changed listener method `onToggleSwitchChangeListener(int position, boolean checked)` changed to `onToggleSwitchChanged(int position)`.
+- Changed listener method `onToggleSwitchChangeListener(int pos, boolean checked)` changed to `onToggleSwitchChanged(int pos)`.
 
 #### Multiple Toggle Switch
 - Method `getCheckedTogglePositions` renamed in `getCheckedPositions` and its return type is `List<Integer>`.

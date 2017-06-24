@@ -2,112 +2,63 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.RelativeLayout
 import belka.us.androidtoggleswitch.R
 
 
-class ToggleSwitchButton : LinearLayout {
+class ToggleSwitchButton (context: Context, var position: Int, var positionType: PositionType,
+                          listener: Listener, layoutId: Int,
+                          var activeDecorator: ViewDecorator, var inactiveDecorator: ViewDecorator,
+                          var activeBackgroundColor: Int, var activeBorderColor: Int,
+                          var borderRadius: Float, var borderWidth: Float,
+                          var inactiveBackgroundColor: Int, var inactiveBorderColor: Int,
+                          var separatorColor: Int, var toggleMargin: Int) :
+        LinearLayout(context), IRightToLeftProvider {
+
+    interface ViewDecorator {
+        fun decorate(view: View, position: Int)
+    }
 
     interface Listener {
         fun onToggleSwitchClicked(button: ToggleSwitchButton)
     }
 
-    enum class Position {
+    enum class PositionType {
         LEFT, CENTER, RIGHT
     }
 
-    var activeBackgroundColor: Int
-    var activeBorderColor: Int
-    var activeTextColor: Int
+    var toggleWidth                                 = 0
+    var toggleHeight                                = LinearLayout.LayoutParams.MATCH_PARENT
+    var isChecked                                   = false
+    var rightToLeftProvider: IRightToLeftProvider   = this
 
-    var borderRadius: Float
-    var borderWidth: Float
-
-    var inactiveBackgroundColor: Int
-    var inactiveBorderColor: Int
-    var inactiveTextColor: Int
-
-    var separatorColor: Int
-
-    var textSize: Float
-
-    var toggleMargin: Int
-    var toggleWidth: Int
-    var toggleHeight: Int
-
-    var isChecked: Boolean
-
-    var position: Position
-    var textView: TextView
     var separator: View
+    var buttonView: View
 
-    var listener: Listener
-
-
-    constructor(context: Context, layoutId: Int, activeDecorator: BaseToggleSwitch.ViewDecorator,
-                inactiveDecorator: BaseToggleSwitch.ViewDecorator, position: Position, listener: Listener,
-                activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
-                borderRadius: Float, borderWidth: Float, inactiveBackgroundColor: Int,
-                inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Float,
-                separatorColor: Int, toggleMargin: Int) : super(context) {
-
-        tttt(activeBackgroundColor, activeBorderColor, activeTextColor)
-    }
-
-    private fun tttt(activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int) {
-        this.activeBackgroundColor      = activeBackgroundColor
-        this.activeBorderColor          = activeBorderColor
-        this.activeTextColor            = activeTextColor
-    }
-
-    constructor(context: Context, entry: String, position: Position, listener: Listener,
-                activeBackgroundColor: Int, activeBorderColor: Int, activeTextColor: Int,
-                borderRadius: Float, borderWidth: Float, inactiveBackgroundColor: Int,
-                inactiveBorderColor: Int, inactiveTextColor: Int, textSize: Float,
-                separatorColor: Int, toggleMargin: Int) : super(context) {
-
-        this.isChecked                  = false
-        this.position                   = position
-        this.listener                   = listener
-
-        tttt(activeBackgroundColor, activeBorderColor, activeTextColor)
-
-//        this.activeBackgroundColor      = activeBackgroundColor
-//        this.activeBorderColor          = activeBorderColor
-//        this.activeTextColor            = activeTextColor
-
-        this.borderRadius               = borderRadius
-        this.borderWidth                = borderWidth
-
-        this.inactiveBackgroundColor    = inactiveBackgroundColor
-        this.inactiveBorderColor        = inactiveBorderColor
-        this.inactiveTextColor          = inactiveTextColor
-
-        this.separatorColor             = separatorColor
-        this.textSize                   = textSize
-
-        this.toggleMargin               = toggleMargin
-        this.toggleWidth                = 0
-        this.toggleHeight               = LinearLayout.LayoutParams.MATCH_PARENT
-
+    init {
 
         // Inflate Layout
+        val inflater    = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view        = inflater.inflate(R.layout.toggle_switch_button, this, true) as LinearLayout
+        val relativeLayoutContainer = view.findViewById(R.id.relative_layout_container) as RelativeLayout
 
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var view = inflater.inflate(R.layout.toggle_switch_button, this, true)
+        // Button View
+        val params = RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE)
+        params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE)
+        buttonView  = LayoutInflater.from(context).inflate(layoutId, relativeLayoutContainer, false)
+        relativeLayoutContainer.addView(buttonView, params)
 
         // Bind Views
-
-        textView = view.findViewById(R.id.text_view) as TextView
         separator = view.findViewById(R.id.separator)
         val clickableWrapper = findViewById(R.id.clickable_wrapper)
 
         // Setup View
-
         val layoutParams = LinearLayout.LayoutParams(toggleWidth, toggleHeight, 1.0f)
 
         if (toggleMargin > 0 && !isFirst()) {
@@ -117,14 +68,11 @@ class ToggleSwitchButton : LinearLayout {
         this.layoutParams = layoutParams
 
         this.orientation = HORIZONTAL
-        this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
-                inactiveBorderColor, borderRadius, borderWidth, toggleMargin)
+        this.background = getBackgroundDrawable(inactiveBackgroundColor, inactiveBorderColor)
 
         separator.setBackgroundColor(separatorColor)
 
-        textView.text = entry
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
-        textView.setTextColor(inactiveTextColor)
+        inactiveDecorator.decorate(buttonView, position)
 
         clickableWrapper.setOnClickListener {
             listener.onToggleSwitchClicked(this)
@@ -132,39 +80,29 @@ class ToggleSwitchButton : LinearLayout {
     }
 
     fun check() {
-        this.background = getBackgroundDrawable(position, activeBackgroundColor,
-                activeBorderColor, borderRadius, borderWidth, toggleMargin)
-        this.textView.setTextColor(activeTextColor)
+        this.background = getBackgroundDrawable(activeBackgroundColor, activeBorderColor)
         this.isChecked = true
+        activeDecorator.decorate(buttonView, position)
     }
 
     fun uncheck() {
-        this.background = getBackgroundDrawable(position, inactiveBackgroundColor,
-                inactiveBorderColor, borderRadius, borderWidth, toggleMargin)
-        this.textView.setTextColor(inactiveTextColor)
+        this.background = getBackgroundDrawable(inactiveBackgroundColor, inactiveBorderColor)
         this.isChecked = false
+        inactiveDecorator.decorate(buttonView, position)
     }
 
-    fun getText() : String {
-        return textView.text.toString()
-    }
-
-    public fun setSeparatorVisibility(isSeparatorVisible : Boolean) {
+    fun setSeparatorVisibility(isSeparatorVisible : Boolean) {
         separator.visibility = if (isSeparatorVisible) View.VISIBLE else View.GONE
     }
 
     // Private instance methods
 
-    private fun getBackgroundDrawable(position: Position, backgroundColor : Int, borderColor : Int,
-                              borderRadius: Float, borderWidth : Float,
-                                      toggleMargin: Int) : GradientDrawable {
+    private fun getBackgroundDrawable(backgroundColor : Int, borderColor : Int) : GradientDrawable {
 
-        val isRightToLeft = resources.getBoolean(R.bool.is_right_to_left)
-
-        var gradientDrawable = GradientDrawable()
+        val gradientDrawable = GradientDrawable()
         gradientDrawable.setColor(backgroundColor)
 
-        gradientDrawable.cornerRadii = getCornerRadii(position, isRightToLeft, borderRadius, toggleMargin)
+        gradientDrawable.cornerRadii = getCornerRadii()
 
         if (borderWidth > 0) {
             gradientDrawable.setStroke(borderWidth.toInt(), borderColor)
@@ -173,39 +111,45 @@ class ToggleSwitchButton : LinearLayout {
         return gradientDrawable
     }
 
-    private fun getCornerRadii(position: Position, isRightToLeft: Boolean, borderRadius: Float, toggleMargin: Int): FloatArray {
+    private fun getCornerRadii(): FloatArray {
         if (toggleMargin > 0) {
-            return floatArrayOf(borderRadius,borderRadius,borderRadius, borderRadius, borderRadius, borderRadius, borderRadius,borderRadius)
+            return floatArrayOf(borderRadius,borderRadius,
+                    borderRadius, borderRadius,
+                    borderRadius, borderRadius,
+                    borderRadius,borderRadius)
         }
         else {
-            when(position) {
-                Position.LEFT ->
-                    return if (isRightToLeft) getRightCornerRadii(borderRadius) else getLeftCornerRadii(borderRadius)
+            val isRightToLeft = rightToLeftProvider.isRightToLeft()
+            when(positionType) {
+                PositionType.LEFT ->
+                    return if (isRightToLeft) getRightCornerRadii() else getLeftCornerRadii()
 
-                Position.RIGHT ->
-                    return if (isRightToLeft) getLeftCornerRadii(borderRadius) else getRightCornerRadii(borderRadius)
+                PositionType.RIGHT ->
+                    return if (isRightToLeft) getLeftCornerRadii() else getRightCornerRadii()
 
                 else -> return floatArrayOf(0f,0f,0f, 0f, 0f, 0f, 0f,0f)
             }
         }
     }
 
-    private fun getRightCornerRadii(borderRadius: Float): FloatArray {
+    override fun isRightToLeft(): Boolean {
+        return resources.getBoolean(R.bool.is_right_to_left)
+    }
+
+    private fun getRightCornerRadii(): FloatArray {
         return floatArrayOf(0f,0f,borderRadius, borderRadius, borderRadius, borderRadius, 0f,0f)
     }
 
-    private fun getLeftCornerRadii(borderRadius: Float): FloatArray {
+    private fun getLeftCornerRadii(): FloatArray {
         return floatArrayOf(borderRadius, borderRadius, 0f,0f,0f,0f, borderRadius, borderRadius)
     }
 
     private fun isFirst() : Boolean {
-        val isRightToLeft = resources.getBoolean(R.bool.is_right_to_left)
-
-        if (isRightToLeft) {
-            return position == Position.RIGHT
+        if (rightToLeftProvider.isRightToLeft()) {
+            return positionType == PositionType.RIGHT
         }
         else {
-            return position == Position.LEFT
+            return positionType == PositionType.LEFT
         }
     }
 }

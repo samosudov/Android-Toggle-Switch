@@ -104,17 +104,17 @@ Simply use `MultipleToggleSwitch` instead of `ToggleSwitch`.
 
 #### Toggle Switch
 
-* `int getCheckedPosition()` Returns the current checked position, -1 if none is checked.
+* `int getCheckedPosition()` Returns the current checked pos, -1 if none is checked.
 
 ```java
-int position = toggleSwitch.getCheckedPosition();
+int pos = toggleSwitch.getCheckedPosition();
 ```
 
-* `void setCheckedPosition(int position)` Checks the position passed as argument.
+* `void setCheckedPosition(int pos)` Checks the pos passed as argument.
 
 ```java
-int position = 3;
-multipleToggleSwitch.setCheckedPosition(position);
+int pos = 3;
+multipleToggleSwitch.setCheckedPosition(pos);
 ```
 
 #### Multiple Toggle Switch
@@ -125,7 +125,7 @@ multipleToggleSwitch.setCheckedPosition(position);
 List<Integer> checkedPositions = multipleToggleSwitch.getCheckedPositions();
 ```
 
-* `void setCheckedPositions(List<Integer> checkedPositions)` Checks the position passed as argument
+* `void setCheckedPositions(List<Integer> checkedPositions)` Checks the pos passed as argument
 
 ```java
 List<Integer> checkedPositions = new ArrayList();
@@ -139,7 +139,7 @@ multipleToggleSwitch.setCheckedTogglePositions(checkedPositions);
 ```java
 toggleSwitch.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
       @Override
-      public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+      public void onToggleSwitchChangeListener(int pos, boolean isChecked) {
 	// Write your code ...
       }
   });

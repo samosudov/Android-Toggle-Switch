@@ -4,21 +4,14 @@ import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import belka.us.androidtoggleswitch.R
 import java.util.*
 
 abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
-
-    /*
-       Interfaces
-     */
-
-    public interface ViewDecorator {
-        fun setView(view: View, position: Int)
-    }
-
 
 
     /*
@@ -244,10 +237,6 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         Public instance methods
     */
 
-    fun getLabels() : List<String> {
-        return buttons.map { it.getText() }
-    }
-
     fun setEntries(stringArrayId: Int) {
         setEntries(resources.getStringArray(stringArrayId))
     }
@@ -273,27 +262,31 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         buttons.clear()
 
         for ((index, entry) in entries.withIndex()) {
-            var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
-                    this, activeBackgroundColor, activeBorderColor,
-                    activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
-                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor,
-                    toggleMargin.toInt())
-            buttons.add(button)
-            addView(button)
-        }
-        manageSeparatorVisiblity()
-    }
+            val positionType = getPosition(index, entries)
 
-    fun setCustomView(layoutId: Int, numEntries: Int, activeDecorator: ViewDecorator, inactiveDecorator: ViewDecorator) {
-        removeAllViews()
-        buttons.clear()
+            val activeDecorator = object: ToggleSwitchButton.ViewDecorator {
+                override fun decorate(view: View, position: Int) {
+                    val textView = view.findViewById(R.id.text_view) as TextView
+                    textView.text = entry
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                    textView.setTextColor(activeTextColor)
+                }
+            }
 
-        for (i in 0..numEntries) {
-            var button = ToggleSwitchButton(context, entry, getPosition(index, entries),
-                    this, activeBackgroundColor, activeBorderColor,
-                    activeTextColor, borderRadius, borderWidth, inactiveBackgroundColor,
-                    inactiveBorderColor, inactiveTextColor, textSize, separatorColor,
-                    toggleMargin.toInt())
+            val inactiveDecorator = object: ToggleSwitchButton.ViewDecorator {
+                override fun decorate(view: View, position: Int) {
+                    val textView = view.findViewById(R.id.text_view) as TextView
+                    textView.text = entry
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                    textView.setTextColor(inactiveTextColor)
+                }
+            }
+
+            val button = ToggleSwitchButton(context, index, positionType, this,
+                    R.layout.toggle_switch_button_view, activeDecorator, inactiveDecorator,
+                    activeBackgroundColor, activeBorderColor,
+                    borderRadius, borderWidth, inactiveBackgroundColor,
+                    inactiveBorderColor, separatorColor, toggleMargin.toInt())
             buttons.add(button)
             addView(button)
         }
@@ -302,10 +295,9 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     }
 
     public fun reDraw() {
-        setEntries(buttons.map { it.getText() })
+//        setEntries(buttons.map { it.getText() })
         onRedrawn()
     }
-
 
 
     /*
@@ -333,15 +325,15 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         return toggleMargin > 0
     }
 
-    private fun getPosition(index : Int, entries : List<String>) : ToggleSwitchButton.Position {
+    private fun getPosition(index : Int, entries : List<String>) : ToggleSwitchButton.PositionType {
         if (index == 0) {
-            return ToggleSwitchButton.Position.LEFT
+            return ToggleSwitchButton.PositionType.LEFT
         }
         else if (index == entries.size - 1) {
-            return ToggleSwitchButton.Position.RIGHT
+            return ToggleSwitchButton.PositionType.RIGHT
         }
         else {
-            return ToggleSwitchButton.Position.CENTER
+            return ToggleSwitchButton.PositionType.CENTER
         }
     }
 

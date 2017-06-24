@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             case 2:     return new MatchParentWidthHeightFragment();
             case 3:     return new SeparatedSamplesFragment();
             case 4:     return new CustomViewSamplesFragment();
-            default:    throw new RuntimeException("Unsupported position");
+            default:    throw new RuntimeException("Unsupported pos");
         }
     }
 
