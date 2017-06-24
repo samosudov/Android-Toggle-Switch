@@ -2,32 +2,33 @@ package com.example.androidtoggleswitch_sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.androidtoggleswitch_sample.databinding.MatchParentWidthHeightFragmentBinding;
+
+import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 
 /**
  * Created by lorenzorigato on 20/06/2017.
  */
 
-public class MatchParentWidthHeightFragment extends Fragment {
+public class MatchParentWidthHeightFragment extends BaseSamplesFragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.match_parent_width_height_fragment, container, false);
+        MatchParentWidthHeightFragmentBinding binding = MatchParentWidthHeightFragmentBinding.inflate(inflater);
 
-//        final ToggleSwitch toggleSwitch = (ToggleSwitch) view.findViewById(R.id.matchParentWidthToggleSwitch);
-//        toggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
-//            @Override
-//            public void onToggleSwitchChanged(int pos) {
-//                Toast.makeText(getActivity(),
-//                        "Checked: " + toggleSwitch.getLabels().get(pos),
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        binding.matchParentWidthToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+            @Override
+            public void onToggleSwitchChanged(int position) {
+                String[] planets = getResources().getStringArray(R.array.operators);
+                showToggleChangeToast(planets, position);
+            }
+        });
 
-        return view;
+        return binding.getRoot();
     }
 }

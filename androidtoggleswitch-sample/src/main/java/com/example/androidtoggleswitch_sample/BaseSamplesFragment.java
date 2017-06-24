@@ -7,10 +7,17 @@ import android.widget.Toast;
  * Created by lorenzorigato on 24/06/2017.
  */
 
-public class BaseSamplesFragment extends Fragment {
+public abstract class BaseSamplesFragment extends Fragment {
 
-    protected void showClickedToast(String[] array, int pos) {
-        Toast.makeText(getActivity(), "Checked: " + array[pos], Toast.LENGTH_SHORT).show();
+    protected void showToggleChangeToast(String[] array, int position) {
+        Toast.makeText(getActivity(), "Checked: " + array[position], Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showMultipleToggleChangeToast(String[] array, int position, boolean checked) {
+        String label = array[position];
+        Toast.makeText(getActivity(),
+                label + "[" + position + "] => " +  checked,
+                Toast.LENGTH_SHORT).show();
     }
 
 }

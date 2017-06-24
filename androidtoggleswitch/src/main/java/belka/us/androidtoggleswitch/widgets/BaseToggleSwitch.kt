@@ -300,7 +300,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         this.activeDecorator = activeDecorator
         this.inactiveDecorator = inactiveDecorator
 
-        for (index in 0..numEntries) {
+        for (index in 0..numEntries - 1) {
             val positionType = getPosition(index, numEntries)
             val button = ToggleSwitchButton(context, index, positionType, this,
                     layoutId, activeDecorator, inactiveDecorator,

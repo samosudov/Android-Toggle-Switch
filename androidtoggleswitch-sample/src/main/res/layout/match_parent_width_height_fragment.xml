@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:padding="16dp"
-    android:orientation="vertical">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
-        android:id="@+id/matchParentWidthToggleSwitch"
+    <data></data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:entries="@array/operators"/>
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+            android:id="@+id/matchParentWidthToggleSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/operators"/>
+
+    </LinearLayout>
+</layout>

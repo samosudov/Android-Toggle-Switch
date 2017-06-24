@@ -2,11 +2,12 @@ package com.example.androidtoggleswitch_sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.example.androidtoggleswitch_sample.databinding.CustomSamplesFragmentBinding;
 
 import belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch;
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
@@ -19,45 +20,41 @@ public class CustomSamplesFragment extends BaseSamplesFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.custom_samples_fragment, container, false);
+        CustomSamplesFragmentBinding binding = CustomSamplesFragmentBinding.inflate(inflater);
 
-        final ToggleSwitch matchParentWidthToggleSwitch = (ToggleSwitch) view.findViewById(R.id.matchParentWidthToggleSwitch);
-        final ToggleSwitch customColorsToggleSwitch = (ToggleSwitch) view.findViewById(R.id.customColorsToggleSwitch);
-        final ToggleSwitch customSizesToggleSwitch = (ToggleSwitch) view.findViewById(R.id.customSizesToggleSwitch);
-        final MultipleToggleSwitch customBordersToggleSwitch = (MultipleToggleSwitch) view.findViewById(R.id.customBordersToggleSwitch);
-        final ToggleSwitch noSeparatorToggleSwitch = (ToggleSwitch) view.findViewById(R.id.noSeparatorToggleSwitch);
-
-
-        matchParentWidthToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+        binding.matchParentWidthToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override
             public void onToggleSwitchChanged(int position) {
                 String[] operators = getResources().getStringArray(R.array.operators);
-                showClickedToast(operators, position);
+                showToggleChangeToast(operators, position);
             }
         });
 
-        customColorsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+        binding.customColorsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override
-            public void onToggleSwitchChanged(int pos) {
-                showClickedToast(customColorsToggleSwitch, pos);
+            public void onToggleSwitchChanged(int position) {
+                String[] planets = getResources().getStringArray(R.array.planets);
+                showToggleChangeToast(planets, position);
             }
         });
 
-        customSizesToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+        binding.customSizesToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override
-            public void onToggleSwitchChanged(int pos) {
-                showClickedToast(customSizesToggleSwitch, pos);
+            public void onToggleSwitchChanged(int position) {
+                String[] array = {getString(R.string.apple), getString(R.string.lemon)};
+                showToggleChangeToast(array, position);
             }
         });
 
-        noSeparatorToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+        binding.noSeparatorToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override
-            public void onToggleSwitchChanged(int pos) {
-                showClickedToast(noSeparatorToggleSwitch, pos);
+            public void onToggleSwitchChanged(int position) {
+                String[] planets = getResources().getStringArray(R.array.planets);
+                showToggleChangeToast(planets, position);
             }
         });
 
-        customBordersToggleSwitch.setOnChangeListener(new MultipleToggleSwitch.OnChangeListener() {
+        binding.customBordersToggleSwitch.setOnChangeListener(new MultipleToggleSwitch.OnChangeListener() {
             @Override
             public void onMultipleToggleSwitchChanged(int position, boolean checked) {
                 String[] planets = getResources().getStringArray(R.array.planets);
@@ -68,6 +65,6 @@ public class CustomSamplesFragment extends BaseSamplesFragment {
             }
         });
 
-        return view;
+        return binding.getRoot();
     }
 }
