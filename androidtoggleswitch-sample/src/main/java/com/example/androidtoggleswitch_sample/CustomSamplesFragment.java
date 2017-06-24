@@ -15,7 +15,7 @@ import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
  * Created by lorenzorigato on 16/06/2017.
  */
 
-public class CustomSamplesFragment extends Fragment {
+public class CustomSamplesFragment extends BaseSamplesFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,33 +28,34 @@ public class CustomSamplesFragment extends Fragment {
         final ToggleSwitch noSeparatorToggleSwitch = (ToggleSwitch) view.findViewById(R.id.noSeparatorToggleSwitch);
 
 
-//        matchParentWidthToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
-//            @Override
-//            public void onToggleSwitchChanged(int pos) {
-//                showClickedToast(matchParentWidthToggleSwitch, pos);
-//            }
-//        });
-//
-//        customColorsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
-//            @Override
-//            public void onToggleSwitchChanged(int pos) {
-//                showClickedToast(customColorsToggleSwitch, pos);
-//            }
-//        });
-//
-//        customSizesToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
-//            @Override
-//            public void onToggleSwitchChanged(int pos) {
-//                showClickedToast(customSizesToggleSwitch, pos);
-//            }
-//        });
-//
-//        noSeparatorToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
-//            @Override
-//            public void onToggleSwitchChanged(int pos) {
-//                showClickedToast(noSeparatorToggleSwitch, pos);
-//            }
-//        });
+        matchParentWidthToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+            @Override
+            public void onToggleSwitchChanged(int position) {
+                String[] operators = getResources().getStringArray(R.array.operators);
+                showClickedToast(operators, position);
+            }
+        });
+
+        customColorsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+            @Override
+            public void onToggleSwitchChanged(int pos) {
+                showClickedToast(customColorsToggleSwitch, pos);
+            }
+        });
+
+        customSizesToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+            @Override
+            public void onToggleSwitchChanged(int pos) {
+                showClickedToast(customSizesToggleSwitch, pos);
+            }
+        });
+
+        noSeparatorToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+            @Override
+            public void onToggleSwitchChanged(int pos) {
+                showClickedToast(noSeparatorToggleSwitch, pos);
+            }
+        });
 
         customBordersToggleSwitch.setOnChangeListener(new MultipleToggleSwitch.OnChangeListener() {
             @Override
@@ -69,10 +70,4 @@ public class CustomSamplesFragment extends Fragment {
 
         return view;
     }
-
-//    private void showClickedToast(ToggleSwitch toggleSwitch, int pos) {
-//        Toast.makeText(getActivity(),
-//                "Checked: " + toggleSwitch.getLabels().get(pos),
-//                Toast.LENGTH_SHORT).show();
-//    }
 }

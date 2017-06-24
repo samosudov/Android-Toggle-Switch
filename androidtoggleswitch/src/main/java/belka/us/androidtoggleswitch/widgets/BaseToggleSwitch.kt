@@ -30,8 +30,11 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val INACTIVE_BORDER_COLOR       = R.color.gray_light
         @JvmStatic private val INACTIVE_TEXT_COLOR         = R.color.gray
 
+        @JvmStatic private val LAYOUT_ID                   = R.layout.toggle_switch_button_view
         @JvmStatic private val LAYOUT_HEIGHT               = LinearLayout.LayoutParams.WRAP_CONTENT
         @JvmStatic private val LAYOUT_WIDTH                = LinearLayout.LayoutParams.WRAP_CONTENT
+
+        @JvmStatic private val NUM_ENTRIES                 = 0
 
         @JvmStatic private val SEPARATOR_COLOR             = R.color.gray_very_light
         @JvmStatic private val SEPARATOR_VISIBLE           = true
@@ -41,6 +44,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val TOGGLE_DISTANCE             = 0f
         @JvmStatic private val TOGGLE_HEIGHT               = 38f
         @JvmStatic private val TOGGLE_WIDTH                = 72f
+
+        @JvmStatic private val EMPTY_DECORATOR             = object: ToggleSwitchButton.ViewDecorator {
+            override fun decorate(view: View, position: Int) {}
+        }
     }
 
 
@@ -51,28 +58,33 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
      */
 
 
-    var activeBackgroundColor: Int
-    var activeBorderColor: Int
-    var activeTextColor: Int
+    var activeBackgroundColor:      Int
+    var activeBorderColor:          Int
+    var activeTextColor:            Int
 
-    var borderRadius: Float
-    var borderWidth: Float
+    var borderRadius:               Float
+    var borderWidth:                Float
 
-    var inactiveBackgroundColor: Int
-    var inactiveBorderColor: Int
-    var inactiveTextColor: Int
+    var inactiveBackgroundColor:    Int
+    var inactiveBorderColor:        Int
+    var inactiveTextColor:          Int
 
-    var separatorColor: Int
-    var separatorVisible: Boolean
+    var separatorColor:             Int
+    var separatorVisible =          SEPARATOR_VISIBLE
 
-    var textSize: Float
+    var textSize:                   Float
 
-    var toggleMargin: Float
-    var toggleHeight: Float
-    var toggleWidth: Float
+    var toggleMargin:               Float
+    var toggleHeight:               Float
+    var toggleWidth:                Float
 
-    var layoutHeight: Int
-    var layoutWidth: Int
+    var layoutHeight =              LAYOUT_HEIGHT
+    var layoutWidth =               LAYOUT_WIDTH
+
+    var layoutId =                  LAYOUT_ID
+    var numEntries =                NUM_ENTRIES
+    var activeDecorator =           EMPTY_DECORATOR
+    var inactiveDecorator =         EMPTY_DECORATOR
 
     var buttons = ArrayList<ToggleSwitchButton>()
 
@@ -82,8 +94,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
      */
 
     constructor(context: Context) : super(context) {
-        prepareLayout()
+        // Setup View
+        setUpView()
 
+        // Set default params
         activeBackgroundColor       = ContextCompat.getColor(context, ACTIVE_BACKGROUND_COLOR)
         activeBorderColor           = ContextCompat.getColor(context, ACTIVE_BORDER_COLOR)
         activeTextColor             = ContextCompat.getColor(context, ACTIVE_TEXT_COLOR)
@@ -96,22 +110,18 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         inactiveTextColor           = ContextCompat.getColor(context, INACTIVE_TEXT_COLOR)
 
         separatorColor              = ContextCompat.getColor(context, SEPARATOR_COLOR)
-        separatorVisible            = SEPARATOR_VISIBLE
 
         textSize                    = dp2px(context, TEXT_SIZE)
 
-        toggleMargin              = dp2px(getContext(), TOGGLE_DISTANCE)
+        toggleMargin                = dp2px(getContext(), TOGGLE_DISTANCE)
         toggleHeight                = dp2px(getContext(), TOGGLE_HEIGHT)
         toggleWidth                 = dp2px(getContext(), TOGGLE_WIDTH)
-
-        layoutHeight                = LAYOUT_HEIGHT
-        layoutWidth                 = LAYOUT_WIDTH
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super (context, attrs) {
-        prepareLayout()
 
         if (attrs != null) {
+            setUpView()
 
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.BaseToggleSwitch, 0, 0)
 
@@ -258,32 +268,42 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     }
 
     fun setEntries(entries : List<String>) {
+        val activeDecorator = object: ToggleSwitchButton.ViewDecorator {
+            override fun decorate(view: View, position: Int) {
+                val textView = view.findViewById(R.id.text_view) as TextView
+                textView.text = entries[position]
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                textView.setTextColor(activeTextColor)
+            }
+        }
+
+        val inactiveDecorator = object: ToggleSwitchButton.ViewDecorator {
+            override fun decorate(view: View, position: Int) {
+                val textView = view.findViewById(R.id.text_view) as TextView
+                textView.text = entries[position]
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                textView.setTextColor(inactiveTextColor)
+            }
+        }
+
+        setView(R.layout.toggle_switch_button_view, entries.size, activeDecorator, inactiveDecorator)
+    }
+
+    fun setView(layoutId: Int, numEntries: Int,
+                activeDecorator: ToggleSwitchButton.ViewDecorator,
+                inactiveDecorator: ToggleSwitchButton.ViewDecorator) {
         removeAllViews()
         buttons.clear()
 
-        for ((index, entry) in entries.withIndex()) {
-            val positionType = getPosition(index, entries)
+        this.layoutId = layoutId
+        this.numEntries = numEntries
+        this.activeDecorator = activeDecorator
+        this.inactiveDecorator = inactiveDecorator
 
-            val activeDecorator = object: ToggleSwitchButton.ViewDecorator {
-                override fun decorate(view: View, position: Int) {
-                    val textView = view.findViewById(R.id.text_view) as TextView
-                    textView.text = entry
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
-                    textView.setTextColor(activeTextColor)
-                }
-            }
-
-            val inactiveDecorator = object: ToggleSwitchButton.ViewDecorator {
-                override fun decorate(view: View, position: Int) {
-                    val textView = view.findViewById(R.id.text_view) as TextView
-                    textView.text = entry
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
-                    textView.setTextColor(inactiveTextColor)
-                }
-            }
-
+        for (index in 0..numEntries) {
+            val positionType = getPosition(index, numEntries)
             val button = ToggleSwitchButton(context, index, positionType, this,
-                    R.layout.toggle_switch_button_view, activeDecorator, inactiveDecorator,
+                    layoutId, activeDecorator, inactiveDecorator,
                     activeBackgroundColor, activeBorderColor,
                     borderRadius, borderWidth, inactiveBackgroundColor,
                     inactiveBorderColor, separatorColor, toggleMargin.toInt())
@@ -294,8 +314,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         manageSeparatorVisiblity()
     }
 
-    public fun reDraw() {
-//        setEntries(buttons.map { it.getText() })
+    fun reDraw() {
+        setView(layoutId, numEntries, activeDecorator, inactiveDecorator)
         onRedrawn()
     }
 
@@ -325,11 +345,11 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         return toggleMargin > 0
     }
 
-    private fun getPosition(index : Int, entries : List<String>) : ToggleSwitchButton.PositionType {
+    private fun getPosition(index : Int, size: Int) : ToggleSwitchButton.PositionType {
         if (index == 0) {
             return ToggleSwitchButton.PositionType.LEFT
         }
-        else if (index == entries.size - 1) {
+        else if (index == size - 1) {
             return ToggleSwitchButton.PositionType.RIGHT
         }
         else {
@@ -349,7 +369,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         return layoutWidth == LinearLayout.LayoutParams.MATCH_PARENT
     }
 
-    private fun prepareLayout() {
+    private fun setUpView() {
         layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT)
