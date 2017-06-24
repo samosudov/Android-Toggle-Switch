@@ -19,6 +19,9 @@
     <string name="lemon">Lemon</string>
     <string name="orange">Orange</string>
 
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+
     <string-array name="planets">
         <item>Earth</item>
         <item>Jupiter</item>

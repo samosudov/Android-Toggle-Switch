@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_camera_alt_black_24dp"
+        android:tint="@color/gray"/>
+
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        tools:text="Camera"/>
+
+</LinearLayout>
