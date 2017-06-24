@@ -67,6 +67,31 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
             }
         });
 
+
+
+        binding.arrowImagesToggleSwitch.setView(R.layout.images_toggle_button, 4,
+                new ToggleSwitchButton.ViewDecorator() {
+                    @Override
+                    public void decorate(@NotNull View view, int position) {
+                        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                        imageView.setImageDrawable(getArrowDrawable(position));
+                    }
+                },
+                new ToggleSwitchButton.ViewDecorator() {
+                    @Override
+                    public void decorate(@NotNull View view, int position) {
+                        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                        imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
+                    }
+                }, new ToggleSwitchButton.ViewDecorator() {
+                    @Override
+                    public void decorate(@NotNull View view, int position) {
+                        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                        imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
+                    }
+                });
+
+
         return binding.getRoot();
     }
 
@@ -85,4 +110,16 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
             default: throw new RuntimeException("Unknown position");
         }
     }
+
+    private Drawable getArrowDrawable(int position) {
+        switch (position) {
+            case 0: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_back_black_24dp);
+            case 1: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_upward_black_24dp);
+            case 2: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_forward_black_24dp);
+            case 3: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_downward_black_24dp);
+            default: throw new RuntimeException("Unknown position");
+        }
+    }
+
+
 }
