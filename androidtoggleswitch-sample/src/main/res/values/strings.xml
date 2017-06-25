@@ -10,6 +10,7 @@
     <string name="multi_select_items_switch_text">Multi Select</string>
     <string name="image_and_text">Image and text</string>
     <string name="only_images">Only images</string>
+    <string name="multiple_colors">Multiple colors</string>
     <string name="disabled">Disabled</string>
 
     <string name="match_parent_width">Match parent width</string>
@@ -24,6 +25,15 @@
 
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+
+    <string name="left">Left</string>
+    <string name="up">Up</string>
+    <string name="right">Right</string>
+    <string name="down">Down</string>
+
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 
     <string-array name="planets">
         <item>Earth</item>

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.androidtoggleswitch_sample.databinding.SeparatedSamplesFragmentBinding;
+import com.example.androidtoggleswitch_sample.databinding.FragmentSeparatedSamplesBinding;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 
@@ -18,7 +18,7 @@ public class SeparatedSamplesFragment extends BaseSamplesFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        SeparatedSamplesFragmentBinding binding = SeparatedSamplesFragmentBinding.inflate(inflater);
+        FragmentSeparatedSamplesBinding binding = FragmentSeparatedSamplesBinding.inflate(inflater);
 
         binding.operatorsSeparatedToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override

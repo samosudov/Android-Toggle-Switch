@@ -2,7 +2,6 @@ package belka.us.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.support.v4.view.ViewCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +11,17 @@ import belka.us.androidtoggleswitch.R
 
 
 class ToggleSwitchButton (context: Context, var position: Int, var positionType: PositionType,
-                          listener: Listener, layoutId: Int, var prepareDecorator: ViewDecorator,
+                          listener: Listener, layoutId: Int, var prepareDecorator: ToggleSwitchButtonDecorator,
                           var activeDecorator: ViewDecorator?, var inactiveDecorator: ViewDecorator?,
                           var activeBackgroundColor: Int, var activeBorderColor: Int,
                           var borderRadius: Float, var borderWidth: Float,
                           var inactiveBackgroundColor: Int, var inactiveBorderColor: Int,
                           var separatorColor: Int, var toggleMargin: Int) :
         LinearLayout(context), IRightToLeftProvider {
+
+    interface ToggleSwitchButtonDecorator {
+        fun decorate(toggleSwitchButton: ToggleSwitchButton, view: View, position: Int)
+    }
 
     interface ViewDecorator {
         fun decorate(view: View, position: Int)
@@ -38,25 +41,26 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
     var rightToLeftProvider: IRightToLeftProvider   = this
 
     var separator: View
-    var buttonView: View
+    var view: View
 
     init {
 
         // Inflate Layout
         val inflater    = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view        = inflater.inflate(R.layout.toggle_switch_button, this, true) as LinearLayout
-        val relativeLayoutContainer = view.findViewById(R.id.relative_layout_container) as RelativeLayout
+        val layoutView  = inflater.inflate(R.layout.toggle_switch_button, this, true) as LinearLayout
+        val relativeLayoutContainer = layoutView.findViewById(R.id.relative_layout_container) as RelativeLayout
 
-        // Button View
+        // View
         val params = RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE)
         params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE)
-        buttonView  = LayoutInflater.from(context).inflate(layoutId, relativeLayoutContainer, false)
-        relativeLayoutContainer.addView(buttonView, params)
+
+        view  = LayoutInflater.from(context).inflate(layoutId, relativeLayoutContainer, false)
+        relativeLayoutContainer.addView(view, params)
 
         // Bind Views
-        separator = view.findViewById(R.id.separator)
+        separator = layoutView.findViewById(R.id.separator)
         val clickableWrapper = findViewById(R.id.clickable_wrapper)
 
         // Setup View
@@ -78,8 +82,8 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
         }
 
         // Decorate
-        prepareDecorator.decorate(buttonView, position)
-        inactiveDecorator?.decorate(buttonView, position)
+        prepareDecorator.decorate(this, view, position)
+        inactiveDecorator?.decorate(view, position)
     }
 
     // Public instance methods
@@ -87,13 +91,13 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
     fun check() {
         this.background = getBackgroundDrawable(activeBackgroundColor, activeBorderColor)
         this.isChecked = true
-        activeDecorator?.decorate(buttonView, position)
+        activeDecorator?.decorate(view, position)
     }
 
     fun uncheck() {
         this.background = getBackgroundDrawable(inactiveBackgroundColor, inactiveBorderColor)
         this.isChecked = false
-        inactiveDecorator?.decorate(buttonView, position)
+        inactiveDecorator?.decorate(view, position)
     }
 
     fun setSeparatorVisibility(isSeparatorVisible : Boolean) {

@@ -35,5 +35,16 @@
             app:toggleMargin="16dp"
             app:elevation="8dp"/>
 
+        <TextView
+            style="@style/Label"
+            android:text="@string/multiple_colors"/>
+
+        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+            android:id="@+id/multipleColorsToggleSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:toggleHeight="48dp"
+            app:elevation="8dp"/>
+
     </LinearLayout>
 </layout>

@@ -27,8 +27,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val BORDER_RADIUS_DP            = 4
         @JvmStatic private val BORDER_WIDTH                = 0
 
-        @JvmStatic private val EMPTY_DECORATOR             = object: ToggleSwitchButton.ViewDecorator {
-            override fun decorate(view: View, position: Int) {}
+        @JvmStatic private val EMPTY_TOGGLE_DECORATOR      = object: ToggleSwitchButton.ToggleSwitchButtonDecorator {
+            override fun decorate(toggleSwitchButton: ToggleSwitchButton, view: View, position: Int) {}
         }
 
         @JvmStatic private val ENABLED                     = true
@@ -89,7 +89,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     var layoutId =                  LAYOUT_ID
     var numEntries =                NUM_ENTRIES
 
-    var prepareDecorator:   ToggleSwitchButton.ViewDecorator     = EMPTY_DECORATOR
+    var prepareDecorator:   ToggleSwitchButton.ToggleSwitchButtonDecorator = EMPTY_TOGGLE_DECORATOR
     var activeDecorator:    ToggleSwitchButton.ViewDecorator?    = null
     var inactiveDecorator:  ToggleSwitchButton.ViewDecorator?    = null
 
@@ -309,8 +309,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     fun setEntries(entries : List<String>) {
 
-        val prepareDecorator = object: ToggleSwitchButton.ViewDecorator {
-            override fun decorate(view: View, position: Int) {
+        val prepareDecorator = object: ToggleSwitchButton.ToggleSwitchButtonDecorator {
+            override fun decorate(toggleSwitchButton: ToggleSwitchButton, view: View, position: Int) {
                 val textView = view.findViewById(R.id.text_view) as TextView
                 textView.text = entries[position]
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
@@ -336,13 +336,13 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     }
 
     fun setView(layoutId: Int, numEntries: Int,
-                prepareDecorator: ToggleSwitchButton.ViewDecorator) {
+                prepareDecorator: ToggleSwitchButton.ToggleSwitchButtonDecorator) {
 
         setView(layoutId, numEntries, prepareDecorator, null, null)
     }
 
     fun setView(layoutId: Int, numEntries: Int,
-                prepareDecorator: ToggleSwitchButton.ViewDecorator,
+                prepareDecorator: ToggleSwitchButton.ToggleSwitchButtonDecorator,
                 activeDecorator: ToggleSwitchButton.ViewDecorator?,
                 inactiveDecorator: ToggleSwitchButton.ViewDecorator?) {
         removeAllViews()

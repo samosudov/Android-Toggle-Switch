@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.androidtoggleswitch_sample.databinding.BasicSamplesFragmentBinding;
+import com.example.androidtoggleswitch_sample.databinding.FragmentBasicSamplesBinding;
 
 import belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch;
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
@@ -20,7 +20,7 @@ public class BasicSamplesFragment extends BaseSamplesFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        BasicSamplesFragmentBinding binding = BasicSamplesFragmentBinding.inflate(inflater);
+        FragmentBasicSamplesBinding binding = FragmentBasicSamplesBinding.inflate(inflater);
 
         binding.twoItemsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override
@@ -37,8 +37,6 @@ public class BasicSamplesFragment extends BaseSamplesFragment {
                 showToggleChangeToast(array, position);
             }
         });
-
-        binding.threeItemsToggleSwitch.setElevation(30);
 
         binding.nItemsToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.androidtoggleswitch_sample.databinding.CustomSamplesFragmentBinding;
+import com.example.androidtoggleswitch_sample.databinding.FragmentCustomSamplesBinding;
 
 import belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch;
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
@@ -20,7 +20,7 @@ public class CustomSamplesFragment extends BaseSamplesFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        CustomSamplesFragmentBinding binding = CustomSamplesFragmentBinding.inflate(inflater);
+        FragmentCustomSamplesBinding binding = FragmentCustomSamplesBinding.inflate(inflater);
 
         binding.matchParentWidthToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override

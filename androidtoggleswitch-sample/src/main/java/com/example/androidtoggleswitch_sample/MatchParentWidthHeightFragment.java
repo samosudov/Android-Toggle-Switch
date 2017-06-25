@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.androidtoggleswitch_sample.databinding.MatchParentWidthHeightFragmentBinding;
+import com.example.androidtoggleswitch_sample.databinding.FragmentMatchParentWidthHeightBinding;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 
@@ -19,7 +19,7 @@ public class MatchParentWidthHeightFragment extends BaseSamplesFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        MatchParentWidthHeightFragmentBinding binding = MatchParentWidthHeightFragmentBinding.inflate(inflater);
+        FragmentMatchParentWidthHeightBinding binding = FragmentMatchParentWidthHeightBinding.inflate(inflater);
 
         binding.matchParentWidthToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
             @Override
