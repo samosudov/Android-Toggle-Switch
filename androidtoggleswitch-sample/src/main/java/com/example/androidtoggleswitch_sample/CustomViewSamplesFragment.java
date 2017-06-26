@@ -106,7 +106,7 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
                 public void decorate(ToggleSwitchButton toggleSwitchButton, @NotNull View view, int position) {
                     ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
                     imageView.setImageDrawable(getCrudDrawable(position));
-                    toggleSwitchButton.setActiveBackgroundColor(getCrudActiveBackgroundColor(position));
+                    toggleSwitchButton.setCheckedBackgroundColor(getCrudActiveBackgroundColor(position));
 
                     TextView textView = (TextView) view.findViewById(R.id.text_view);
                     textView.setText(getCrudLabel(position));

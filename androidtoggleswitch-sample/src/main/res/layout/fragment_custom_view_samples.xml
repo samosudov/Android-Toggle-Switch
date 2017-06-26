@@ -30,7 +30,7 @@
             android:id="@+id/arrowImagesToggleSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:activeBackgroundColor="@color/green"
+            app:checkedBackgroundColor="@color/green"
             app:toggleHeight="54dp"
             app:toggleMargin="16dp"
             app:elevation="8dp"/>

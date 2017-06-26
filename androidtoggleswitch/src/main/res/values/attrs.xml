@@ -12,18 +12,18 @@
 
         <!-- Custom Attributes-->
 
-        <attr name="activeBackgroundColor"      format="color"/>
-        <attr name="activeBorderColor"          format="color"/>
-        <attr name="activeTextColor"            format="color"/>
+        <attr name="checkedBackgroundColor"      format="color"/>
+        <attr name="checkedBorderColor"          format="color"/>
+        <attr name="checkedTextColor"            format="color"/>
 
         <attr name="borderWidth"                format="dimension"/>
         <attr name="borderRadius"               format="dimension"/>
 
         <attr name="elevation"                  format="dimension"/>
 
-        <attr name="inactiveBackgroundColor"    format="color"/>
-        <attr name="inactiveBorderColor"        format="color"/>
-        <attr name="inactiveTextColor"          format="color"/>
+        <attr name="uncheckedBackgroundColor"    format="color"/>
+        <attr name="uncheckedBorderColor"        format="color"/>
+        <attr name="uncheckedTextColor"          format="color"/>
 
         <attr name="separatorColor"             format="color"/>
         <attr name="separatorVisible"           format="boolean"/>

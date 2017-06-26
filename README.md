@@ -136,11 +136,25 @@ multipleToggleSwitch.setCheckedTogglePositions(checkedPositions);
 
 ## Listeners
 
+
+#### Toggle Switch
+
 ```java
-toggleSwitch.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
+toggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener(){
       @Override
-      public void onToggleSwitchChangeListener(int pos, boolean isChecked) {
-	// Write your code ...
+      public void onToggleSwitchChanged(int position) {
+	       // Your code ...
+      }
+  });
+```
+
+#### Multiple Toggle Switch
+
+```java
+multipleToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener(){
+      @Override
+      public void onMultipleToggleSwitchChanged(int position, boolean checked) {
+	       // Your code ...
       }
   });
 ```
@@ -154,16 +168,24 @@ toggleSwitch.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChan
 It is possible to customize the buttons applying the following options:
 
 
-| Option Name      				    | Format         | Description                  |
-| ---------------- 				    | -------------- | -----------------------------            |
-| android:textSize 				    | `dimension`  	 | Text size of each button                 |
-| custom:activeBgColor        | `color`        | Background color of the checked button    |
-| custom:activeTextColor      | `color`        | Text color of the checked button |
-| custom:inactiveBgColor 	    | `color`		     | Background color of the inactive buttons  |
-| custom:inactiveTextColor    | `color`        | Text color of the inactive buttons       |
-| custom:separatorColor       | `color`        | Color of the vertical separator between inactive buttons  |
-| custom:toggleWidth    		  | `dimension`    | Width of each button  |
-| custom:borderRadius			    | `dimension`	   | Corner Radius in dp |
+| Option Name      				       | Format          | Description                                      |
+| ---------------- 				       | --------------  | -----------------------------                    |
+| android:enabled 				       | `boolean`  	   | Enable or disable the toggle switch buttons      |
+| android:entries 				       | `array`  	     | Set the labels of each button                    |
+| android:textSize 				       | `dimension`  	 | Text size of each button                         |
+| custom:checkedBackgroundColor   | `color`         | Background color of a checked button             |
+| custom:checkedBorderColor       | `color`         | Border color of a checked button                 |
+| custom:checkedTextColor         | `color`         | Text color of a checked button                   |
+| custom:borderRadius			       | `dimension`	   | The border radius of each button in dp           |
+| custom:borderWidth             | `dimension`     | The width of the border of each button in dp     |
+| custom:uncheckedBackgroundColor | `color`		     | Background color of the unchecked buttons        |
+| custom:uncheckedBorderColor     | `color`         | Border color of a unchecked button               |
+| custom:uncheckedTextColor       | `color`         | Text color of the unchecked buttons              |
+| custom:separatorColor          | `color`         | Color of the vertical separator between buttons  |
+| custom:separatorVisible        | `boolean`       | Set if the separator is visible or not           |
+| custom:toggleMargin    		     | `dimension`     | Margin between each button in dp                 |
+| custom:toggleHeight    		     | `dimension`     | Height of each button                            |
+| custom:toggleWidth    		     | `dimension`     | Width of each button                             |
 
 #### Example
 
@@ -172,10 +194,10 @@ It is possible to customize the buttons applying the following options:
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        custom:activeBgColor="@android:color/holo_blue_dark"
-        custom:activeTextColor="@android:color/white"
-        custom:inactiveBgColor="@android:color/white"
-        custom:inactiveTextColor="@android:color/black"
+        custom:checkedBgColor="@android:color/holo_blue_dark"
+        custom:checkedTextColor="@android:color/white"
+        custom:uncheckedBgColor="@android:color/white"
+        custom:uncheckedTextColor="@android:color/black"
         custom:separatorColor="@color/gray_very_light"
         custom:textToggleCenter="APPLE"
         custom:textToggleLeft="ORANGE"

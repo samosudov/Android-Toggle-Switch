@@ -38,8 +38,8 @@
             app:elevation="4dp"
             app:borderRadius="35dp"
             app:borderWidth="4dp"
-            app:activeBackgroundColor="@color/green"
-            app:activeBorderColor="@color/orange"
+            app:checkedBackgroundColor="@color/green"
+            app:checkedBorderColor="@color/orange"
             app:toggleHeight="70dp"
             app:toggleWidth="70dp"/>
 

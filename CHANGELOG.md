@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added `android:entries` attribute to set the entries from xml.
 - Added `android:layout_width` and `android:layout_height` attributes to support `match_parent` width and height.
 - Added `android:enabled` attribute to support disable toggle buttons.
-- Added `app:activeBorderColor` and `app:inactiveBorderColor` attributes.
+- Added `app:checkedBorderColor` and `app:uncheckedBorderColor` attributes.
 - Added `app:border_width` attribute.
 - Added `app:elevation` attribute to support button's elevation.
 - Added `app:separatorVisible` attribute to set if the separator should be visible or not.
@@ -23,8 +23,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- `app:activeBgColor` renamed to `app:activeBackgroundColor`.
-- `app:inactiveBgColor` renamed to `app:inactiveBackgroundColor`.
+- `app:activeBgColor` renamed to `app:checkedBackgroundColor`.
+- `app:inactiveBgColor` renamed to `app:uncheckedBackgroundColor`.
+- `app:activeTextColor` renamed to `app:checkedTextColor`.
+- `app:inactiveTextColor` renamed to `app:uncheckedTextColor`.
 - `app:cornerRadius` renamed to `app:borderRadius`
 
 #### Toggle Switch

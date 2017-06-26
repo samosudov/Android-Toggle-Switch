@@ -12,10 +12,10 @@ import belka.us.androidtoggleswitch.R
 
 class ToggleSwitchButton (context: Context, var position: Int, var positionType: PositionType,
                           listener: Listener, layoutId: Int, var prepareDecorator: ToggleSwitchButtonDecorator,
-                          var activeDecorator: ViewDecorator?, var inactiveDecorator: ViewDecorator?,
-                          var activeBackgroundColor: Int, var activeBorderColor: Int,
+                          var checkedDecorator: ViewDecorator?, var uncheckedDecorator: ViewDecorator?,
+                          var checkedBackgroundColor: Int, var checkedBorderColor: Int,
                           var borderRadius: Float, var borderWidth: Float,
-                          var inactiveBackgroundColor: Int, var inactiveBorderColor: Int,
+                          var uncheckedBackgroundColor: Int, var uncheckedBorderColor: Int,
                           var separatorColor: Int, var toggleMargin: Int) :
         LinearLayout(context), IRightToLeftProvider {
 
@@ -73,7 +73,7 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
         this.layoutParams = layoutParams
 
         this.orientation = HORIZONTAL
-        this.background = getBackgroundDrawable(inactiveBackgroundColor, inactiveBorderColor)
+        this.background = getBackgroundDrawable(uncheckedBackgroundColor, uncheckedBorderColor)
 
         separator.setBackgroundColor(separatorColor)
 
@@ -83,21 +83,21 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
 
         // Decorate
         prepareDecorator.decorate(this, view, position)
-        inactiveDecorator?.decorate(view, position)
+        uncheckedDecorator?.decorate(view, position)
     }
 
     // Public instance methods
 
     fun check() {
-        this.background = getBackgroundDrawable(activeBackgroundColor, activeBorderColor)
+        this.background = getBackgroundDrawable(checkedBackgroundColor, checkedBorderColor)
         this.isChecked = true
-        activeDecorator?.decorate(view, position)
+        checkedDecorator?.decorate(view, position)
     }
 
     fun uncheck() {
-        this.background = getBackgroundDrawable(inactiveBackgroundColor, inactiveBorderColor)
+        this.background = getBackgroundDrawable(uncheckedBackgroundColor, uncheckedBorderColor)
         this.isChecked = false
-        inactiveDecorator?.decorate(view, position)
+        uncheckedDecorator?.decorate(view, position)
     }
 
     fun setSeparatorVisibility(isSeparatorVisible : Boolean) {

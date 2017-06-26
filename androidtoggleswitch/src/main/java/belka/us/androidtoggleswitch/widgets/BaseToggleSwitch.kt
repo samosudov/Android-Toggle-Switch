@@ -20,22 +20,19 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
      */
 
     companion object Default {
-        @JvmStatic private val ACTIVE_BACKGROUND_COLOR     = R.color.blue
-        @JvmStatic private val ACTIVE_BORDER_COLOR         = R.color.blue
-        @JvmStatic private val ACTIVE_TEXT_COLOR           = android.R.color.white
 
         @JvmStatic private val BORDER_RADIUS_DP            = 4
         @JvmStatic private val BORDER_WIDTH                = 0
+
+        @JvmStatic private val CHECKED_BACKGROUND_COLOR    = R.color.blue
+        @JvmStatic private val CHECKED_BORDER_COLOR        = R.color.blue
+        @JvmStatic private val CHECKED_TEXT_COLOR          = android.R.color.white
 
         @JvmStatic private val EMPTY_TOGGLE_DECORATOR      = object: ToggleSwitchButton.ToggleSwitchButtonDecorator {
             override fun decorate(toggleSwitchButton: ToggleSwitchButton, view: View, position: Int) {}
         }
 
         @JvmStatic private val ENABLED                     = true
-
-        @JvmStatic private val INACTIVE_BACKGROUND_COLOR   = R.color.gray_light
-        @JvmStatic private val INACTIVE_BORDER_COLOR       = R.color.gray_light
-        @JvmStatic private val INACTIVE_TEXT_COLOR         = R.color.gray
 
         @JvmStatic private val LAYOUT_ID                   = R.layout.toggle_switch_button_view
         @JvmStatic private val LAYOUT_HEIGHT               = LinearLayout.LayoutParams.WRAP_CONTENT
@@ -52,6 +49,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         @JvmStatic private val TOGGLE_ELEVATION            = 0f
         @JvmStatic private val TOGGLE_HEIGHT               = 38f
         @JvmStatic private val TOGGLE_WIDTH                = 72f
+
+        @JvmStatic private val UNCHECKED_BACKGROUND_COLOR  = R.color.gray_light
+        @JvmStatic private val UNCHECKED_BORDER_COLOR      = R.color.gray_light
+        @JvmStatic private val UNCHECKED_TEXT_COLOR        = R.color.gray
     }
 
 
@@ -62,16 +63,16 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
      */
 
 
-    var activeBackgroundColor:      Int
-    var activeBorderColor:          Int
-    var activeTextColor:            Int
+    var checkedBackgroundColor:      Int
+    var checkedBorderColor:          Int
+    var checkedTextColor:            Int
 
     var borderRadius:               Float
     var borderWidth:                Float
 
-    var inactiveBackgroundColor:    Int
-    var inactiveBorderColor:        Int
-    var inactiveTextColor:          Int
+    var uncheckedBackgroundColor:    Int
+    var uncheckedBorderColor:        Int
+    var uncheckedTextColor:          Int
 
     var separatorColor:             Int
     var separatorVisible =          SEPARATOR_VISIBLE
@@ -90,8 +91,8 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     var numEntries =                NUM_ENTRIES
 
     var prepareDecorator:   ToggleSwitchButton.ToggleSwitchButtonDecorator = EMPTY_TOGGLE_DECORATOR
-    var activeDecorator:    ToggleSwitchButton.ViewDecorator?    = null
-    var inactiveDecorator:  ToggleSwitchButton.ViewDecorator?    = null
+    var checkedDecorator:    ToggleSwitchButton.ViewDecorator?    = null
+    var uncheckedDecorator:  ToggleSwitchButton.ViewDecorator?    = null
 
     var buttons = ArrayList<ToggleSwitchButton>()
 
@@ -105,16 +106,16 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
         setUpView()
 
         // Set default params
-        activeBackgroundColor       = ContextCompat.getColor(context, ACTIVE_BACKGROUND_COLOR)
-        activeBorderColor           = ContextCompat.getColor(context, ACTIVE_BORDER_COLOR)
-        activeTextColor             = ContextCompat.getColor(context, ACTIVE_TEXT_COLOR)
+        checkedBackgroundColor       = ContextCompat.getColor(context, CHECKED_BACKGROUND_COLOR)
+        checkedBorderColor           = ContextCompat.getColor(context, CHECKED_BORDER_COLOR)
+        checkedTextColor             = ContextCompat.getColor(context, CHECKED_TEXT_COLOR)
 
         borderRadius                = dp2px(context, BORDER_RADIUS_DP.toFloat())
         borderWidth                 = dp2px(context, BORDER_WIDTH.toFloat())
 
-        inactiveBackgroundColor     = ContextCompat.getColor(context, INACTIVE_BACKGROUND_COLOR)
-        inactiveBorderColor         = ContextCompat.getColor(context, INACTIVE_BORDER_COLOR)
-        inactiveTextColor           = ContextCompat.getColor(context, INACTIVE_TEXT_COLOR)
+        uncheckedBackgroundColor     = ContextCompat.getColor(context, UNCHECKED_BACKGROUND_COLOR)
+        uncheckedBorderColor         = ContextCompat.getColor(context, UNCHECKED_BORDER_COLOR)
+        uncheckedTextColor           = ContextCompat.getColor(context, UNCHECKED_TEXT_COLOR)
 
         separatorColor              = ContextCompat.getColor(context, SEPARATOR_COLOR)
 
@@ -134,17 +135,17 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
             try {
 
-                activeBackgroundColor = attributes.getColor(
-                        R.styleable.BaseToggleSwitch_activeBackgroundColor,
-                        ContextCompat.getColor(context, ACTIVE_BACKGROUND_COLOR))
+                checkedBackgroundColor = attributes.getColor(
+                        R.styleable.BaseToggleSwitch_checkedBackgroundColor,
+                        ContextCompat.getColor(context, CHECKED_BACKGROUND_COLOR))
 
-                activeBorderColor = attributes.getColor(
-                        R.styleable.BaseToggleSwitch_activeBorderColor,
-                        ContextCompat.getColor(context, ACTIVE_BORDER_COLOR))
+                checkedBorderColor = attributes.getColor(
+                        R.styleable.BaseToggleSwitch_checkedBorderColor,
+                        ContextCompat.getColor(context, CHECKED_BORDER_COLOR))
 
-                activeTextColor = attributes.getColor(
-                        R.styleable.BaseToggleSwitch_activeTextColor,
-                        ContextCompat.getColor(context, ACTIVE_TEXT_COLOR))
+                checkedTextColor = attributes.getColor(
+                        R.styleable.BaseToggleSwitch_checkedTextColor,
+                        ContextCompat.getColor(context, CHECKED_TEXT_COLOR))
 
                 borderRadius = attributes.getDimensionPixelSize(
                         R.styleable.BaseToggleSwitch_borderRadius,
@@ -158,17 +159,17 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
                         R.styleable.BaseToggleSwitch_android_enabled,
                         ENABLED)
 
-                inactiveBackgroundColor = attributes.getColor(
-                        R.styleable.BaseToggleSwitch_inactiveBackgroundColor,
-                        ContextCompat.getColor(context, INACTIVE_BACKGROUND_COLOR))
+                uncheckedBackgroundColor = attributes.getColor(
+                        R.styleable.BaseToggleSwitch_uncheckedBackgroundColor,
+                        ContextCompat.getColor(context, UNCHECKED_BACKGROUND_COLOR))
 
-                inactiveBorderColor = attributes.getColor(
-                        R.styleable.BaseToggleSwitch_inactiveBorderColor,
-                        ContextCompat.getColor(context, INACTIVE_BORDER_COLOR))
+                uncheckedBorderColor = attributes.getColor(
+                        R.styleable.BaseToggleSwitch_uncheckedBorderColor,
+                        ContextCompat.getColor(context, UNCHECKED_BORDER_COLOR))
 
-                inactiveTextColor = attributes.getColor(
-                        R.styleable.BaseToggleSwitch_inactiveTextColor,
-                        ContextCompat.getColor(context, INACTIVE_TEXT_COLOR))
+                uncheckedTextColor = attributes.getColor(
+                        R.styleable.BaseToggleSwitch_uncheckedTextColor,
+                        ContextCompat.getColor(context, UNCHECKED_TEXT_COLOR))
 
                 separatorColor = attributes.getColor(
                         R.styleable.BaseToggleSwitch_separatorColor,
@@ -317,22 +318,22 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
             }
         }
 
-        val activeDecorator = object: ToggleSwitchButton.ViewDecorator {
+        val checkedDecorator = object: ToggleSwitchButton.ViewDecorator {
             override fun decorate(view: View, position: Int) {
                 val textView = view.findViewById(R.id.text_view) as TextView
-                textView.setTextColor(activeTextColor)
+                textView.setTextColor(checkedTextColor)
             }
         }
 
-        val inactiveDecorator = object: ToggleSwitchButton.ViewDecorator {
+        val uncheckedDecorator = object: ToggleSwitchButton.ViewDecorator {
             override fun decorate(view: View, position: Int) {
                 val textView = view.findViewById(R.id.text_view) as TextView
-                textView.setTextColor(inactiveTextColor)
+                textView.setTextColor(uncheckedTextColor)
             }
         }
 
         setView(R.layout.toggle_switch_button_view, entries.size,
-                prepareDecorator, activeDecorator, inactiveDecorator)
+                prepareDecorator, checkedDecorator, uncheckedDecorator)
     }
 
     fun setView(layoutId: Int, numEntries: Int,
@@ -343,23 +344,23 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     fun setView(layoutId: Int, numEntries: Int,
                 prepareDecorator: ToggleSwitchButton.ToggleSwitchButtonDecorator,
-                activeDecorator: ToggleSwitchButton.ViewDecorator?,
-                inactiveDecorator: ToggleSwitchButton.ViewDecorator?) {
+                checkedDecorator: ToggleSwitchButton.ViewDecorator?,
+                uncheckedDecorator: ToggleSwitchButton.ViewDecorator?) {
         removeAllViews()
         buttons.clear()
 
         this.layoutId = layoutId
         this.numEntries = numEntries
-        this.activeDecorator = activeDecorator
-        this.inactiveDecorator = inactiveDecorator
+        this.checkedDecorator = checkedDecorator
+        this.uncheckedDecorator = uncheckedDecorator
 
         for (index in 0..numEntries - 1) {
             val positionType = getPosition(index, numEntries)
             val button = ToggleSwitchButton(context, index, positionType, this,
-                    layoutId, prepareDecorator, activeDecorator, inactiveDecorator,
-                    activeBackgroundColor, activeBorderColor,
-                    borderRadius, borderWidth, inactiveBackgroundColor,
-                    inactiveBorderColor, separatorColor, toggleMargin.toInt())
+                    layoutId, prepareDecorator, checkedDecorator, uncheckedDecorator,
+                    checkedBackgroundColor, checkedBorderColor,
+                    borderRadius, borderWidth, uncheckedBackgroundColor,
+                    uncheckedBorderColor, separatorColor, toggleMargin.toInt())
             buttons.add(button)
             addView(button)
         }
@@ -370,7 +371,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     }
 
     fun reDraw() {
-        setView(layoutId, numEntries, prepareDecorator, activeDecorator, inactiveDecorator)
+        setView(layoutId, numEntries, prepareDecorator, checkedDecorator, uncheckedDecorator)
         onRedrawn()
     }
 

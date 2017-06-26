@@ -35,10 +35,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/planets"
-                app:activeBackgroundColor="@color/orange"
-                app:activeTextColor="@android:color/white"
-                app:inactiveBackgroundColor="@color/colorPrimaryDark"
-                app:inactiveTextColor="@color/green"
+                app:checkedBackgroundColor="@color/orange"
+                app:checkedTextColor="@android:color/white"
+                app:uncheckedBackgroundColor="@color/colorPrimaryDark"
+                app:uncheckedTextColor="@color/green"
                 app:separatorColor="@color/green"/>
 
             <TextView
@@ -66,8 +66,8 @@
                 android:entries="@array/planets"
                 app:borderRadius="8dp"
                 app:borderWidth="4dp"
-                app:activeBorderColor="@color/teal"
-                app:inactiveBorderColor="@color/gray_border"/>
+                app:checkedBorderColor="@color/teal"
+                app:uncheckedBorderColor="@color/gray_border"/>
 
             <TextView
                 style="@style/Label"
