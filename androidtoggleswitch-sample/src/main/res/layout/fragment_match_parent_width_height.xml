@@ -11,6 +11,10 @@
         android:padding="16dp"
         android:orientation="vertical">
 
+        <TextView
+            style="@style/Label"
+            android:text="@string/match_parent_width_and_height"/>
+
         <belka.us.androidtoggleswitch.widgets.ToggleSwitch
             android:id="@+id/matchParentWidthToggleSwitch"
             android:layout_width="match_parent"

@@ -28,6 +28,14 @@ public class SeparatedSamplesFragment extends BaseSamplesFragment {
             }
         });
 
+        binding.planetsSeparatedCircleToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener() {
+            @Override
+            public void onToggleSwitchChanged(int position) {
+                String[] operators = getResources().getStringArray(R.array.planets);
+                showToggleChangeToast(operators, position);
+            }
+        });
+
         return binding.getRoot();
     }
 }
