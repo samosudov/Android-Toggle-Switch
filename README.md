@@ -35,15 +35,6 @@ dependencies {
 
 ![Basic Samples](docs/basic_samples.gif)
 
-#### 2 Items
-
-```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        custom:textToggleLeft="OR"
-        custom:textToggleRight="AND"/>
-```
 #### 3 Items
 
 ```xml
@@ -98,6 +89,13 @@ Simply use `MultipleToggleSwitch` instead of `ToggleSwitch`.
         custom:textToggleLeft="Left"
         custom:textToggleRight="Right"/>                
 ```
+
+#### Disabled
+
+In order to disable the toggle switch buttons:
+* **xml**: set the attribute `android:enabled=false`
+* **programmatically**: ```java toggleSwitch.setEnabled(false)```
+
 
 ## Getters and Setters
 
@@ -161,9 +159,73 @@ multipleToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener(){
 
 ## Customization
 
-![Basic Samples](docs/custom_samples.gif)
+![Basic Samples](docs/custom.gif)
 
-#### Attributes
+
+#### Border
+
+Since by default the `borderWidth` is 0, it is important to set it at least
+to `1dp` in order to show the border.
+
+```xml
+  <belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:entries="@array/planets"
+      app:borderRadius="8dp"
+      app:borderWidth="4dp"
+      app:checkedBorderColor="@color/teal"
+      app:uncheckedBorderColor="@color/gray_border"/>
+```
+
+#### Color
+
+```xml
+  <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:entries="@array/planets"
+      app:checkedBackgroundColor="@color/orange"
+      app:checkedTextColor="@android:color/white"
+      app:uncheckedBackgroundColor="@color/colorPrimaryDark"
+      app:uncheckedTextColor="@color/green"
+      app:separatorColor="@color/green"/>
+```
+
+#### Size
+
+```xml
+  <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:textToggleLeft="@string/apple"
+      app:textToggleRight="@string/lemon"
+      android:textSize="26sp"
+      app:toggleHeight="82dp"
+      app:toggleWidth="122dp"/>
+```
+
+In order to let the attributes `app:toggleHeight` and `app:toggleWidth`to work
+properly, it is **very** important to set the attributes `android:layout_height`
+and `android:layout_width` setted as `wrap_content` respectively.
+
+This is important, because if `android:layout_width=match_parent` then,
+the button's width take all the width of the parent distributing the space evenly
+for each button.
+
+![Match parent width and height sample](docs/match_width_height.gif)
+
+## Separated Buttons
+
+![Separated samples](docs/separated.gif)
+
+## Custom View
+
+![Custom view samples](docs/custom_views.gif)
+
+## Other
+
+## Attributes
 
 It is possible to customize the buttons applying the following options:
 
@@ -173,39 +235,19 @@ It is possible to customize the buttons applying the following options:
 | android:enabled 				       | `boolean`  	   | Enable or disable the toggle switch buttons      |
 | android:entries 				       | `array`  	     | Set the labels of each button                    |
 | android:textSize 				       | `dimension`  	 | Text size of each button                         |
-| custom:checkedBackgroundColor   | `color`         | Background color of a checked button             |
-| custom:checkedBorderColor       | `color`         | Border color of a checked button                 |
-| custom:checkedTextColor         | `color`         | Text color of a checked button                   |
+| custom:checkedBackgroundColor  | `color`         | Background color of a checked button             |
+| custom:checkedBorderColor      | `color`         | Border color of a checked button                 |
+| custom:checkedTextColor        | `color`         | Text color of a checked button                   |
 | custom:borderRadius			       | `dimension`	   | The border radius of each button in dp           |
 | custom:borderWidth             | `dimension`     | The width of the border of each button in dp     |
-| custom:uncheckedBackgroundColor | `color`		     | Background color of the unchecked buttons        |
-| custom:uncheckedBorderColor     | `color`         | Border color of a unchecked button               |
-| custom:uncheckedTextColor       | `color`         | Text color of the unchecked buttons              |
+| custom:uncheckedBackgroundColor| `color`		     | Background color of the unchecked buttons        |
+| custom:uncheckedBorderColor    | `color`         | Border color of a unchecked button               |
+| custom:uncheckedTextColor      | `color`         | Text color of the unchecked buttons              |
 | custom:separatorColor          | `color`         | Color of the vertical separator between buttons  |
 | custom:separatorVisible        | `boolean`       | Set if the separator is visible or not           |
 | custom:toggleMargin    		     | `dimension`     | Margin between each button in dp                 |
 | custom:toggleHeight    		     | `dimension`     | Height of each button                            |
 | custom:toggleWidth    		     | `dimension`     | Width of each button                             |
-
-#### Example
-
-```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        custom:checkedBgColor="@android:color/holo_blue_dark"
-        custom:checkedTextColor="@android:color/white"
-        custom:uncheckedBgColor="@android:color/white"
-        custom:uncheckedTextColor="@android:color/black"
-        custom:separatorColor="@color/gray_very_light"
-        custom:textToggleCenter="APPLE"
-        custom:textToggleLeft="ORANGE"
-        custom:textToggleRight="BANANA"
-        custom:toggleWidth="104dp"/>
-```
-
-![Sample of libray with 3 items](docs/customized.gif)
 
 
 ## Contributors
