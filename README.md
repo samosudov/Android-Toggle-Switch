@@ -235,11 +235,133 @@ to call the method `reDraw()`
 In order to create separated buttons, just set the `android:toggleMargin` attribute
 with a value (in `dp`) greater than 0.
 
+Obviously when the toggle buttons are separated the separator is hidden.
+That's why in this case both the attributes
+`app:separatorVisible` and `app:separatorColor` will be ignored.
+
 An example of separate toggle buttons is shown below.
 
 ![Separated samples](docs/separated.gif)
 
 ## Custom View
+
+In case you want something more complex than a simple text into each button,
+you can specify your own view.
+
+Let's suppose you want toggle buttons with an icon and a label below.
+The layout xml of your view should be something similar to the following one,
+called `view_image_text_toggle_button.xml`
+
+```xml
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:tint="@color/gray"/>
+
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        tools:text="Camera"/>
+
+</LinearLayout>
+```
+
+In order to assign this layout to each toggle switch button call the method:
+
+```java
+public void setView(int layoutId, int numEntries,
+                ToggleSwitchButton.ToggleSwitchButtonDecorator prepareDecorator,
+                ToggleSwitchButton.ViewDecorator checkedDecorator,
+                ToggleSwitchButton.ViewDecorator uncheckedDecorator)
+```                
+
+Here a detailed explanation of the arguments:
+* **layoutId**: the resourceId of the layout to be inflated into each toggle button
+* **numEntries**: the number of entries (buttons)
+* **prepareDecorator**: set a prepare decorator in order to set the customization to be
+  done for each button, like setting for each one the proper label, icon, etc.
+* **checkedDecorator**: set a checked decorator in order to set the customization to be
+  done for each checked button, like a proper background color, text color etc.
+* **uncheckedDecorator**: set an unchecked decorator in order to set the customization to be
+  done for each unchecked button, like a proper background color, text color etc.
+
+```java
+toggleSwitch.setView(
+    R.layout.view_image_text_toggle_button,
+    2,
+    new ToggleSwitchButton.ToggleSwitchButtonDecorator() {
+        @Override
+        public void decorate(ToggleSwitchButton toggleSwitchButton, @NotNull View view, int position) {
+            TextView textView   = (TextView) view.findViewById(R.id.text_view);
+            textView.setText(getCameraGalleryLabel(position));
+
+            ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+            imageView.setImageDrawable(getCameraGalleryDrawable(position));
+        }
+    },
+    new ToggleSwitchButton.ViewDecorator() {
+        @Override
+        public void decorate(@NotNull View view, int position) {
+            TextView textView   = (TextView) view.findViewById(R.id.text_view);
+            textView.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
+
+            ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+            imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
+        }
+    }, new ToggleSwitchButton.ViewDecorator() {
+        @Override
+        public void decorate(@NotNull View view, int position) {
+
+            TextView textView   = (TextView) view.findViewById(R.id.text_view);
+            textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
+
+            ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+            imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
+        }
+    });
+
+    private String getCameraGalleryLabel(int position) {
+        switch (position) {
+            case 0: return getString(R.string.camera);
+            case 1: return getString(R.string.gallery);
+            default: throw new RuntimeException("Unknown position");
+        }
+    }
+
+    private Drawable getCameraGalleryDrawable(int position) {
+        switch (position) {
+            case 0: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_camera_alt_black_24dp);
+            case 1: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_camera_roll_black_24dp);
+            default: throw new RuntimeException("Unknown position");
+        }
+    }
+```
+
+Both checked and unchecked decorator are optional.
+In case you have no customization to be done you can call the simpler method
+
+```java
+public void setView(int layoutId, int numEntries,
+                ToggleSwitchButton.ToggleSwitchButtonDecorator prepareDecorator)
+```   
+
+Since you are using your own view only the following attributes will not work:
+* `android:entries`
+* `app:checkedTextColor`
+* `app:uncheckedTextColor`
+
 
 ![Custom view samples](docs/custom_views.gif)
 
@@ -247,37 +369,47 @@ An example of separate toggle buttons is shown below.
 
 #### Disabled
 
-In order to disable the toggle switch buttons:
+You can disable the toggle switch buttons by:
 * **xml**: set the attribute `android:enabled=false`
 * **programmatically**: ```java toggleSwitch.setEnabled(false)```
 
+In this case they become not clickable.
+You can see an example at the top of the documentation in basic samples gif example.
+
 #### Elevation
 
-Set the attribute: `android:elevation=<dimension_dp>`
+In order to specify the elevation of the toggle buttons,
+add the following attribute:
+
+```xml
+  app:elevation=<dimension_dp>
+```
+
+You can see an example in the custom view gif example.
 
 ## Attributes
 
-It is possible to customize the buttons applying the following options:
-
+Summarizing the full list of all available attributes to customize the
+toggle switch buttons is shown below.
 
 | Option Name      				       | Format          | Description                                      |
 | ---------------- 				       | --------------  | -----------------------------                    |
 | android:enabled 				       | `boolean`  	   | Enable or disable the toggle switch buttons      |
 | android:entries 				       | `array`  	     | Set the labels of each button                    |
 | android:textSize 				       | `dimension`  	 | Text size of each button                         |
-| custom:checkedBackgroundColor  | `color`         | Background color of a checked button             |
-| custom:checkedBorderColor      | `color`         | Border color of a checked button                 |
-| custom:checkedTextColor        | `color`         | Text color of a checked button                   |
-| custom:borderRadius			       | `dimension`	   | The border radius of each button in dp           |
-| custom:borderWidth             | `dimension`     | The width of the border of each button in dp     |
-| custom:uncheckedBackgroundColor| `color`		     | Background color of the unchecked buttons        |
-| custom:uncheckedBorderColor    | `color`         | Border color of a unchecked button               |
-| custom:uncheckedTextColor      | `color`         | Text color of the unchecked buttons              |
-| custom:separatorColor          | `color`         | Color of the vertical separator between buttons  |
-| custom:separatorVisible        | `boolean`       | Set if the separator is visible or not           |
-| custom:toggleMargin    		     | `dimension`     | Margin between each button in dp                 |
-| custom:toggleHeight    		     | `dimension`     | Height of each button                            |
-| custom:toggleWidth    		     | `dimension`     | Width of each button                             |
+| app:checkedBackgroundColor     | `color`         | Background color of a checked button             |
+| app:checkedBorderColor         | `color`         | Border color of a checked button                 |
+| app:checkedTextColor           | `color`         | Text color of a checked button                   |
+| app:borderRadius			         | `dimension`	   | The border radius of each button in dp           |
+| app:borderWidth                | `dimension`     | The width of the border of each button in dp     |
+| app:uncheckedBackgroundColor   | `color`		     | Background color of the unchecked buttons        |
+| app:uncheckedBorderColor       | `color`         | Border color of a unchecked button               |
+| app:uncheckedTextColor         | `color`         | Text color of the unchecked buttons              |
+| app:separatorColor             | `color`         | Color of the vertical separator between buttons  |
+| app:separatorVisible           | `boolean`       | Set if the separator is visible or not           |
+| app:toggleMargin    		       | `dimension`     | Margin between each button in dp                 |
+| app:toggleHeight    		       | `dimension`     | Height of each button                            |
+| app:toggleWidth    		         | `dimension`     | Width of each button                             |
 
 
 ## Contributors
