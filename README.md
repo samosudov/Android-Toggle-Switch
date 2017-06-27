@@ -90,13 +90,6 @@ Simply use `MultipleToggleSwitch` instead of `ToggleSwitch`.
         custom:textToggleRight="Right"/>                
 ```
 
-#### Disabled
-
-In order to disable the toggle switch buttons:
-* **xml**: set the attribute `android:enabled=false`
-* **programmatically**: ```java toggleSwitch.setEnabled(false)```
-
-
 ## Getters and Setters
 
 
@@ -213,17 +206,35 @@ This is important, because if `android:layout_width=match_parent` then,
 the button's width take all the width of the parent distributing the space evenly
 for each button.
 
+#### Programmatically Customization
+
+All customizations can be done also programmatically.
+Once all the properties has been properly set, it's necessary
+to call the method `reDraw()`
+
 ![Match parent width and height sample](docs/match_width_height.gif)
 
 ## Separated Buttons
 
 ![Separated samples](docs/separated.gif)
 
+In order to
+
 ## Custom View
 
 ![Custom view samples](docs/custom_views.gif)
 
-## Other
+## Bonus
+
+#### Disabled
+
+In order to disable the toggle switch buttons:
+* **xml**: set the attribute `android:enabled=false`
+* **programmatically**: ```java toggleSwitch.setEnabled(false)```
+
+#### Elevation
+
+Set the attribute: `android:elevation=<dimension_dp>`
 
 ## Attributes
 
