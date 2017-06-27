@@ -157,6 +157,11 @@ multipleToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener(){
 
 #### Border
 
+It is possible to customize:
+* the color of the border of both checked and unchecked buttons with `app:checkedBorderColor` and `app:uncheckedBorderColor` respectively
+* the border width with the attribute `app:borderWidth`
+* the border radius with the attribute `app:borderRadius`
+
 Since by default the `borderWidth` is 0, it is important to set it at least
 to `1dp` in order to show the border.
 
@@ -173,6 +178,10 @@ to `1dp` in order to show the border.
 
 #### Color
 
+It is possible to customize:
+* the background color of both checked and unchecked buttons with `app:checkedBackgroundColor` and `app:uncheckedBackgroundColor` respectively
+* the text color of both checked and unchecked buttons with `app:checkedTextColor` and `app:uncheckedTextColor` respectively
+
 ```xml
   <belka.us.androidtoggleswitch.widgets.ToggleSwitch
       android:layout_width="wrap_content"
@@ -187,6 +196,13 @@ to `1dp` in order to show the border.
 
 #### Size
 
+By default each button has a predefined width and height.
+It is possible to customize both of them with the attributes `app:toggleWidth` and `app:toggleHeight` respectively.
+
+NB. In order to let the attributes `app:toggleHeight` and `app:toggleWidth`to work
+properly, it is **very** important to set the attributes `android:layout_height`
+and `android:layout_width` setted as `wrap_content` respectively.
+
 ```xml
   <belka.us.androidtoggleswitch.widgets.ToggleSwitch
       android:layout_width="wrap_content"
@@ -198,13 +214,15 @@ to `1dp` in order to show the border.
       app:toggleWidth="122dp"/>
 ```
 
-In order to let the attributes `app:toggleHeight` and `app:toggleWidth`to work
-properly, it is **very** important to set the attributes `android:layout_height`
-and `android:layout_width` setted as `wrap_content` respectively.
+In fact, setting one of them to `match_parent` the respectively `app:toggle<Height/Width>`
+will be ignored since the following cases happen:
+* `android:layout_width=match_parent` then the parent's width is distributed evenly
+between the buttons.
+* `android:layout_height=match_parent` then each button takes all the parent view height.
 
-This is important, because if `android:layout_width=match_parent` then,
-the button's width take all the width of the parent distributing the space evenly
-for each button.
+An example of setting both attributes to `match_parent` is shown below.
+
+![Match parent width and height sample](docs/match_width_height.gif)
 
 #### Programmatically Customization
 
@@ -212,13 +230,14 @@ All customizations can be done also programmatically.
 Once all the properties has been properly set, it's necessary
 to call the method `reDraw()`
 
-![Match parent width and height sample](docs/match_width_height.gif)
-
 ## Separated Buttons
 
-![Separated samples](docs/separated.gif)
+In order to create separated buttons, just set the `android:toggleMargin` attribute
+with a value (in `dp`) greater than 0.
 
-In order to
+An example of separate toggle buttons is shown below.
+
+![Separated samples](docs/separated.gif)
 
 ## Custom View
 
