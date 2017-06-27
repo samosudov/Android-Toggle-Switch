@@ -33,7 +33,7 @@ dependencies {
 
 ## Basic Usage
 
-![Basic Samples](docs/basic_samples.gif)
+![Basic Samples](docs/basic.gif)
 
 #### 3 Items
 
