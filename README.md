@@ -49,11 +49,11 @@ dependencies {
 
 ```xml
 <belka.us.androidtoggleswitch.widgets.ToggleSwitch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:textToggleLeft="@string/apple"
-        app:textToggleCenter="@string/orange"
-        app:textToggleRight="@string/lemon"/>
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:textToggleLeft="@string/apple"
+    app:textToggleCenter="@string/orange"
+    app:textToggleRight="@string/lemon"/>
 ```
 
 #### N - Items support
@@ -66,9 +66,9 @@ as a `string-array`.
 XML
 ```xml
 <belka.us.androidtoggleswitch.widgets.ToggleSwitch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/planets"/>
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:entries="@array/planets"/>
 ```
 
 Programmatically
@@ -92,16 +92,15 @@ Simply use `MultipleToggleSwitch` instead of `ToggleSwitch`.
 
 ```xml
 <belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
-        android:id="@+id/multiple_toggle_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        custom:textToggleCenter="Center"
-        custom:textToggleLeft="Left"
-        custom:textToggleRight="Right"/>                
+    android:id="@+id/multiple_toggle_switch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    custom:textToggleCenter="Center"
+    custom:textToggleLeft="Left"
+    custom:textToggleRight="Right"/>                
 ```
 
 ## Getters and Setters
-
 
 #### Toggle Switch
 
@@ -137,27 +136,26 @@ multipleToggleSwitch.setCheckedTogglePositions(checkedPositions);
 
 ## Listeners
 
-
 #### Toggle Switch
 
 ```java
 toggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener(){
-      @Override
-      public void onToggleSwitchChanged(int position) {
-	       // Your code ...
-      }
-  });
+    @Override
+    public void onToggleSwitchChanged(int position) {
+       // Your code ...
+    }
+});
 ```
 
 #### Multiple Toggle Switch
 
 ```java
 multipleToggleSwitch.setOnChangeListener(new ToggleSwitch.OnChangeListener(){
-      @Override
-      public void onMultipleToggleSwitchChanged(int position, boolean checked) {
-	       // Your code ...
-      }
-  });
+    @Override
+    public void onMultipleToggleSwitchChanged(int position, boolean checked) {
+       // Your code ...
+    }
+});
 ```
 
 ## Customization
@@ -176,14 +174,14 @@ Since by default the `borderWidth` is 0, it is important to set it at least
 to `1dp` in order to show the border.
 
 ```xml
-  <belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:entries="@array/planets"
-      app:borderRadius="8dp"
-      app:borderWidth="4dp"
-      app:checkedBorderColor="@color/teal"
-      app:uncheckedBorderColor="@color/gray_border"/>
+<belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:entries="@array/planets"
+    app:borderRadius="8dp"
+    app:borderWidth="4dp"
+    app:checkedBorderColor="@color/teal"
+    app:uncheckedBorderColor="@color/gray_border"/>
 ```
 
 #### Color
@@ -193,15 +191,15 @@ It is possible to customize:
 * the text color of both checked and unchecked buttons with `app:checkedTextColor` and `app:uncheckedTextColor` respectively
 
 ```xml
-  <belka.us.androidtoggleswitch.widgets.ToggleSwitch
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:entries="@array/planets"
-      app:checkedBackgroundColor="@color/orange"
-      app:checkedTextColor="@android:color/white"
-      app:uncheckedBackgroundColor="@color/colorPrimaryDark"
-      app:uncheckedTextColor="@color/green"
-      app:separatorColor="@color/green"/>
+<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:entries="@array/planets"
+    app:checkedBackgroundColor="@color/orange"
+    app:checkedTextColor="@android:color/white"
+    app:uncheckedBackgroundColor="@color/colorPrimaryDark"
+    app:uncheckedTextColor="@color/green"
+    app:separatorColor="@color/green"/>
 ```
 
 #### Size
@@ -214,14 +212,14 @@ properly, it is **very** important to set the attributes `android:layout_height`
 and `android:layout_width` setted as `wrap_content` respectively.
 
 ```xml
-  <belka.us.androidtoggleswitch.widgets.ToggleSwitch
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:textToggleLeft="@string/apple"
-      app:textToggleRight="@string/lemon"
-      android:textSize="26sp"
-      app:toggleHeight="82dp"
-      app:toggleWidth="122dp"/>
+<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:textToggleLeft="@string/apple"
+    app:textToggleRight="@string/lemon"
+    android:textSize="26sp"
+    app:toggleHeight="82dp"
+    app:toggleWidth="122dp"/>
 ```
 
 In fact, setting one of them to `match_parent` the respectively `app:toggle<Height/Width>`
@@ -266,26 +264,26 @@ called `view_image_text_toggle_button.xml`
 
 ```xml
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:gravity="center">
+
+  <ImageView
+    android:id="@+id/image_view"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:tint="@color/gray"/>
+
+  <TextView
+    android:id="@+id/text_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center">
-
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:tint="@color/gray"/>
-
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textSize="18sp"
-        tools:text="Camera"/>
+    android:layout_marginTop="12dp"
+    android:textSize="18sp"
+    tools:text="Camera"/>
 
 </LinearLayout>
 ```
@@ -294,9 +292,9 @@ In order to assign this layout to each toggle switch button call the method:
 
 ```java
 public void setView(int layoutId, int numEntries,
-                ToggleSwitchButton.ToggleSwitchButtonDecorator prepareDecorator,
-                ToggleSwitchButton.ViewDecorator checkedDecorator,
-                ToggleSwitchButton.ViewDecorator uncheckedDecorator)
+    ToggleSwitchButton.ToggleSwitchButtonDecorator prepareDecorator,
+    ToggleSwitchButton.ViewDecorator checkedDecorator,
+    ToggleSwitchButton.ViewDecorator uncheckedDecorator)
 ```                
 
 Here a detailed explanation of the arguments:
@@ -311,54 +309,55 @@ Here a detailed explanation of the arguments:
 
 ```java
 toggleSwitch.setView(
-    R.layout.view_image_text_toggle_button,
-    2,
-    new ToggleSwitchButton.ToggleSwitchButtonDecorator() {
-        @Override
-        public void decorate(ToggleSwitchButton toggleSwitchButton, @NotNull View view, int position) {
-            TextView textView   = (TextView) view.findViewById(R.id.text_view);
-            textView.setText(getCameraGalleryLabel(position));
+  R.layout.view_image_text_toggle_button,
+  2,
+  new ToggleSwitchButton.ToggleSwitchButtonDecorator() {
+    @Override
+    public void decorate(ToggleSwitchButton toggleSwitchButton, @NotNull View view, int position) {
+        TextView textView   = (TextView) view.findViewById(R.id.text_view);
+        textView.setText(getCameraGalleryLabel(position));
 
-            ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
-            imageView.setImageDrawable(getCameraGalleryDrawable(position));
-        }
-    },
-    new ToggleSwitchButton.ViewDecorator() {
-        @Override
-        public void decorate(@NotNull View view, int position) {
-            TextView textView   = (TextView) view.findViewById(R.id.text_view);
-            textView.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
-
-            ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
-            imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
-        }
-    }, new ToggleSwitchButton.ViewDecorator() {
-        @Override
-        public void decorate(@NotNull View view, int position) {
-
-            TextView textView   = (TextView) view.findViewById(R.id.text_view);
-            textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
-
-            ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
-            imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
-        }
-    });
-
-    private String getCameraGalleryLabel(int position) {
-        switch (position) {
-            case 0: return getString(R.string.camera);
-            case 1: return getString(R.string.gallery);
-            default: throw new RuntimeException("Unknown position");
-        }
+        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+        imageView.setImageDrawable(getCameraGalleryDrawable(position));
     }
+  },
+  new ToggleSwitchButton.ViewDecorator() {
+    @Override
+    public void decorate(@NotNull View view, int position) {
+        TextView textView   = (TextView) view.findViewById(R.id.text_view);
+        textView.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
 
-    private Drawable getCameraGalleryDrawable(int position) {
-        switch (position) {
-            case 0: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_camera_alt_black_24dp);
-            case 1: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_camera_roll_black_24dp);
-            default: throw new RuntimeException("Unknown position");
-        }
+        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+        imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
     }
+  },
+  new ToggleSwitchButton.ViewDecorator() {
+    @Override
+    public void decorate(@NotNull View view, int position) {
+
+        TextView textView   = (TextView) view.findViewById(R.id.text_view);
+        textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+        imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
+    }
+  });
+
+private String getCameraGalleryLabel(int position) {
+  switch (position) {
+    case 0: return getString(R.string.camera);
+    case 1: return getString(R.string.gallery);
+    default: throw new RuntimeException("Unknown position");
+  }
+}
+
+private Drawable getCameraGalleryDrawable(int position) {
+  switch (position) {
+    case 0: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_camera_alt_black_24dp);
+    case 1: return ContextCompat.getDrawable(getActivity(), R.drawable.ic_camera_roll_black_24dp);
+    default: throw new RuntimeException("Unknown position");
+  }
+}
 ```
 
 Both checked and unchecked decorator are optional.
@@ -366,7 +365,7 @@ In case you have no customization to be done you can call the simpler method
 
 ```java
 public void setView(int layoutId, int numEntries,
-                ToggleSwitchButton.ToggleSwitchButtonDecorator prepareDecorator)
+  ToggleSwitchButton.ToggleSwitchButtonDecorator prepareDecorator)
 ```   
 
 Since you are using your own view only the following attributes will not work:
