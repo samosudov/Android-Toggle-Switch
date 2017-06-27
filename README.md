@@ -35,15 +35,25 @@ dependencies {
 
 ![Basic Samples](docs/basic.gif)
 
+#### 2 Items
+
+```xml
+<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:textToggleLeft="@string/apple"
+    app:textToggleRight="@string/lemon" />
+```
+
 #### 3 Items
 
 ```xml
 <belka.us.androidtoggleswitch.widgets.ToggleSwitch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        custom:textToggleCenter="XOR"
-        custom:textToggleLeft="OR"
-        custom:textToggleRight="AND"/>
+        app:textToggleLeft="@string/apple"
+        app:textToggleCenter="@string/orange"
+        app:textToggleRight="@string/lemon"/>
 ```
 
 #### N - Items support
