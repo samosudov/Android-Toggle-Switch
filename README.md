@@ -248,6 +248,8 @@ An example of separate toggle buttons is shown below.
 In case you want something more complex than a simple text into each button,
 you can specify your own view.
 
+![Custom view samples](docs/custom_views.gif)
+
 Let's suppose you want toggle buttons with an icon and a label below.
 The layout xml of your view should be something similar to the following one,
 called `view_image_text_toggle_button.xml`
@@ -362,8 +364,6 @@ Since you are using your own view only the following attributes will not work:
 * `app:checkedTextColor`
 * `app:uncheckedTextColor`
 
-
-![Custom view samples](docs/custom_views.gif)
 
 ## Bonus
 
