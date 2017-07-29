@@ -417,18 +417,18 @@ toggle switch buttons is shown below.
 
 
 ## Contributors
-Lorenzo Rigato,
-Fabrizio Rizzonelli, Android Developer @[Belka](https://github.com/BelkaLab)
+Lorenzo Rigato
 
 ## License
-Android-Toggle-Switch is Copyright (c) 2016 Belka, srl. It is free software, and may be redistributed under the terms specified in the LICENSE file.  
+Android-Toggle-Switch is Copyright (c) 2017 Lorenzo Rigato.
+It is free software, and may be redistributed under the terms specified in the LICENSE file.
 
-## About Belka
-![Alt text](http://s2.postimg.org/rcjk3hf5x/logo_rosso.jpg)
+## About Author
 
-[Belka](http://belka.us/en) is a Digital Agency specialized in design, mobile applications development and custom solutions.
-We love open source software! You can [see our projects](http://belka.us/en/portfolio/) or look at our case studies.
+[Lorenzo Rigato](http://lorenzorigato.it/) is a dedicated Web, Android & iOS developer with 5+ years of experience.
+Clean code lover and beautiful UI fascinated.
+You can [see my portfolio](http://lorenzorigato.it/#portfolio) with all my recent projects.
 
-Interested? [Hire us](http://belka.us/en/contacts/) to help build your next amazing project.
+Interested? [Get in touch](mailto:lore91tanz@gmail.com).
 
-[www.belka.us](http://belka.us/en)
+[www.lorenzorigato.it](http://lorenzorigato.it/)
