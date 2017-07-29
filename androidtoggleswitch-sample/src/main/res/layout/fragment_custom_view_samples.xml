@@ -14,7 +14,7 @@
             style="@style/Label"
             android:text="@string/image_and_text"/>
 
-        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+        <com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
             android:id="@+id/imageTextToggleSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             style="@style/Label"
             android:text="@string/only_images"/>
 
-        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+        <com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
             android:id="@+id/arrowImagesToggleSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             style="@style/Label"
             android:text="@string/multiple_colors"/>
 
-        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+        <com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
             android:id="@+id/multipleColorsToggleSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

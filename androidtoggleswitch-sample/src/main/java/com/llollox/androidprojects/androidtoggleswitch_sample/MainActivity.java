@@ -1,4 +1,4 @@
-package com.example.androidtoggleswitch_sample;
+package com.llollox.androidprojects.androidtoggleswitch_sample;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

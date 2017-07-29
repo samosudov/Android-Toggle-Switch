@@ -1,4 +1,4 @@
-package com.example.androidtoggleswitch_sample;
+package com.llollox.androidprojects.androidtoggleswitch_sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.androidtoggleswitch_sample.databinding.FragmentMatchParentWidthHeightBinding;
+import com.llollox.androidprojects.androidtoggleswitch_sample.databinding.FragmentMatchParentWidthHeightBinding;
 
-import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
+import com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch;
 
 /**
  * Created by lorenzorigato on 20/06/2017.

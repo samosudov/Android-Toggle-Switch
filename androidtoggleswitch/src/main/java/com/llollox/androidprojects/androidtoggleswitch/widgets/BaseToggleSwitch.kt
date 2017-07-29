@@ -1,4 +1,4 @@
-package belka.us.androidtoggleswitch.widgets
+package com.llollox.androidprojects.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -9,7 +9,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import belka.us.androidtoggleswitch.R
+import com.llollox.androidprojects.androidtoggleswitch.R
 import java.util.*
 
 abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {

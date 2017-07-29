@@ -2,15 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 ext {
-    PUBLISH_GROUP_ID    = 'us.belka'
+    PUBLISH_GROUP_ID    = 'com.llollox.androidprojects'
     PUBLISH_ARTIFACT_ID = 'androidtoggleswitch'
-    PUBLISH_VERSION     = '1.2.2'
+    PUBLISH_VERSION     = '2.0.0'
 }
 
 android {
-//    dataBinding {
-//        enabled = true
-//    }
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
 

@@ -1,4 +1,4 @@
-package com.example.androidtoggleswitch_sample;
+package com.llollox.androidprojects.androidtoggleswitch_sample;
 
 import android.support.v4.app.Fragment;
 import android.widget.Toast;

@@ -2,13 +2,8 @@
 
 ![Alt text](https://img.shields.io/badge/license-MIT-green.svg?style=flat)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Toggle%20Switch-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3235)
-![Alt text](http://www.android-gems.com/badge/BelkaLab/Android-Toggle-Switch.svg)
-
 
 A customizable extension of Android Switches that supports also more than 2 items.
-
-![Sample of libray](docs/screen.jpg)
-
 
 ## Installation
 
@@ -17,16 +12,16 @@ Add Gradle dependency:
 
 ```groovy
 dependencies {
-    compile 'us.belka:androidtoggleswitch:1.2.2'
+    compile 'com.llollox.androidprojects:androidtoggleswitch:2.0.0'
 }
 ```
 
 #### Maven
 ```xml
 <dependency>
-  <groupId>us.belka</groupId>
+  <groupId>com.llollox.androidprojects</groupId>
   <artifactId>androidtoggleswitch</artifactId>
-  <version>1.2.2</version>
+  <version>2.0.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -38,7 +33,7 @@ dependencies {
 #### 2 Items
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:textToggleLeft="@string/apple"
@@ -48,7 +43,7 @@ dependencies {
 #### 3 Items
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:textToggleLeft="@string/apple"
@@ -65,7 +60,7 @@ as a `string-array`.
 
 XML
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:entries="@array/planets"/>
@@ -91,7 +86,7 @@ the attributes textToggle[Left/Center/Right] will be ignored.
 Simply use `MultipleToggleSwitch` instead of `ToggleSwitch`.
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
+<com.llollox.androidprojects.androidtoggleswitch.widgets.MultipleToggleSwitch
     android:id="@+id/multiple_toggle_switch"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -174,7 +169,7 @@ Since by default the `borderWidth` is 0, it is important to set it at least
 to `1dp` in order to show the border.
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.MultipleToggleSwitch
+<com.llollox.androidprojects.androidtoggleswitch.widgets.MultipleToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:entries="@array/planets"
@@ -191,7 +186,7 @@ It is possible to customize:
 * the text color of both checked and unchecked buttons with `app:checkedTextColor` and `app:uncheckedTextColor` respectively
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:entries="@array/planets"
@@ -212,7 +207,7 @@ properly, it is **very** important to set the attributes `android:layout_height`
 and `android:layout_width` setted as `wrap_content` respectively.
 
 ```xml
-<belka.us.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:textToggleLeft="@string/apple"

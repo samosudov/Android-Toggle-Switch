@@ -1,4 +1,4 @@
-package com.example.androidtoggleswitch_sample;
+package com.llollox.androidprojects.androidtoggleswitch_sample;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.androidtoggleswitch_sample.databinding.FragmentCustomViewSamplesBinding;
+import com.llollox.androidprojects.androidtoggleswitch_sample.databinding.FragmentCustomViewSamplesBinding;
 
 import org.jetbrains.annotations.NotNull;
 
-import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
-import belka.us.androidtoggleswitch.widgets.ToggleSwitchButton;
+import com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch;
+import com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitchButton;
 
 /**
  * Created by rigatol on 23/06/2017.

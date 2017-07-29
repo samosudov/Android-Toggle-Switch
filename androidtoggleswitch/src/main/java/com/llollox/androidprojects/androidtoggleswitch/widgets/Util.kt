@@ -1,4 +1,4 @@
-package belka.us.androidtoggleswitch.widgets
+package com.llollox.androidprojects.androidtoggleswitch.widgets
 
 import android.content.Context
 
