@@ -1,4 +1,4 @@
-package com.llollox.androidprojects.androidtoggleswitch.widgets
+package com.llollox.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import com.llollox.androidprojects.androidtoggleswitch.R
+import com.llollox.androidtoggleswitch.R
 
 
 class ToggleSwitchButton (context: Context, var position: Int, var positionType: PositionType,
@@ -38,7 +38,7 @@ class ToggleSwitchButton (context: Context, var position: Int, var positionType:
     var toggleWidth                                 = 0
     var toggleHeight                                = LinearLayout.LayoutParams.MATCH_PARENT
     var isChecked                                   = false
-    var rightToLeftProvider: IRightToLeftProvider   = this
+    var rightToLeftProvider: IRightToLeftProvider = this
 
     var separator: View
     var view: View

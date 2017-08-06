@@ -1,8 +1,7 @@
-package com.llollox.androidprojects.androidtoggleswitch_sample;
+package com.llollox.androidtoggleswitch_sample;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,21 +9,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.llollox.androidprojects.androidtoggleswitch_sample.databinding.FragmentCustomViewSamplesBinding;
+import com.llollox.androidtoggleswitch.widgets.ToggleSwitch;
+import com.llollox.androidtoggleswitch.widgets.ToggleSwitchButton;
+import com.llollox.androidtoggleswitch_sample.databinding.FragmentCustomViewSamplesBinding;
 
 import org.jetbrains.annotations.NotNull;
-
-import com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch;
-import com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitchButton;
 
 /**
  * Created by rigatol on 23/06/2017.
  */
 
 public class CustomViewSamplesFragment extends BaseSamplesFragment {
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentCustomViewSamplesBinding binding = FragmentCustomViewSamplesBinding.inflate(inflater);
 
         binding.imageTextToggleSwitch.setView(R.layout.view_image_text_toggle_button, 2,

@@ -1,4 +1,4 @@
-package com.llollox.androidprojects.androidtoggleswitch.widgets
+package com.llollox.androidtoggleswitch.widgets
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -9,7 +9,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.llollox.androidprojects.androidtoggleswitch.R
+import com.llollox.androidtoggleswitch.R
 import java.util.*
 
 abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
@@ -75,22 +75,22 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     var uncheckedTextColor:          Int
 
     var separatorColor:             Int
-    var separatorVisible =          SEPARATOR_VISIBLE
+    var separatorVisible = SEPARATOR_VISIBLE
 
     var textSize:                   Float
 
-    var toggleElevation =           TOGGLE_ELEVATION
+    var toggleElevation = TOGGLE_ELEVATION
     var toggleMargin:               Float
     var toggleHeight:               Float
     var toggleWidth:                Float
 
-    var layoutHeight =              LAYOUT_HEIGHT
-    var layoutWidth =               LAYOUT_WIDTH
+    var layoutHeight = LAYOUT_HEIGHT
+    var layoutWidth = LAYOUT_WIDTH
 
-    var layoutId =                  LAYOUT_ID
-    var numEntries =                NUM_ENTRIES
+    var layoutId = LAYOUT_ID
+    var numEntries = NUM_ENTRIES
 
-    var prepareDecorator:   ToggleSwitchButton.ToggleSwitchButtonDecorator = EMPTY_TOGGLE_DECORATOR
+    var prepareDecorator: ToggleSwitchButton.ToggleSwitchButtonDecorator = EMPTY_TOGGLE_DECORATOR
     var checkedDecorator:    ToggleSwitchButton.ViewDecorator?    = null
     var uncheckedDecorator:  ToggleSwitchButton.ViewDecorator?    = null
 

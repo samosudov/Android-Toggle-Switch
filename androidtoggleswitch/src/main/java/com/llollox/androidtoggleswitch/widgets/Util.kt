@@ -1,4 +1,4 @@
-package com.llollox.androidprojects.androidtoggleswitch.widgets
+package com.llollox.androidtoggleswitch.widgets
 
 import android.content.Context
 

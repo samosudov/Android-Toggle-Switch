@@ -12,16 +12,16 @@ Add Gradle dependency:
 
 ```groovy
 dependencies {
-    compile 'com.llollox.androidprojects:androidtoggleswitch:2.0.0'
+    compile 'com.llollox:androidtoggleswitch:2.0.1'
 }
 ```
 
 #### Maven
 ```xml
 <dependency>
-  <groupId>com.llollox.androidprojects</groupId>
+  <groupId>com.llollox</groupId>
   <artifactId>androidtoggleswitch</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -33,7 +33,7 @@ dependencies {
 #### 2 Items
 
 ```xml
-<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:textToggleLeft="@string/apple"
@@ -43,7 +43,7 @@ dependencies {
 #### 3 Items
 
 ```xml
-<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:textToggleLeft="@string/apple"
@@ -60,7 +60,7 @@ as a `string-array`.
 
 XML
 ```xml
-<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:entries="@array/planets"/>
@@ -86,7 +86,7 @@ the attributes textToggle[Left/Center/Right] will be ignored.
 Simply use `MultipleToggleSwitch` instead of `ToggleSwitch`.
 
 ```xml
-<com.llollox.androidprojects.androidtoggleswitch.widgets.MultipleToggleSwitch
+<com.llollox.androidtoggleswitch.widgets.MultipleToggleSwitch
     android:id="@+id/multiple_toggle_switch"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -169,7 +169,7 @@ Since by default the `borderWidth` is 0, it is important to set it at least
 to `1dp` in order to show the border.
 
 ```xml
-<com.llollox.androidprojects.androidtoggleswitch.widgets.MultipleToggleSwitch
+<com.llollox.androidtoggleswitch.widgets.MultipleToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:entries="@array/planets"
@@ -186,7 +186,7 @@ It is possible to customize:
 * the text color of both checked and unchecked buttons with `app:checkedTextColor` and `app:uncheckedTextColor` respectively
 
 ```xml
-<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:entries="@array/planets"
@@ -207,7 +207,7 @@ properly, it is **very** important to set the attributes `android:layout_height`
 and `android:layout_width` setted as `wrap_content` respectively.
 
 ```xml
-<com.llollox.androidprojects.androidtoggleswitch.widgets.ToggleSwitch
+<com.llollox.androidtoggleswitch.widgets.ToggleSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:textToggleLeft="@string/apple"
