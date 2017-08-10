@@ -1,6 +1,7 @@
 # Android-Toggle-Switch
 
 ![Alt text](https://img.shields.io/badge/license-MIT-green.svg?style=flat)
+[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Toggle%20Switch-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3235)
 
 A customizable extension of Android Switches that supports also more than 2 items.
