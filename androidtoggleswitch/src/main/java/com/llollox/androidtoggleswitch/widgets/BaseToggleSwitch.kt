@@ -1,6 +1,8 @@
 package com.llollox.androidtoggleswitch.widgets
 
 import android.content.Context
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.text.TextUtils
@@ -259,15 +261,10 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
 
     final override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
-
-        if (enabled) {
-            alpha = 1f
-        }
-        else {
-            alpha = .6f
-        }
+        alpha = if (enabled) 1f else .6f
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     final override fun setElevation(elevation: Float) {
         super.setElevation(elevation)
         if (elevation > 0) {
@@ -293,11 +290,7 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
     }
 
     fun setEntries(entries: Array<String>) {
-        val entriesList = ArrayList<String>()
-        for (entry in entries) {
-            entriesList.add(entry)
-        }
-        setEntries(entriesList)
+        setEntries(entries.toList())
     }
 
     fun setEntries(entries : Array<CharSequence>) {
@@ -365,7 +358,9 @@ abstract class BaseToggleSwitch : LinearLayout, ToggleSwitchButton.Listener {
             addView(button)
         }
 
-        elevation = toggleElevation
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            elevation = toggleElevation
+        }
 
         manageSeparatorVisiblity()
     }
