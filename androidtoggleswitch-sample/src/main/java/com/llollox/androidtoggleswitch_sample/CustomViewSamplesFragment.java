@@ -13,8 +13,6 @@ import com.llollox.androidtoggleswitch.widgets.ToggleSwitch;
 import com.llollox.androidtoggleswitch.widgets.ToggleSwitchButton;
 import com.llollox.androidtoggleswitch_sample.databinding.FragmentCustomViewSamplesBinding;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * Created by rigatol on 23/06/2017.
  */
@@ -28,31 +26,31 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
         binding.imageTextToggleSwitch.setView(R.layout.view_image_text_toggle_button, 2,
                 new ToggleSwitchButton.ToggleSwitchButtonDecorator() {
                     @Override
-                    public void decorate(ToggleSwitchButton toggleSwitchButton, @NotNull View view, int position) {
-                        TextView textView   = (TextView) view.findViewById(R.id.text_view);
+                    public void decorate(ToggleSwitchButton toggleSwitchButton, View view, int position) {
+                        TextView textView   = view.findViewById(R.id.text_view);
                         textView.setText(getCameraGalleryLabel(position));
 
-                        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                        ImageView imageView = view.findViewById(R.id.image_view);
                         imageView.setImageDrawable(getCameraGalleryDrawable(position));
                     }
                 },
         new ToggleSwitchButton.ViewDecorator() {
             @Override
-            public void decorate(@NotNull View view, int position) {
-                TextView textView   = (TextView) view.findViewById(R.id.text_view);
+            public void decorate(View view, int position) {
+                TextView textView   = view.findViewById(R.id.text_view);
                 textView.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
 
-                ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                ImageView imageView = view.findViewById(R.id.image_view);
                 imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
             }
         }, new ToggleSwitchButton.ViewDecorator() {
             @Override
-            public void decorate(@NotNull View view, int position) {
+            public void decorate(View view, int position) {
 
-                TextView textView   = (TextView) view.findViewById(R.id.text_view);
+                TextView textView   = view.findViewById(R.id.text_view);
                 textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
 
-                ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                ImageView imageView = view.findViewById(R.id.image_view);
                 imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
             }
         });
@@ -70,20 +68,20 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
         binding.arrowImagesToggleSwitch.setView(R.layout.view_images_toggle_button, 4,
                 new ToggleSwitchButton.ToggleSwitchButtonDecorator() {
                     @Override
-                    public void decorate(ToggleSwitchButton toggleSwitchButton, @NotNull View view, int position) {
-                        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                    public void decorate(ToggleSwitchButton toggleSwitchButton, View view, int position) {
+                        ImageView imageView = view.findViewById(R.id.image_view);
                         imageView.setImageDrawable(getArrowDrawable(position));
                     }
                 },
                 new ToggleSwitchButton.ViewDecorator() {
                     @Override
-                    public void decorate(@NotNull View view, int position) {
-                        ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                    public void decorate(View view, int position) {
+                        ImageView imageView = view.findViewById(R.id.image_view);
                         imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
                     }
                 }, new ToggleSwitchButton.ViewDecorator() {
                     @Override
-                    public void decorate(@NotNull View view, int position) {
+                    public void decorate(View view, int position) {
                         ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
                         imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
                     }
@@ -101,32 +99,32 @@ public class CustomViewSamplesFragment extends BaseSamplesFragment {
         binding.multipleColorsToggleSwitch.setView(R.layout.view_image_left_and_text_toggle_button, 3,
             new ToggleSwitchButton.ToggleSwitchButtonDecorator() {
                 @Override
-                public void decorate(ToggleSwitchButton toggleSwitchButton, @NotNull View view, int position) {
-                    ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                public void decorate(ToggleSwitchButton toggleSwitchButton, View view, int position) {
+                    ImageView imageView = view.findViewById(R.id.image_view);
                     imageView.setImageDrawable(getCrudDrawable(position));
                     toggleSwitchButton.setCheckedBackgroundColor(getCrudActiveBackgroundColor(position));
 
-                    TextView textView = (TextView) view.findViewById(R.id.text_view);
+                    TextView textView = view.findViewById(R.id.text_view);
                     textView.setText(getCrudLabel(position));
                 }
             },
             new ToggleSwitchButton.ViewDecorator() {
                 @Override
-                public void decorate(@NotNull View view, int position) {
-                    ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                public void decorate(View view, int position) {
+                    ImageView imageView = view.findViewById(R.id.image_view);
                     imageView.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white));
 
-                    TextView textView   = (TextView) view.findViewById(R.id.text_view);
+                    TextView textView   = view.findViewById(R.id.text_view);
                     textView.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
                 }
             },
             new ToggleSwitchButton.ViewDecorator() {
                 @Override
-                public void decorate(@NotNull View view, int position) {
-                    ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
+                public void decorate(View view, int position) {
+                    ImageView imageView = view.findViewById(R.id.image_view);
                     imageView.setColorFilter(ContextCompat.getColor(getActivity(), R.color.gray));
 
-                    TextView textView   = (TextView) view.findViewById(R.id.text_view);
+                    TextView textView   = view.findViewById(R.id.text_view);
                     textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
                 }
             }
